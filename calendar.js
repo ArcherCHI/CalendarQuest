@@ -17,6 +17,7 @@ const months = [
     "December",
 ];
 
+let events = [];
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 let date = new Date();
@@ -72,18 +73,39 @@ dates.addEventListener("click", function (e) {
     const button = e.target.closest(".date-button");
     if (button) {
         const dateStr = button.getAttribute("data-date");
-        console.log("Date clicked:", dateStr);
-        console.log("Full date info:", button.getAttribute("aria-label"));
 
         // Create Date object properly to avoid timezone issues
         const [clickedYear, clickedMonth, clickedDay] = dateStr
             .split("-")
             .map(Number);
+        
         const clickedDate = new Date(clickedYear, clickedMonth - 1, clickedDay);
-        console.log("Date object:", clickedDate);
-        console.log("Selected day:", clickedDate.getDate());
+        console.log("Selected day:", clickedDate.toDateString());
+        document.getElementById("eventDate").textContent = clickedDate.toDateString();
+
+        eventWindow.style.display = "flex";
+        
+        updateXPBar();
     }
+    
 });
+
+function updateXPBar() {
+    let currentXP = parseInt(document.getElementById("xpBar").textContent);
+    if ( currentXP >= 100 ) {
+        currentXP = 0;
+        level++;
+        document.getElementById("level").innerHTML = level;
+    }
+    document.getElementById("xpBar").style.width = currentXP + 10 + "%";
+    document.getElementById("xpBar").textContent = currentXP + 10 + "%";
+}
+
+// Initialize level
+let level = 0;
+// Update the level display
+document.getElementById("level").innerHTML = level;
+
 
 navs.forEach((nav) => {
     nav.addEventListener("click", (e) => {
@@ -109,27 +131,44 @@ navs.forEach((nav) => {
 
 renderCalendar();
 
+// Event Window functionality
+const newEvent = document.getElementById("newEvent");
+const eventWindow = document.getElementById("eventWindow");
+const closeEventWindow = document.getElementById("closeEventWindow");
+
+newEvent.addEventListener("click", function () {
+    eventWindow.style.display = "block";
+    console.log("Event Window Opened");
+});
+closeEventWindow.addEventListener("click", function () {
+    eventWindow.style.display = "none";
+    console.log("Event Window Closed");
+})
+
+
 // Modal functionality
 const modal = document.getElementById("myModal");
 const modalBtn = document.getElementById("modalWindow");
-const closeBtn = document.querySelector(".close");
+const closeBtn = document.getElementById("closeModal");
 
 // Open modal when button is clicked
 modalBtn.addEventListener("click", function () {
-    displayWeeklyStreak();
+    displayWeeklyStreak(); 
     modal.style.display = "flex";
 });
 
 // Close modal when X is clicked
 closeBtn.addEventListener("click", function () {
     modal.style.display = "none";
+    console.log("Modal Closed");
 });
 
 // Close modal when clicking outside of it
 window.addEventListener("click", function (event) {
     if (event.target === modal) {
         modal.style.display = "none";
-    }
+    } else if (event.target === eventWindow )
+        eventWindow.style.display = "none";    
 });
 
 function displayWeeklyStreak() {
@@ -146,3 +185,12 @@ function displayWeeklyStreak() {
     document.getElementsByClassName("dayBox")[i].style.backgroundColor =
         "#4caf50";
 }
+
+const eventList = document.querySelector(".event-list");
+const eventButton = document.querySelector(".event-button");
+
+
+eventButton.addEventListener("click", function (e) {
+    console.log("Event Button Clicked");
+    document.getElementsByClassName("event-details").visibility = "visible";
+});

@@ -5,24 +5,28 @@
 * https://www.w3schools.com/css/css3_borders.asp
 -->
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Calendar Quest</title>
-        <link rel="stylesheet" href="style.css" />
-        <script src="calendar.js" defer></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar Quest</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src = "calendar.js" defer></script>
+</head>
     <body>
+        <ul class = "navBar">
+            <li><a href="achievements.html"">Achievements</a></li>
+            <li><a href="quests.html">Quests</a></li>
+        </ul>
         <h1>Calendar Quest</h1>
-        <div id="buttonContainer" class="calendar">
+        <div id='buttonContainer' class="calendar">
             <header>
                 <h3></h3>
                 <nav>
-                    <button id="prev"></button>
-                    <button id="next"></button>
+                    <button id = "prev"></button>
+                    <button id = "next"></button>
                 </nav>
             </header>
             <section>
@@ -38,24 +42,80 @@
                 <ul class="dates"></ul>
             </section>
         </div>
-        <div id="XP">
+        
+        <div>
+            <h4>Level: <span id="level"></span></h4>
+        </div>
+        
+        <div id="XP" >
             <div id="xpBar">10%</div>
         </div>
 
-        <button id="modalWindow">Open Modal</button>
+        <!-- New Event Window -->
+        <button id = "newEvent"></button>    <!-- Button to open event window -->
+        <div id = "eventWindow" class = "event">
+            <div class = "event-content">
+                <div class = "event-header">
+                    
+                    <h2 id = "eventDate"></h2>
+                    <span id = "closeEventWindow" class = "close">&times; </span>
+                    <!-- <textarea id = "eventTitle" rows = "1" cols = "50">Enter a title:</textarea> -->
+                </div>
+                <div class = "event-body">
+                    <!-- List of events for the day -->
+                    <section>
+                        <h3 class = "event-info-header">List of Events</h3>
+                        <ul class = "event-list">
+                            <li class = "event-list-item">Event 1
+                                <button class = "event-button"></button></li>
+                            <li class = "event-list-item">Event 2
+                                <button class = "event-button"></button></li>
+                            <button class = "button">+</button>
+                        </ul>    
+                    </section>
+                    <section>
+                        <h3 class = "event-details">Event Date: </h3>
+                        <!-- <h3 id = "eventDate"></h3>  -->
+                        <h3 class = "event-details">Event Time: </h3>
+                    </section>
+
+                    
+                    <!-- <h3 class = "event-details">Event Date: </h3>
+                    <h3 id = "eventDate"></h3>
+                    <!-- <input type = "date" id = "eventDate" name = "eventDate"> -->
+                    <!-- <h3>Event Time</h3>
+                    <input type = "time" id = "eventTime" name = "eventTime">
+                    <h3>Event Duration</h3>
+                    <input type = "time" id = "eventDuration" name = "eventDuration">
+                    <h3>Event Location</h3>
+                    <textarea id = "eventLocation" rows = "1" cols = "50">Enter a location:</textarea> -->
+                </div>
+                <div class = "event-footer">
+                    <h3>Event Description</h3>
+                    <textarea id = "eventDescription" rows = "4" cols = "50">Enter a description:</textarea>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- Modal Window -->
+
+        <button id="modalWindow" visibility="hidden">Open Modal</button>
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="close">&times;</span>
+                    <span id = "closeModal" class="close">&times;</span>
                     <h2 id="today"></h2>
                     <script>
                         var today = new Date();
-                        document.getElementById("today").textContent =
+                        document.getElementById("today").textContent = 
                             today.toDateString();
+                        
                     </script>
                 </div>
                 <div class="modal-body">
-                    <ul class="weeklyStreak">
+                    <ul class="thisWeek">
+                        
                         <li class="dayBox">Sun</li>
                         <li class="dayBox">Mon</li>
                         <li class="dayBox">Tue</li>
@@ -63,16 +123,34 @@
                         <li class="dayBox">Thu</li>
                         <li class="dayBox">Fri</li>
                         <li class="dayBox">Sat</li>
+                        <script>
+                            today = new Date().getDay();
+                            console.log(today);
+                            let i = 0;
+                            if ( today == 0 ) {
+                                document.getElementsByClassName("dayBox")[0].style.backgroundColor =
+                                    "#4caf50";
+                            } else {
+                                while (today != i && i < 7) {
+                                    document.getElementsByClassName("dayBox")[i].style.backgroundColor =
+                                        "#4caf50";
+                                    i++;
+                                }
+                            }
+                            document.getElementById("xpBar").style.width = (i + 1) * 10 + "%";
+                            document.getElementById("xpBar").textContent = (i + 1) * 10 + "%";
+                        </script>
                     </ul>
                 </div>
                 <div class="modal-footer">
                     <h3 id="dayNum"></h3>
                     <script>
                         var today = new Date();
-                        document.getElementById("dayNum").textContent =
-                            "Streak: " + today.getDay() + " / 7";
+                        document.getElementById("dayNum").textContent = "Streak: " + 
+                            today.getDay() + " / 7"; 
                     </script>
                 </div>
+                
             </div>
         </div>
     </body>
