@@ -85,27 +85,9 @@ dates.addEventListener("click", function (e) {
 
         eventWindow.style.display = "flex";
         
-        updateXPBar();
+        addXP(10);
     }
-    
 });
-
-function updateXPBar() {
-    let currentXP = parseInt(document.getElementById("xpBar").textContent);
-    if ( currentXP >= 100 ) {
-        currentXP = 0;
-        level++;
-        document.getElementById("level").innerHTML = level;
-    }
-    document.getElementById("xpBar").style.width = currentXP + 10 + "%";
-    document.getElementById("xpBar").textContent = currentXP + 10 + "%";
-}
-
-// Initialize level
-let level = 0;
-// Update the level display
-document.getElementById("level").innerHTML = level;
-
 
 navs.forEach((nav) => {
     nav.addEventListener("click", (e) => {

@@ -196,19 +196,21 @@ h4 {
 
     border-color: #A8FBD3;
     border-style: solid;
-    border-width: 1px
+    border-width: 1px;
+
+    transition: width 1s ease;
 }
 
 /* Modal Window Styling */
 .modal {
-    display: inline;
+    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: scroll;
+    overflow: hidden;
     /* background-color: rgb(0,0,0); */
     background-color: rgba(0,0,0,0.4);
     /* padding-top: 60px; */
@@ -349,7 +351,7 @@ h4 {
 */
 
 .event {
-    display: inline;
+    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -387,7 +389,7 @@ h4 {
     background-color: #fefefe;
     margin: auto;
     margin-bottom: 10%;
-    margin-top: 10%
+    margin-top: 10%;
     padding: 0;
     border: 1px solid #888;
     width: 80%;
@@ -395,7 +397,7 @@ h4 {
 
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.4s;
 }
 .event-details {
     width: 40%;
@@ -421,7 +423,7 @@ eventTitle {
     align-items: center;
     margin-top: 2%;
     margin-left: 13%;
-    margin-right: 10%
+    margin-right: 10%;
     margin-bottom: 5%;
 }
 eventDate {
