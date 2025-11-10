@@ -3,10 +3,15 @@
 */
 let amountToLevelUp = 50;
 let amountToAddToEachLevelUp = 50;
+
 let level = 0;
-let xp = 0;
 const levelElement = document.getElementById("level"); // the level number element itself
+
+let xp = 0;
 const xpBar = document.getElementById("xpBar"); // the XP bar element itself
+
+let dailyStreak = 0;
+// const streakNumber = document.getElementById("");
 
 // Load in level and XP from local storage
 if (typeof(Storage) !== "undefined") {
@@ -107,32 +112,4 @@ function setLevel(newLevel) {
   updateXPBar();
 
   console.log("Level manually set to " + level + " and was XP reset to 0");
-}
-
-// Check to see if user has logged in today
-function hasLoggedInToday() {
-  const today = new Date().toDateString(); // format: "Sat Nov 08 2025"
-  const lastLogin = localStorage.getItem("lastLoginDate");
-
-  if (lastLogin === today) {
-    // Already logged in today
-    console.log("Player has already logged in today")
-    return true;
-  } else {
-    // First login today, update last login day
-    localStorage.setItem("lastLoginDate", today);
-    return false;
-  }
-}
-
-displayDailyMessage();
-
-// If the player hasn't logged in today then display login message
-function displayDailyMessage() {
-  if (!hasLoggedInToday()) {
-    // Make modal visiable
-    const modal = document.getElementById("myModal");
-    modal.style.display = "flex";
-    console.log("Displaying login message")
-  }
 }

@@ -85,7 +85,7 @@ dates.addEventListener("click", function (e) {
 
         eventWindow.style.display = "flex";
         
-        addXP(10);
+        addXP(10); // FOR TESTING
     }
 });
 
