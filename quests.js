@@ -262,6 +262,9 @@ function dailyReset() {
   } else {
     console.log("Current month has not changed")
   }
+
+  // Update last login
+  localStorage.setItem("lastLoginDate", today.toDateString());
 }
 
 // Helper to calculate week number

@@ -40,7 +40,7 @@ if (typeof(Storage) !== "undefined") {
   // Retrieve and set XP
   xp = parseInt(localStorage.getItem("xp")) || 0;
   updateXPBar();
-  console.log("Set XP to " + xp)
+  console.log("Set XP to " + xp + " out of " + amountToLevelUp +" needed")
 } else {
   levelElement.innerHTML = "Web storage not supported";
 }

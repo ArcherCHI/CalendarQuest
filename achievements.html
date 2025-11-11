@@ -5,12 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Achievements</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src = "calendar.js" defer></script> 
-   
+    <link rel="stylesheet" href="style.css" /> 
+    <script src = "level.js" defer></script>
 </head>
 <body>
-    <h1>All Achievements</h1>
     <!-- When an Achievement is claimed, XP is rewarded and the claim button is once again disabled with a longer incentive -->
 
     <div class="navBar">
@@ -20,7 +18,7 @@
 
     <!-- Number of Quests Completed -->
     <div class="achievement-list" style="margin: 2%; padding: 2%;">
-        <h2>Achievements</h2>
+        <h1>All Achievements</h1>
         <div class="achievement" style="background-color:#f5f5f5; padding:10px; margin-bottom:10px; border-radius:5px;">
             <span>Quest Conqueror</span>
             <span style="float:right;">4/10</span>
@@ -81,7 +79,9 @@
         </div>
 
     </div>
-
+    <div>
+        <h4>Level: <span id="level"></span></h4>
+    </div>
     <div class="XP" id="XP" style="margin-left:13%; margin-right:10%;">
         <div id="xpBar">25%</div>
     </div>
