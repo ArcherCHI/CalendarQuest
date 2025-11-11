@@ -89,7 +89,7 @@ function updateXPBar() {
   xpBar.textContent = Math.floor(percent) + "%";
 }
 
-// Sets the level to the number is passed as a parameter
+// Sets the level to the number that is passed as a parameter
 function setLevel(newLevel) {
   // Check for valid number (is a number and not negative)
   newLevel = parseInt(newLevel);

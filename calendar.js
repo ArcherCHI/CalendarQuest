@@ -281,6 +281,8 @@ saveButton.addEventListener("click", function (e) {
     const success = addEvent(date, createEvent(eventName, date, eventTime, eventLocation, eventDescription));
     
     if (success) {
+        addXP(25); // FOR TESTING
+
         renderEventList(date);
         
         document.getElementById("eventTitle").value = "";
