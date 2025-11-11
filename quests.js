@@ -275,3 +275,51 @@ function getWeekNumber(date) {
   const daysSinceYearStart = Math.floor((date - firstDayOfYear) / (1000 * 60 * 60 * 24));
   return Math.ceil((daysSinceYearStart + firstDayOfYear.getDay() + 1) / 7);
 }
+
+const dailyQuestsButtonOpen = document.getElementById("daily-quests-button-open");
+const dailyQuestsButtonClose = document.getElementById("daily-quests-button-close");
+const dailyQuests_ = document.getElementById("daily-quests");
+dailyQuestsButtonOpen.addEventListener("click", function () {
+    dailyQuests_.style.display = "flex";
+    dailyQuestsButtonClose.style.display = "inline";
+    dailyQuestsButtonOpen.style.display = "none";
+    console.log("Daily Quests Opened");
+});
+dailyQuestsButtonClose.addEventListener("click", function () {
+    dailyQuests_.style.display = "none";
+    dailyQuestsButtonClose.style.display = "none";
+    dailyQuestsButtonOpen.style.display = "inline";
+    console.log("Daily Quests Closed");
+})
+
+const weeklyQuestsButtonOpen = document.getElementById("weekly-quests-button-open");
+const weeklyQuestsButtonClose = document.getElementById("weekly-quests-button-close");
+const weeklyQuests_ = document.getElementById("weekly-quests");
+weeklyQuestsButtonOpen.addEventListener("click", function () {
+    weeklyQuests_.style.display = "flex";
+    weeklyQuestsButtonClose.style.display = "inline";
+    weeklyQuestsButtonOpen.style.display = "none";
+    console.log("Weekly Quests Opened");
+});
+weeklyQuestsButtonClose.addEventListener("click", function () {
+    weeklyQuests_.style.display = "none";
+    weeklyQuestsButtonClose.style.display = "none";
+    weeklyQuestsButtonOpen.style.display = "inline";
+    console.log("Weekly Quests Closed");
+})
+
+const monthlyQuestsButtonOpen = document.getElementById("monthly-quests-button-open");
+const monthlyQuestsButtonClose = document.getElementById("monthly-quests-button-close");
+const monthlyQuests_ = document.getElementById("monthly-quests");
+monthlyQuestsButtonOpen.addEventListener("click", function () {
+    monthlyQuests_.style.display = "flex";
+    monthlyQuestsButtonClose.style.display = "inline";
+    monthlyQuestsButtonOpen.style.display = "none";
+    console.log("Monthly Quests Opened");
+});
+monthlyQuestsButtonClose.addEventListener("click", function () {
+    monthlyQuests_.style.display = "none";
+    monthlyQuestsButtonClose.style.display = "none";
+    monthlyQuestsButtonOpen.style.display = "inline";
+    console.log("Monthly Quests Closed");
+})
