@@ -213,7 +213,7 @@ h4 {
 /* Modal Header */
 .modal-header {
     padding: 2px 16px;
-    background-color: #5cb85c;
+    background-color: #865DFF;
     color: white;
     text-align: center;
 }
@@ -225,7 +225,7 @@ h4 {
 .modal-footer {
     padding: 2px 16px;
     text-align: center;
-    background-color: #5cb85c;
+    background-color: #865DFF;
     color: white;
 }
 
