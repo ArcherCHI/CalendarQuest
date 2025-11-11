@@ -551,3 +551,44 @@ textarea {
     margin-top: 1%;
 }
 /* Achievement List Styling */
+
+/* Quests Page Styling*/
+#quests-container {
+    display: flex;
+    flex-direction: column;
+    height:auto;
+    background-color: transparent;
+}
+#quest-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+    background-color: transparent;
+    list-style-type: none;
+}
+.quest-button {
+    width: 300px;
+    height: 150px;
+    margin: 10px 0px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+#daily-quests {
+    background-color: crimson;
+}
+#weekly-quests {
+    background-color: gold;
+}
+#monthly-quests {
+    background-color: slateblue;
+}
+span arrow { 
+    font-size: 200%; 
+    font-weight: bold 
+}

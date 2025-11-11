@@ -9,7 +9,28 @@
     <script src = "calendar.js" defer></script>
 </head>
     <body>
-        <ul>
+        <ul class = "navBar">
             <li><a href="calendar.html">Calendar</a></li>
             <li><a href="achievements.html">Achievements</a></li>
         </ul>
+        <h1>Quests</h1>
+        <div id = "quests-container">
+            <ul id = "quest-list">
+                <li>
+                    <button id = "daily-quests" class = "quest-button">Daily Quests <span><arrow>&#8678;</arrow></span></button>
+                </li>
+                <li>
+                    <button id = "weekly-quests" class = "quest-button">Weekly Quests <span><arrow>&#8678;</arrow></span></button>
+                </li>
+                <li>
+                    <button id = "monthly-quests" class = "quest-button">Monthly Quests <span><arrow>&#8678;</arrow></span></button>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h4>Level: <span id="level"></span></h4>
+        </div>
+        
+        <div id="XP" >
+            <div id="xpBar">10%</div>
+        </div>
