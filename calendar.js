@@ -80,9 +80,10 @@ dates.addEventListener("click", function (e) {
             .map(Number);
         
         const clickedDate = new Date(clickedYear, clickedMonth - 1, clickedDay);
+        const dateString = clickedDate.toDateString();
         console.log("Selected day:", clickedDate.toDateString());
-        document.getElementById("eventDate").textContent = clickedDate.toDateString();
-
+        document.getElementById("eventDate").textContent = dateString;
+        renderEventList(dateString);
         eventWindow.style.display = "flex";
         
         addXP(10); // FOR TESTING
@@ -113,25 +114,18 @@ navs.forEach((nav) => {
 
 renderCalendar();
 
-// Event Window functionality
-const newEvent = document.getElementById("newEvent");
-const eventWindow = document.getElementById("eventWindow");
-const closeEventWindow = document.getElementById("closeEventWindow");
+// displayWeeklyStreak();
 
-newEvent.addEventListener("click", function () {
-    eventWindow.style.display = "block";
-    console.log("Event Window Opened");
-});
-closeEventWindow.addEventListener("click", function () {
-    eventWindow.style.display = "none";
-    console.log("Event Window Closed");
-})
+const newEventWindow = document.getElementById("newEventWindow");
 
-
-// Modal functionality
+// Modal windows are the pop up windows that appear when you initially log in
+// Modal Window functionality
 const modal = document.getElementById("myModal");
 const modalBtn = document.getElementById("modalWindow");
 const closeBtn = document.getElementById("closeModal");
+
+modalBtn.style.background = "transparent";
+modalBtn.style.border = "none";
 
 // Open modal when button is clicked
 modalBtn.addEventListener("click", function () {
@@ -149,10 +143,13 @@ closeBtn.addEventListener("click", function () {
 window.addEventListener("click", function (event) {
     if (event.target === modal) {
         modal.style.display = "none";
-    } else if (event.target === eventWindow )
-        eventWindow.style.display = "none";    
+    } else if (event.target === eventWindow ){
+        eventWindow.style.display = "none"; 
+        newEventWindow.style.visibility = "hidden";
+    }
 });
 
+// Display weekly streak in modal window
 function displayWeeklyStreak() {
     today = date.getDay();
     let i = 0;
@@ -168,11 +165,185 @@ function displayWeeklyStreak() {
         "#4caf50";
 }
 
+
+// Event Window functionality
+let currentEditingEventName = null;
+
+const openEvents = document.getElementById("openEvents");
+const eventWindow = document.getElementById("eventWindow");
+const closeEventWindow = document.getElementById("closeEventWindow");
+const addEventButton = document.getElementById("addEvent");
+
+openEvents.style.background = "transparent";
+openEvents.style.border = "none";
+
+openEvents.addEventListener("click", function () {
+    eventWindow.style.display = "block";
+    date = document.getElementById("eventDate").textContent;
+    renderEventList(date);
+    console.log("Event Window Opened");
+});
+closeEventWindow.addEventListener("click", function () {
+    eventWindow.style.display = "none";
+    console.log("Event Window Closed");
+    clearEventInput();
+    newEventWindow.style.visibility = "hidden";
+});
+
+
+addEventButton.addEventListener("click", function (e) {
+    console.log("Add Event Button Clicked");
+    currentEditingEventName = null;
+    newEventWindow.style.visibility = "visible";
+
+    document.getElementById("eventTitle").value = "";
+    document.getElementById("eventTime").value = "";
+    document.getElementById("eventLocation").value = "";
+    document.getElementById("eventDescription").value = "";
+});
+
+// Event List functionality
 const eventList = document.querySelector(".event-list");
 const eventButton = document.querySelector(".event-button");
 
+if (eventButton) {
+    eventButton.addEventListener("click", function (e) {
+        console.log("Event Button Clicked");
+        document.getElementsByClassName("event-details").visibility = "visible";
+    });
+}
 
-eventButton.addEventListener("click", function (e) {
-    console.log("Event Button Clicked");
-    document.getElementsByClassName("event-details").visibility = "visible";
+function addEventToList(eventName) {
+    const newEvent = document.createElement("li");
+    newEvent.classList.add("event-list-item");
+    
+    const textSpan = document.createElement("span");
+    textSpan.textContent = eventName;
+    textSpan.style.flexGrow = "1";
+    newEvent.appendChild(textSpan);
+
+    const viewBtn = document.createElement("button");
+    viewBtn.textContent = "View";
+    viewBtn.classList.add("event-view-btn");
+    viewBtn.addEventListener('click', function() {
+        const currentDate = document.getElementById("eventDate").textContent;
+        const events = getEventsForDate(currentDate);
+        const eventData = events.find(e => e.name === eventName);
+
+        if (eventData) {
+            currentEditingEventName = eventName;
+            
+            document.getElementById("eventTitle").value = eventData.name || "";
+            document.getElementById("eventTime").value = eventData.time || "";
+            document.getElementById("eventLocation").value = eventData.place || "";
+            document.getElementById("eventDescription").value = eventData.description || "";
+            newEventWindow.style.visibility = "visible";
+            console.log('Viewing event:', eventName);
+        }
+    });
+
+    newEvent.appendChild(viewBtn);
+    eventList.prepend(newEvent);
+}    
+
+function clearEventInput() {
+    document.getElementById("eventTitle").value = "";
+    document.getElementById("eventTime").value = "";
+    document.getElementById("eventLocation").value = "";
+    document.getElementById("eventDescription").value = "";
+}
+
+function renderEventList(date) {
+    const items = eventList.querySelectorAll('.event-list-item');
+    items.forEach(item => item.remove());
+    
+    const events = getEventsForDate(date);
+    events.forEach(event => addEventToList(event.name));
+}
+
+function openNewEventWindow(){
+    document.getElementById("newEvent-section").visibility = "visible";
+}
+const saveButton = document.getElementById("saveButton");
+saveButton.addEventListener("click", function (e) {
+    console.log("Save Button Clicked");
+    date = document.getElementById("eventDate").textContent;
+    eventName = document.getElementById("eventTitle").value;
+    eventTime = document.getElementById("eventTime").value;
+    eventLocation = document.getElementById("eventLocation").value;
+    eventDescription = document.getElementById("eventDescription").value;
+    
+    if (!eventName.trim()) {
+        alert("Please enter an event title");
+        return;
+    }
+    
+    const success = addEvent(date, createEvent(eventName, date, eventTime, eventLocation, eventDescription));
+    
+    if (success) {
+        renderEventList(date);
+        
+        document.getElementById("eventTitle").value = "";
+        document.getElementById("eventTime").value = "";
+        document.getElementById("eventLocation").value = "";
+        document.getElementById("eventDescription").value = "";
+        
+        currentEditingEventName = null;
+        newEventWindow.style.visibility = "hidden";
+        
+        console.log("Event saved successfully: " + eventName);
+    }
 });
+
+const editButton = document.getElementById("editButton");
+editButton.addEventListener("click", function (e) {
+    console.log("Edit Button Clicked");
+    
+    if (!currentEditingEventName) {
+        alert("Please select an event to edit by clicking the View button");
+        return;
+    }
+    
+    const date = document.getElementById("eventDate").textContent;
+    const newEventName = document.getElementById("eventTitle").value;
+    const newEventTime = document.getElementById("eventTime").value;
+    const newEventLocation = document.getElementById("eventLocation").value;
+    const newEventDescription = document.getElementById("eventDescription").value;
+    
+    if (!newEventName.trim()) {
+        alert("Please enter an event title");
+        return;
+    }
+    
+    const updatedEvent = createEvent(newEventName, date, newEventTime, newEventLocation, newEventDescription);
+    const success = editEvent(date, currentEditingEventName, updatedEvent);
+    
+    if (success) {
+        renderEventList(date);
+        
+        document.getElementById("eventTitle").value = "";
+        document.getElementById("eventTime").value = "";
+        document.getElementById("eventLocation").value = "";
+        document.getElementById("eventDescription").value = "";
+        
+        currentEditingEventName = null;
+        newEventWindow.style.visibility = "hidden";
+        
+        console.log("Event edited successfully");
+    } else {
+        alert("Failed to edit event. An event with that name may already exist.");
+    }
+});
+
+const removeButton = document.getElementById("removeButton");
+removeButton.addEventListener("click", function (e) {
+    console.log("Remove Button Clicked");
+    date = document.getElementById("eventDate").textContent;
+    eventName = document.getElementById("eventTitle").value;
+    removeEvent(date, eventName);
+    renderEventList(date);
+    newEventWindow.style.visibility = "hidden";
+    // removeEvent();
+});
+
+displayWeeklyStreak();

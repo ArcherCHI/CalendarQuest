@@ -8,7 +8,7 @@ body {
     flex-direction: column;
     height: 100%; /* Previously 100vh */
     font-family: Poppins, sans-serif;
-    background: linear-gradient(to bottom, #ff5e88, #ff9966);
+    background: linear-gradient(to bottom, #191825, #865DFF);
 }
 h1 {
     font-weight: 600;
@@ -43,8 +43,8 @@ h4 {
     justify-content: space-between;
     align-items: center;
     margin-top: 2%;
-    margin-left: 13%;
-    margin-right: 10%;
+    margin-left: 5%;
+    margin-right: 1%;
 }
 
 /* Calendar Styling */
@@ -170,37 +170,6 @@ h4 {
     color: #ccc;
 }
 
-
-/* Experience (XP) Bar Styling */
-#XP {
-    min-width: 25%;
-    max-width: 75%; 
-    height: 25px;
-    background-color: #fff;
-    margin-top: 1%;
-    margin-left: 13%;
-    margin-right: 10%;
-    margin-bottom: 1%;
-    border-color: black;
-    border-style: solid;
-    border-width: 2px;
-}
-#xpBar {
-    width: 10%;
-    height: 21px;
-    background-color: #4caf50;
-    
-    text-align: center;
-    line-height: 21px;
-    color: white;
-
-    border-color: #A8FBD3;
-    border-style: solid;
-    border-width: 1px;
-
-    transition: width 1s ease;
-}
-
 /* Modal Window Styling */
 .modal {
     display: none;
@@ -231,7 +200,7 @@ h4 {
 .close {
     color: #fff;
     float: right;
-    font-size: 28px;
+    font-size: 50px;
     font-weight: bold;
 }
 .close:hover,
@@ -280,7 +249,7 @@ h4 {
   from {top: -300px; opacity: 0}
   to {top: 0; opacity: 1}
 }
-
+/* Weekly Streak Styling */
 .thisWeek {
     list-style-type: none;
     display: flex;
@@ -320,8 +289,8 @@ h4 {
     flex-direction: row;
     padding: 5%;
     margin: 2%;
-    background-color: #fff;
-    border: 1px solid #000;
+    /* background-color: #fff; */
+    /* border: 1px solid #000; */
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     text-align: center;
@@ -334,223 +303,174 @@ h4 {
     justify-content: space-between;
     align-items: center;
 }
-
-/*
-#level {
+.link {
     font-size: 20px;
     font-weight: bold;
     color: #000;
+    background-color: #865DFF;
+    border: 1px solid #fff;
     text-decoration: none;
     list-style-type: none;
     justify-content: space-between;
     align-items: center;
-    margin-top: 2%;
-    margin-left: 13%;
-    margin-right: 10%;
-}
-*/
-
-.event {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: scroll;
-    /* background-color: rgb(0,0,0); */
-    background-color: rgba(0,0,0,0.4);
-    /* padding-top: 60px; */
-    align-items: center;
-    justify-content: center;
-}
-
-.event-header {
-    font-size: 18px;
-    font-weight: bold;
-    font-color: #fff;
-    background-color: #5cb85c;
-    text-align: center;
-    display: flex;
-    /* margin-top: 10%; */
-    /* margin-left: 13%;
-    margin-right: 10%; */
-    height: 20%;
-    width: 100%;
-}
-.event-body{
-    width: 100%;
-    /* padding: 2px 16px; */
-}
-
-.event-content {
-    position: relative;
-    background-color: #fefefe;
-    margin: auto;
-    margin-bottom: 10%;
-    margin-top: 10%;
-    padding: 0;
-    border: 1px solid #888;
-    width: 80%;
-    height: 70%;
-
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    animation-name: animatetop;
-    animation-duration: 0.4s;
-}
-.event-details {
-    width: 40%;
-    height: 50%;
-    background-color: #5cb85c;
-    color: white;
-    text-align: center;
     margin-top: 2%;
     margin-left: 2%;
-    border: 1px solid #000;
-    border-radius: 5%;;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    visibility: hidden;
+    margin-right: 2%
+}
+#bottomBar {
+    display: flex;
+    flex-direction: row;
+    padding: 2%;
+    margin: 2%;
+    background-color: transparent;
+    list-style-type: none;
+    /* border: 1px solid #4cae4c; */
 }
 
-eventTitle {
-    font-size: 12px;
-    font-weight: bold;
-    color: #000;
-    text-decoration: none;
-    list-style-type: none;
+/* Experience (XP) Bar Styling */
+.xpGroup{
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: 2%;
-    margin-left: 13%;
-    margin-right: 10%;
-    margin-bottom: 5%;
+    margin: 0 auto;
+    width: 100%;
+    height: 50%;
+    /* background-color: #fff; */
+    padding: 1rem;
+    margin-top: 5px;
+    /* margin-left: 5%; */
+    margin-right: 4%;
+    margin-bottom: 5px;
 }
-eventDate {
-    text-align: center;
-    margin-right: 80%;
-}
-.event-footer {
-    padding: 2px 16px;
-    text-align: center;
-    background-color: #5cb85c;
-    color: white;
-    margin-top: 40%;
-}
-
-.event-close {
+#level {
+    font-size: 20px;
+    font-weight: bold;
     color: #fff;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-.event-close:hover,
-.event-close:focus {
-    color: black;
     text-decoration: none;
-    cursor: pointer
-}
-.event-info-header {
-    width: 40%;
-    height: 50%;
-    background-color: #5cb85c;
-    color: white;
-    text-align: center;
-    margin-top: 2%;
-    margin-left: 2%;
-    border: 1px solid #000;
-    border-radius: 5%;;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.event-list {
-    display: flex;
-    flex-direction: column;
+    list-style-type: none;
+    justify-content: space-between;
     align-items: center;
-    font-size: 18px;
-    width: 40%;
+    margin-top: 2%;
+    margin-right: 1%;
+}
+#XP {
+    width: 100%;
     height: 100%;
     background-color: #fff;
-    border: 1px solid #000;
-    border-radius: 5%;;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    margin-left: 2%;
-}
-.event-list-item {
-    border: 1px solid #000;
-    border-radius: 5%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    margin-left: 2%;
-    margin-right: 2%;
-    padding: 2%;
-    padding-left: 5%;
-    padding-right: 5%;
-    list-style-type: none;
-    
-}
-.event-cell {
-    cursor: pointer;
-}
-
-.event-button {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 42%;
-    height: 40%;
-    background: transparent;
-    border: 1px solid #000;
-    border-radius: 5%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    z-index: 1;
-    opacity: 0;
-}
-
-.event-button:hover {
-    opacity: 0.1;
-    background: rgba(0, 0, 0, 0.05);
-}
-
-.event-button:active {
-    opacity: 0.15;
-    background: rgba(0, 0, 0, 0.1);
-}
-
-textarea {
-    width: 100%;
-    height: 80%;
-    padding: 12px 20px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-    font-size: 16px;
-    resize: none;
     margin-top: 1%;
-    margin-right: 1%;
-    margin-bottom: 4%;
-}
-
-.button {
-    background-color: #4CAF50;
-    border: 2px solid #000;
-    color: white;
-    padding: 5px 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 24px;
-    font-weight: bold;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 12px;
-    margin-left: 1%;
-    margin-right: 1%;
+    /* margin-left: 13%; */
+    /* margin-right: 20%; */
     margin-bottom: 1%;
-    margin-top: 1%;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
 }
-/* Achievement List Styling */
+#xpBar {
+    width: 100%;
+    height: 10%;
+    
+    text-align: center;
+    line-height: 21px;
+    color: white;
+    background-color: #E384FF;
+    
+    border-color: #A8FBD3;
+    border-style: solid;
+    border-width: 1px;
+
+    transition: width 1s ease;
+}
+/* Event View Button Styling */
+.event-view-btn {
+    background-color: #865DFF;
+    color: white;
+    border: 1px solid #865DFF;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+    transition: background-color 0.2s;
+}
+
+.event-view-btn:hover {
+    background-color: #865DFF;
+}
+
+.event-view-btn:active {
+    background-color: #865DFF;
+}
+
+.event-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+
+/* Navigation Button Styling */
+/* Reference: https://uiverse.io/Smit-Prajapati/lazy-cow-47 */
+.nav-button {
+  /* in scss with just one variable i can change opacity with rgba(variable, opacity) but in css it's not possible so i have used three seperate variables */
+  /* with hue-rotate color can be changed */
+    --main-color: #865DFF;
+    --main-bg-color: #E384FF;
+    --pattern-color: #FFA3FD;
+    
+    /* change this rotation value */
+    filter: hue-rotate(0deg);
+    
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5rem;
+    background: radial-gradient(
+      circle,
+      var(--main-bg-color) 0%,
+      rgba(0, 0, 0, 0) 95%
+    ),
+    linear-gradient(var(--pattern-color) 1px, transparent 1px),
+    linear-gradient(to right, var(--pattern-color) 1px, transparent 1px);
+    background-size:
+    cover,
+    15px 15px,
+    15px 15px;
+    background-position:
+    center center,
+    center center,
+    center center;
+    border-image: radial-gradient(
+      circle,
+      var(--main-color) 0%,
+      rgba(0, 0, 0, 0) 100%
+    )
+    1;
+    border-width: 1px 0 1px 0;
+    border-radius: 30px;
+    color: var(--main-color);
+    padding: 2rem 3rem;
+    margin-top: 1rem;
+    font-weight: 300;
+    font-size: 1.25rem;
+    transition: background-size 0.2s ease-in-out;
+}
+
+.nav-button:hover {
+  background-size:
+    cover,
+    10px 10px,
+    10px 10px;
+}
+.nav-button:active {
+  filter: hue-rotate(250deg);
+}
+#achievementsLink {
+    float: left;
+}
+#questsLink {
+    float: right;
+}
 
 /* Quests Page Styling*/
 #quests-container {
@@ -591,4 +511,13 @@ textarea {
 span arrow { 
     font-size: 200%; 
     font-weight: bold 
+
+a:visited {
+    color: #fff;
+}
+a:link {
+    color: #fff;
+}
+a:active {
+    color: #fff;
 }

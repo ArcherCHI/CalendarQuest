@@ -10,9 +10,16 @@
     <script src = "quests.js" defer></script>
 </head>
     <body>
-        <ul class = "navBar">
-            <li><a href="achievements.html">Achievements</a></li>
-            <li><a href="calendar.html">Calendar</a></li>
+        <ul id = "bottomBar">
+            <li id = "achievementsLink" class = "nav-button"><a href="achievements.html">Achievements</a></li>
+            <div class = "xpGroup">
+                <h4>Level: <span id="level"></span></h4>
+
+                <div id="XP" >
+                    <div id="xpBar">10%</div>
+                </div>
+            </div>
+            <li class = "nav-button"><a href="calendar.html">Calendar</a></li>
         </ul>
         <h1>Quests</h1>
         <div id = "quests-container">
@@ -28,10 +35,5 @@
                 </li>
             </ul>
         </div>
-        <div>
-            <h4>Level: <span id="level"></span></h4>
-        </div>
-        
-        <div id="XP" >
-            <div id="xpBar">10%</div>
-        </div>
+    </body>
+</html>

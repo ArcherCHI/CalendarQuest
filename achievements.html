@@ -10,12 +10,18 @@
 </head>
 <body>
     <!-- When an Achievement is claimed, XP is rewarded and the claim button is once again disabled with a longer incentive -->
+    <div id="bottomBar">
+            <li class = "nav-button"><a href="calendar.html">Calendar</a></li>
+            <div class = "xpGroup">
+                <h4>Level: <span id="level"></span></h4>
 
-    <div class="navBar">
-        <a href="calendar.html">Calendar</a>
-        <a href="quests.html">Quests</a>
+                <div id="XP" >
+                    <div id="xpBar">10%</div>
+                </div>
+            </div>
+            <li class = "nav-button"><a href="quests.html">Quests</a></li>
+        </div>
     </div>
-
     <!-- Number of Quests Completed -->
     <div class="achievement-list" style="margin: 2%; padding: 2%;">
         <h1>All Achievements</h1>
@@ -23,7 +29,7 @@
             <span>Quest Conqueror</span>
             <span style="float:right;">4/10</span>
             <div style="background-color:#ddd; height:15px; border-radius:5px; margin-top:5px; position:relative;">
-                <div style="width:40%; height:100%; background-color:#4CAF50; border-radius:5px;"></div>
+                <div style="width:40%; height:100%; background-color:#E384FF; border-radius:5px;"></div>
             </div>
             <button style="margin-top:5px; padding:5px 10px; background-color:grey; color:white; border:none; border-radius:5px;" disabled>Claim</button>
         </div>
@@ -33,7 +39,7 @@
             <span>Busy Bee</span>
             <span style="float:right;">6/30</span>
             <div style="background-color:#ddd; height:15px; border-radius:5px; margin-top:5px; position:relative;">
-                <div style="width:20%; height:100%; background-color:#4CAF50; border-radius:5px;"></div>
+                <div style="width:20%; height:100%; background-color:#E384FF; border-radius:5px;"></div>
             </div>
             <button style="margin-top:5px; padding:5px 10px; background-color:grey; color:white; border:none; border-radius:5px;" disabled>Claim</button>
         </div>
@@ -43,7 +49,7 @@
             <span>Stylist</span>
             <span style="float:right;">1/4</span>
             <div style="background-color:#ddd; height:15px; border-radius:5px; margin-top:5px; position:relative;">
-                <div style="width:25%; height:100%; background-color:#4CAF50; border-radius:5px;"></div>
+                <div style="width:25%; height:100%; background-color:#E384FF; border-radius:5px;"></div>
             </div>
             <button style="margin-top:5px; padding:5px 10px; background-color:grey; color:white; border:none; border-radius:5px;" disabled>Claim</button>
         </div>
@@ -53,7 +59,7 @@
             <span>For The EXperience</span>
             <span style="float:right;">234/1000</span>
             <div style="background-color:#ddd; height:15px; border-radius:5px; margin-top:5px; position:relative;">
-                <div style="width:23%; height:100%; background-color:#4CAF50; border-radius:5px;"></div>
+                <div style="width:23%; height:100%; background-color:#E384FF; border-radius:5px;"></div>
             </div>
             <button style="margin-top:5px; padding:5px 10px; background-color:grey; color:white; border:none; border-radius:5px;" disabled>Claim</button>
         </div>
@@ -63,7 +69,7 @@
             <span>Calendar Collector</span>
             <span style="float:right;">1/3</span>
             <div style="background-color:#ddd; height:15px; border-radius:5px; margin-top:5px; position:relative;">
-                <div style="width:33%; height:100%; background-color:#4CAF50; border-radius:5px;"></div>
+                <div style="width:33%; height:100%; background-color:#E384FF; border-radius:5px;"></div>
             </div>
             <button style="margin-top:5px; padding:5px 10px; background-color:grey; color:white; border:none; border-radius:5px;" disabled>Claim</button>
         </div>
@@ -73,18 +79,18 @@
             <span>Longest Streak!</span>
             <span style="float:right;">12 days</span>
             <div style="background-color:#ddd; height:15px; border-radius:5px; margin-top:5px; position:relative;">
-                <div style="width:100%; height:100%; background-color:#4CAF50; border-radius:5px;"></div>
+                <div style="width:100%; height:100%; background-color:#E384FF; border-radius:5px;"></div>
             </div>
-            <button style="margin-top:5px; padding:5px 10px; background-color:#4CAF50; color:white; border:none; border-radius:5px;">Claim</button>
+            <button style="margin-top:5px; padding:5px 10px; background-color:#865DFF; color:white; border:none; border-radius:5px;">Claim</button>
         </div>
 
     </div>
-    <div>
+    <!-- <div>
         <h4>Level: <span id="level"></span></h4>
     </div>
     <div class="XP" id="XP" style="margin-left:13%; margin-right:10%;">
         <div id="xpBar">25%</div>
-    </div>
+    </div> -->
 
 </body>
 </html>
