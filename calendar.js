@@ -86,7 +86,7 @@ dates.addEventListener("click", function (e) {
         renderEventList(dateString);
         eventWindow.style.display = "flex";
         
-        addXP(10); // FOR TESTING
+        updateAllQuestProgress("inspect event", 1);
     }
 });
 
@@ -281,7 +281,11 @@ saveButton.addEventListener("click", function (e) {
     const success = addEvent(date, createEvent(eventName, date, eventTime, eventLocation, eventDescription));
     
     if (success) {
-        addXP(25); // FOR TESTING
+        updateAllQuestProgress("add event", 1);
+
+        if (eventTime !== "" && eventLocation !== "") {
+            updateAllQuestProgress("add time+location", 1);
+        }
 
         renderEventList(date);
         
@@ -322,6 +326,10 @@ editButton.addEventListener("click", function (e) {
     
     if (success) {
         renderEventList(date);
+
+        if (eventTime !== "" && eventLocation !== "") {
+            updateAllQuestProgress("add time+location", 1);
+        }
         
         document.getElementById("eventTitle").value = "";
         document.getElementById("eventTime").value = "";

@@ -2,7 +2,7 @@
     Leveling System
 */
 let amountToLevelUp = 50;
-let amountToAddToEachLevelUp = 50;
+let amountToAddToEachLevelUp = 25;
 
 let level = 0;
 const levelElement = document.getElementById("level"); // the level number element itself

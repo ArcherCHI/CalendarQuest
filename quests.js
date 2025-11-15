@@ -15,6 +15,8 @@ function updateQuestProgress(quests, type, amount) {
 
 // Updates all quests for progress of a given type by a given amount
 function updateAllQuestProgress(type, amount) {
+    console.log("Updating all quests of type: " + type);
+
     const daily = getDailyQuests();
     if (daily) {
         updateQuestProgress(daily, type, amount);
@@ -31,7 +33,7 @@ function updateAllQuestProgress(type, amount) {
     if (monthly) {
         updateQuestProgress(monthly, type, amount);
         localStorage.setItem("monthly_quests", JSON.stringify(monthly)); // Update local storage
-    } 
+    }
 }
 
 
@@ -46,7 +48,7 @@ function updateAllQuestProgress(type, amount) {
 const dailyQuests = [
     {
         id: 1,
-        description: "Inspect 1 event on the calendar",
+        description: "Inspect 1 event on the calendar.",
         taskType: "inspect event", // the type of task needed to be completed
         reward: 25, // in XP
         progress: 0,
@@ -72,6 +74,42 @@ const dailyQuests = [
         completed: false
     }
 ];
+
+// Load the daily quests into their html counterparts
+function loadQuests() {
+    // Get daily quest elements and store as a list
+    const dailyElements = document.querySelectorAll('#daily-quests li');
+
+    const dailies = getDailyQuests();
+    for (let i = 0; i < dailyElements.length; i++) {
+        dailyElements[i].innerHTML = `
+            <div class="quest-description">${dailies[i].description}</div>
+            <div class="quest-reward">+${dailies[i].reward} XP</div>
+            <div class="quest-progress">${dailies[i].progress} / ${dailies[i].goal}</div>`;
+    }
+
+    // Get weekly quest elements and store as a list
+    const weeklyElements = document.querySelectorAll('#weekly-quests li');
+
+    const weeklies = getWeeklyQuests();
+    for (let i = 0; i < weeklyElements.length; i++) {
+        weeklyElements[i].innerHTML = `
+            <div class="quest-description">${weeklies[i].description}</div>
+            <div class="quest-reward">+${weeklies[i].reward} XP</div>
+            <div class="quest-progress">${weeklies[i].progress} / ${weeklies[i].goal}</div>`;
+    }
+
+    // Get monthly quest elements and store as a list
+    const monthlyElements = document.querySelectorAll('#monthly-quests li');
+
+    const monthlies = getMonthlyQuests();
+    for (let i = 0; i < monthlyElements.length; i++) {
+        monthlyElements[i].innerHTML = `
+            <div class="quest-description">${monthlies[i].description}</div>
+            <div class="quest-reward">+${monthlies[i].reward} XP</div>
+            <div class="quest-progress">${monthlies[i].progress} / ${monthlies[i].goal}</div>`;
+    }
+}
 
 function resetDailyQuests() {
     // Make deep copies of the quests
@@ -111,7 +149,7 @@ function getDailyQuests() {
 const weeklyQuests = [
     {
         id: 4,
-        description: "Inspect 5 events on the calendar",
+        description: "Inspect 5 events on the calendar.",
         taskType: "inspect event", // the type of task needed to be completed
         reward: 50, // in XP
         progress: 0,
@@ -176,7 +214,7 @@ function getWeeklyQuests() {
 const monthlyQuests = [
     {
         id: 7,
-        description: "Inspect 25 events on the calendar",
+        description: "Inspect 25 events on the calendar.",
         taskType: "inspect event", // the type of task needed to be completed
         reward: 100, // in XP
         progress: 0,
@@ -263,6 +301,8 @@ function dailyReset() {
     console.log("Current month has not changed")
   }
 
+  loadQuests(); // Load the quests onto the quest page
+
   // Update last login
   localStorage.setItem("lastLoginDate", today.toDateString());
 }
@@ -276,10 +316,20 @@ function getWeekNumber(date) {
   return Math.ceil((daysSinceYearStart + firstDayOfYear.getDay() + 1) / 7);
 }
 
+// Daily quest button
 const dailyQuestsButtonOpen = document.getElementById("daily-quests-button-open");
 const dailyQuestsButtonClose = document.getElementById("daily-quests-button-close");
 const dailyQuests_ = document.getElementById("daily-quests");
+
 dailyQuestsButtonOpen.addEventListener("click", function () {
+    weeklyQuests_.style.display = "none";
+    weeklyQuestsButtonClose.style.display = "none";
+    weeklyQuestsButtonOpen.style.display = "inline";
+
+    monthlyQuests_.style.display = "none";
+    monthlyQuestsButtonClose.style.display = "none";
+    monthlyQuestsButtonOpen.style.display = "inline";
+
     dailyQuests_.style.display = "flex";
     dailyQuestsButtonClose.style.display = "inline";
     dailyQuestsButtonOpen.style.display = "none";
@@ -292,10 +342,22 @@ dailyQuestsButtonClose.addEventListener("click", function () {
     console.log("Daily Quests Closed");
 })
 
+
+
+// Weekly quest button
 const weeklyQuestsButtonOpen = document.getElementById("weekly-quests-button-open");
 const weeklyQuestsButtonClose = document.getElementById("weekly-quests-button-close");
 const weeklyQuests_ = document.getElementById("weekly-quests");
+
 weeklyQuestsButtonOpen.addEventListener("click", function () {
+    dailyQuests_.style.display = "none";
+    dailyQuestsButtonClose.style.display = "none";
+    dailyQuestsButtonOpen.style.display = "inline";
+
+    monthlyQuests_.style.display = "none";
+    monthlyQuestsButtonClose.style.display = "none";
+    monthlyQuestsButtonOpen.style.display = "inline";
+
     weeklyQuests_.style.display = "flex";
     weeklyQuestsButtonClose.style.display = "inline";
     weeklyQuestsButtonOpen.style.display = "none";
@@ -308,10 +370,22 @@ weeklyQuestsButtonClose.addEventListener("click", function () {
     console.log("Weekly Quests Closed");
 })
 
+
+
+// Monthly quest button
 const monthlyQuestsButtonOpen = document.getElementById("monthly-quests-button-open");
 const monthlyQuestsButtonClose = document.getElementById("monthly-quests-button-close");
 const monthlyQuests_ = document.getElementById("monthly-quests");
+
 monthlyQuestsButtonOpen.addEventListener("click", function () {
+    dailyQuests_.style.display = "none";
+    dailyQuestsButtonClose.style.display = "none";
+    dailyQuestsButtonOpen.style.display = "inline";
+
+    weeklyQuests_.style.display = "none";
+    weeklyQuestsButtonClose.style.display = "none";
+    weeklyQuestsButtonOpen.style.display = "inline";
+
     monthlyQuests_.style.display = "flex";
     monthlyQuestsButtonClose.style.display = "inline";
     monthlyQuestsButtonOpen.style.display = "none";

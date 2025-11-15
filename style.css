@@ -1,14 +1,39 @@
+html {
+    min-height: 100%;
+}
+body {
+    min-height: 100%;
+    height: auto;                    /* allow page to grow */
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    font-family: Poppins, sans-serif;
+    background: linear-gradient(to bottom, #191825, #865DFF);
+    background-attachment: fixed;    /* optional — prevents visible gaps */
+}
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-body {
+#global-ui {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
     display: flex;
-    flex-direction: column;
-    height: 100%; /* Previously 100vh */
-    font-family: Poppins, sans-serif;
-    background: linear-gradient(to bottom, #191825, #865DFF);
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    z-index: 999;
+    background: transparent; /* or a soft gradient */
 }
 h1 {
     font-weight: 600;
@@ -317,7 +342,10 @@ h4 {
     margin-left: 2%;
     margin-right: 2%
 }
+
+/* Experience (XP) Bar Styling */
 #bottomBar {
+    width: 100%;
     display: flex;
     flex-direction: row;
     padding: 2%;
@@ -326,8 +354,6 @@ h4 {
     list-style-type: none;
     /* border: 1px solid #4cae4c; */
 }
-
-/* Experience (XP) Bar Styling */
 .xpGroup{
     display: flex;
     flex-direction: row;
@@ -465,10 +491,10 @@ h4 {
 .nav-button:active {
   filter: hue-rotate(250deg);
 }
-#achievementsLink {
+#leftLink {
     float: left;
 }
-#questsLink {
+#rightLink {
     float: right;
 }
 
@@ -476,6 +502,10 @@ h4 {
 #quests-container {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 1200px;  /* prevents giant stretching on big screens */
+    margin: 0 auto;     /* center horizontally */
+    padding: 20px;
     height:auto;
     background-color: transparent;
 }
@@ -483,14 +513,16 @@ h4 {
     display: flex;
     flex-direction: column;
     margin-left: 200px;
-    width: 100%;
-    height: 100%;
+    padding: 0;
+    margin: 0;
+    width: auto;
+    height: auto;     /* IMPORTANT */
     background-color: transparent;
-    list-style-type: none;
+    list-style: none;
 }
 .quest-button {
-    width: 300px;
-    height: 150px;
+    width: 250px;
+    height: 125px;
     margin: 10px 0px;
     border: 1px solid #000;
     border-radius: 5px;
@@ -499,6 +531,34 @@ h4 {
     color: #000;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     cursor: pointer;
+}
+.quest-node {
+    width: 250px;
+    height: 125px;
+    display: flex;
+    border: 1px solid #000;
+    background-color: pink;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    flex-direction: column;   /* stack description + progress vertically */
+    justify-content: space-between;  /* push progress to the bottom */
+}
+.quest-details {
+    display: none;
+    flex-direction: row;
+    background-color: transparent;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.quest-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px; /* space between the button and quest details */
 }
 #daily-quests-button-open {
     background-color: crimson;
@@ -520,23 +580,6 @@ h4 {
 #monthly-quests-button-close {
     background-color: slateblue;
     display: none;
-}
-.quest-details {
-    display: none;
-    flex-direction: row;
-    background-color: transparent;
-    list-style-type: none;
-}
-.quest-node {
-    width: 300px;
-    height: 150px;
-    border: 1px solid #000;
-    background-color: pink;
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    color: #000;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 span arrow {
     font-size: 200%;
