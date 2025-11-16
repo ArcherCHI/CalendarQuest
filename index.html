@@ -12,36 +12,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar Quest</title>
-    <link id="theme-stylesheet" rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="events.css" />
-    <script src="events.js" defer></script>
-    <script src="calendar.js" defer></script>
-    <script src="level.js" defer></script>
-    <script src="quests.js" defer></script>
+    <link rel="stylesheet" href="tutorial.css" />
+    <script src = "calendar.js" defer></script>
+    <script src = "level.js" defer></script>
+    <script src = "events.js" defer></script>
+    <script src = "quests.js" defer></script>
+    <script src = "tutorial.js" defer></script>
 </head>
     <body>
-        <header>
-            <div id="topBar" style="padding-bottom: 3%;">
-                <button id="shop-button" class="top-button">🛍️</button>
-                <button id="reward-button" class="top-button">🎁</button>
-                <h1 >Calendar Quest</h1>
-                <button id="notification-button" class="top-button">🔔</button>
-                <button id="settings-button" class="top-button">⚠️⚙️</button>
-            </div>
-            <h5>Click on a day below to view/add events onto the calendar.</h5>
+        <h1 style="padding-bottom: 1%;" >Calendar Quest</h1>
+        <header id="topBar" style="padding-bottom: 2%;">
+            <button id="shopButton" class="top-button">🛍️</button>
+            <button id = "rewardsButton" class = "top-button"> 🎁 </button>
+            <button id = "notificationsButton" class = "top-button"> 🔔 </button>
+            <button id = "settingsButton" class="top-button"> ⚠️⚙️ </button>
+            <button id = "tutorialButton" class="top-button">?</button>
         </header>
 
         <main>
-
             <div id='buttonContainer' class="calendar">
+                <!-- Calendar Header -->
                 <header>
-                    <h3></h3>
+                    <!-- <div> -->
+                        <button id = "selectMonthButton"> Select Month </button>
+                        <!-- This input is hidden by default, shown when "Select Month" button is pressed -->
+                        <input type="month" id="monthPicker" name="monthPicker">    
+                    <!-- </div> -->
+                    
+                    <h3 class = "calendar-currMonth"></h3>
+                    
+                    
                     <nav>
                         <button id = "prev"></button>
                         <button id = "next"></button>
                     </nav>
                 </header>
-                <section> <!-- days of the week on calendar -->
+                <!-- Calendar Layout -->
+                <section> 
+                    <!-- Days of the week at the top of the calendar -->
                     <ul class="days">
                         <li>Sun</li>
                         <li>Mon</li>
@@ -51,6 +61,7 @@
                         <li>Fri</li>
                         <li>Sat</li>
                     </ul>
+                    <!-- Dates of the month in the calendar grid -->
                     <ul class="dates"></ul>
                 </section>
             </div>
@@ -65,7 +76,6 @@
                         window.location = "achievements.html";
                     });
                 </script>
-                
                 <!-- Level and XP Bar -->
                 <div class = "xpGroup">
                     <h4>Level: <span id="level"></span></h4>
@@ -85,16 +95,37 @@
             </div>
         </footer>
 
+        <!-- Calendar Tutorial Window -->
+        <!-- <div id = "tutorialWindow" class = "tutorial">
+            <div class = "tutorial-content">
+                <div class = "tutorial-header">
+                    <h2>Tutorial</h2>
+                    <span id = "closeTutorialWindow" class = "tutorial-close">&times; </span>
+                </div>
+                <div class = "tutorial-body">
+                    <p>Welcome to Calendar Quest!</p>
+                    <p>This is a tutorial on how to use the calendar.</p>
+                    <p>Click on a date to add an event to that date.</p>
+                    <p>Click on an event to view its details.</p>
+                    <p>Click on the "Select Month" button to select a month.</p>
+                    <p>Click on the "Notifications" button to view notifications.</p>
+                    <p>Click on the "Settings" button to view settings.</p>
+                    <p>Click on the "?" button to view this tutorial.</p>
+                </div>
+            </div>
+            
+        </div> -->
+
         <!-- New Event Window -->
         <button id = "openEvents"></button>    <!-- Button to open event window -->
         <div id = "eventWindow" class = "event">
-            <div class = "event-content">
-                <div class = "event-header">
+            <content>
+                <header>
                     
                     <h2 id = "eventDate"></h2>
                     <span id = "closeEventWindow" class = "event-close">&times; </span>
                     <!-- <textarea id = "eventTitle" rows = "1" cols = "50">Enter a title:</textarea> -->
-                </div>
+                </header>
                 <div class = "event-body">
                     <!-- List of events for the day -->
                     <section class = "event-section">
@@ -113,39 +144,40 @@
                                 <button id = "editButton" class = "addEvent-button">Edit</button>
                                 <button id = "removeButton" class = "addEvent-button">Remove</button>
                             </h3>
-                            
                             <tr>
                                 <th>Title:</th>
-                                <td><textarea id = "eventTitle" rows = "1" cols = "50">
+                                <td>
+                                    <textarea id = "eventTitle" rows = "2" cols = "50" placeholder = "Enter a title:">
                                     </textarea>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Time:</th>
-                                <td><input type = "time" id = "eventTime" name = "eventTime"></td>
+                                <td>
+                                    <input type = "time" id = "eventTime" name = "eventTime">
+                                </td>
                             </tr>
                             <tr>
                                 <th>Place:</th>
-                                <td><textarea id = "eventLocation" rows = "1" cols = "50">
-                                    </textarea>
+                                <td>
+                                    <textarea id = "eventLocation" rows = "2" cols = "50" 
+                                        placeholder = "Enter a location:"></textarea>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Description:</th>
-                                <td><textarea id = "eventDescription" rows = "1" cols = "50">
-                                    </textarea>
+                                <td>
+                                    <textarea id = "eventDescription" rows = "2" cols = "50"
+                                        placeholder = "Enter a description:"></textarea>
                                 </td>
                             </tr>
                         </table>
                     </section>
                 </div>
-                <!-- <div class = "event-footer"></div> -->
-            </div>
+            </content>
         </div>
 
-        
-        <!-- Modal Window -->
-
+        <!-- Window for first login of the day -->
         <button id="modalWindow" ></button>
         <div id="myModal" class="modal">
             <div class="modal-content">
@@ -199,5 +231,45 @@
                 
             </div>
         </div>
+
+        <div id = "tutorialSlides" class = "tutorial-slideshow-container"  >
+            <div class = "slides">
+                <div class = "numbertext"> 1 / 5 </div>
+                <img src = "tutorial_img1.png" style = "width:100%">
+                <div class = "text">Caption Text</div>
+            </div>
+            <div class = "slides fade">
+                <div class = "numbertext"> 2 / 5 </div>
+                <img src = "tutorial_img2.png" style = "width:100%">
+                <div class = "text">Caption Text</div>
+            </div>
+            <div class = "slides fade">
+                <div class = "numbertext"> 3 / 5 </div>
+                <img src = "tutorial_img3.png" style = "width:100%">
+                <div class = "text">Caption Text</div>
+            </div>
+            <div class = "slides fade">
+                <div class = "numbertext"> 4 / 5 </div>
+                <img src = "tutorial_img4.png" style = "width:100%">
+                <div class = "text">Caption Text</div>
+            </div>
+            <div class = "slides fade">
+                <div class = "numbertext"> 5 / 5 </div>
+                <img src = "tutorial_img5.png" style = "width:100%">
+                <div class = "text">Caption Text</div>
+            </div>
+            <a class = "slides-prev" onclick = "plusSlides(-1)">&#10094;</a>
+            <a class = "slides-next" onclick = "plusSlides(1)">&#10095;</a>
+            <div style = "text-align:center">
+                <span class = "dot" onclick = "currentSlide(1)"></span>
+                <span class = "dot" onclick = "currentSlide(2)"></span>
+                <span class = "dot" onclick = "currentSlide(3)"></span>
+                <span class = "dot" onclick = "currentSlide(4)"></span>
+                <span class = "dot" onclick = "currentSlide(5)"></span>
+            </div>
+        </div>
+                
+        
+        
     </body>
 </html>

@@ -1,5 +1,4 @@
 // Retrieves the array of events for a given day
-// Takes a string not a date object
 function getEventsForDate(date) {
   // Get existing array or create a new empty one from local storage
   return JSON.parse(localStorage.getItem(date) || "[]");
@@ -32,7 +31,7 @@ function removeEvent(date, eventName) {
   // Check if the event exists
   const eventExists = events.some(e => e.name === eventName);
   if (!eventExists) {
-    console.log("Event " + eventName + " not found on " + date);
+    console.log("Event " + eventName + "not found on " + date);
     return false; // Failed to remove
   }
 
@@ -71,20 +70,244 @@ function editEvent(date, oldName, updatedEvent) {
   return true; // Successfully edited event
 }
 
-
-
-// Returns true if an event is present on that day, false if not
-function eventOnThisDay(day) {
-  const events = getEventsForDate(day);
-
-  if (events.length === 0) {
-    return false;
-  }
-
-  return true;
-}
-
 // Creates a new event object
 function createEvent(name, date, time, place, description) {
   return { name, date, time, place, description };
 }
+
+// Event Window functionality
+let currentEditingEventName = null;
+const openEvents = document.getElementById("openEvents");
+const eventWindow = document.getElementById("eventWindow");
+const closeEventWindow = document.getElementById("closeEventWindow");
+const addEventButton = document.getElementById("addEvent");
+
+// Open event window when a date is clicked
+openEvents.style.background = "transparent";
+openEvents.style.border = "none";
+openEvents.addEventListener("click", function () {
+    eventWindow.style.display = "block";
+    date = document.getElementById("eventDate").textContent;
+    renderEventList(date);
+    console.log("Event Window Opened");
+});
+
+// Close event window when X is clicked
+closeEventWindow.addEventListener("click", function () {
+    eventWindow.style.display = "none";
+    console.log("Event Window Closed");
+    clearEventInput();
+    newEventWindow.style.visibility = "hidden";
+});
+
+// Creates a small window for adding a new event
+addEventButton.addEventListener("click", function (e) {
+    console.log("Add Event Button Clicked");
+    currentEditingEventName = null;
+    newEventWindow.style.visibility = "visible";
+
+    document.getElementById("eventTitle").value = "";
+    document.getElementById("eventTime").value = "";
+    document.getElementById("eventLocation").value = "";
+    document.getElementById("eventDescription").value = "";
+});
+
+// Event List functionality
+const eventList = document.querySelector(".event-list");
+const eventButton = document.querySelector(".event-button");
+
+if (eventButton) {
+    eventButton.addEventListener("click", function (e) {
+        console.log("Event Button Clicked");
+        document.getElementsByClassName("event-details").visibility = "visible";
+    });
+}
+
+// Add event to list
+function addEventToList(eventName) {
+    const newEvent = document.createElement("li");
+    newEvent.classList.add("event-list-item");
+
+    const textSpan = document.createElement("span");
+    textSpan.textContent = eventName;
+    textSpan.style.flexGrow = "1";
+    newEvent.appendChild(textSpan);
+
+    const viewBtn = document.createElement("button");
+    viewBtn.textContent = "View";
+    viewBtn.classList.add("event-view-btn");
+    viewBtn.addEventListener('click', function() {
+        const currentDate = document.getElementById("eventDate").textContent;
+        const eventsOfDate = getEventsForDate(currentDate);
+        const eventData = eventsOfDate.find(e => e.name === eventName);
+
+        if (eventData) {
+            currentEditingEventName = eventName;
+
+            document.getElementById("eventTitle").value = eventData.name || "";
+            document.getElementById("eventTime").value = eventData.time || "";
+            document.getElementById("eventLocation").value = eventData.place || "";
+            document.getElementById("eventDescription").value = eventData.description || "";
+            newEventWindow.style.visibility = "visible";
+            console.log('Viewing event:', eventName);
+        }
+    });
+    newEvent.appendChild(viewBtn);
+    eventList.prepend(newEvent);
+    events.push(eventName);
+}    
+
+// Clear event input fields when event window is closed
+function clearEventInput() {
+    document.getElementById("eventTitle").value = "";
+    document.getElementById("eventTime").value = "";
+    document.getElementById("eventLocation").value = "";
+    document.getElementById("eventDescription").value = "";
+}
+
+function removeEventDots(){
+    console.log("Removing Event Dots");
+    document.querySelectorAll(".event-dot").forEach(dot => dot.remove());
+}
+
+// For each date-cell, display a dot for each event on that date
+function displayEventDots(){
+    // console.log(events);
+    console.log("Displaying Event Dots");
+    removeEventDots();
+    const dateCells = document.querySelectorAll(".date-cell");
+    dateCells.forEach(cell => {
+
+        const dateStr = cell.querySelector(".date-button").getAttribute("data-date");
+        const [clickedYear, clickedMonth, clickedDay] = dateStr.split("-").map(Number);
+        const clickedDate = new Date( clickedYear, clickedMonth - 1, clickedDay );
+        const dateString = clickedDate.toDateString();
+        const events = getEventsForDate(dateString);
+        if (events.length > 0) {
+            console.log("Number of events on " + dateString + ": " + events.length);
+            const dot = document.createElement("div");
+            dot.classList.add("event-dot");
+            if ( events.length > 1 )
+                dot.textContent = events.length + " events";
+            else 
+                dot.textContent = events.length + " event";
+            cell.appendChild(dot);
+            console.log("Cell Text:" + cell.textContent );
+        }
+    });
+}
+
+
+
+// When user clicks a date, display the events for that date
+function renderEventList(date) {
+    console.log("renderEventList called");
+    const items = eventList.querySelectorAll('.event-list-item');
+    items.forEach(item => item.remove());
+
+    const events = getEventsForDate(date);
+    events.forEach(event => addEventToList(event.name));
+}
+
+// "Opens" event window when "addEvent" button is clicked by just making it visible
+function openNewEventWindow(){
+    document.getElementById("newEvent-section").visibility = "visible";
+}
+
+// Adds event to list when "save" button is clicked
+const saveButton = document.getElementById("saveButton");
+saveButton.addEventListener("click", function (e) {
+    console.log("Save Button Clicked");
+    date = document.getElementById("eventDate").textContent;
+    eventName = document.getElementById("eventTitle").value;
+    eventTime = document.getElementById("eventTime").value;
+    eventLocation = document.getElementById("eventLocation").value;
+    eventDescription = document.getElementById("eventDescription").value;
+
+    if (!eventName.trim()) {
+        alert("Please enter an event title");
+        return;
+    }
+
+    const success = addEvent(date, createEvent(eventName, date, eventTime, eventLocation, eventDescription));
+
+    if (success) {
+        updateAllQuestProgress("add event", 1);
+
+        if (eventTime !== "" && eventLocation !== "") {
+            updateAllQuestProgress("add time+location", 1);
+        }
+        console.log("Event added successfully: " + eventName);
+        renderEventList(date);
+
+        document.getElementById("eventTitle").value = "";
+        document.getElementById("eventTime").value = "";
+        document.getElementById("eventLocation").value = "";
+        document.getElementById("eventDescription").value = "";
+
+        currentEditingEventName = null;
+        newEventWindow.style.visibility = "hidden";
+
+        console.log("Event saved successfully: " + eventName);
+        displayEventDots();
+    }
+});
+
+// Saves event to list when "edit" button is clicked
+const editButton = document.getElementById("editButton");
+editButton.addEventListener("click", function (e) {
+    console.log("Edit Button Clicked");
+
+    if (!currentEditingEventName) {
+        alert("Please select an event to edit by clicking the View button");
+        return;
+    }
+
+    const date = document.getElementById("eventDate").textContent;
+    const newEventName = document.getElementById("eventTitle").value;
+    const newEventTime = document.getElementById("eventTime").value;
+    const newEventLocation = document.getElementById("eventLocation").value;
+    const newEventDescription = document.getElementById("eventDescription").value;
+
+    if (!newEventName.trim()) {
+        alert("Please enter an event title");
+        return;
+    }
+
+    const updatedEvent = createEvent(newEventName, date, newEventTime, newEventLocation, newEventDescription);
+    const success = editEvent(date, currentEditingEventName, updatedEvent);
+
+    if (success) {
+        renderEventList(date);
+
+        if (eventTime !== "" && eventLocation !== "") {
+            updateAllQuestProgress("add time+location", 1);
+        }
+
+        document.getElementById("eventTitle").value = "";
+        document.getElementById("eventTime").value = "";
+        document.getElementById("eventLocation").value = "";
+        document.getElementById("eventDescription").value = "";
+
+        currentEditingEventName = null;
+        newEventWindow.style.visibility = "hidden";
+
+        console.log("Event edited successfully");
+    } else {
+        alert("Failed to edit event. An event with that name may already exist.");
+    }
+});
+
+// Removes event from list when "remove" button is clicked
+const removeButton = document.getElementById("removeButton");
+removeButton.addEventListener("click", function (e) {
+    console.log("Remove Button Clicked");
+    date = document.getElementById("eventDate").textContent;
+    eventName = document.getElementById("eventTitle").value;
+    removeEvent(date, eventName);
+    // document.querySelectorAll("event-dot").remove();
+    // cell.parentNode.removeChild(cell);
+    renderEventList(date);
+    displayEventDots();
+    newEventWindow.style.visibility = "hidden";
+});

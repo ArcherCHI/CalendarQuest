@@ -71,26 +71,51 @@ h4 {
     margin-left: 5%;
     margin-right: 1%;
 }
-h5 { 
-    font-size: 20px;
-    text-align: center;
-    color: #fff;
-    padding-bottom: 1%;
-}
 
 /* Calendar Styling */
 .calendar {
     margin: 0 auto;
-    width: clamp(320px, 400px, 90%);
+    /* width: clamp(320px, 400px, 90%); */
+    /* display: flex; */
+    width: 90%;
+    height: 100%;
+    margin-bottom: 20%;    
     padding: 1rem;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 .calendar header {
+    margin-left: 1rem;
+    margin-right: 1rem;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+.calendar header button {
+    background: #865DFF;
+    border-radius: 10px;
+    padding: 0.25%;
+    font-size: 1.25rem;
+    color: white;
+    cursor: pointer;
+}
+#monthPicker {
+    margin-right: 65rem;
+    height: 2-.5rem;
+    border-radius: 10px;
+    border: 1px solid #865DFF;
+    padding: 0.25%;
+    font-size: 1rem;
+}
+.calendar-currMonth {
+    /* margin-left: 25rem; */
+    position: absolute; 
+    left: 50%; 
+    transform: translateX(-50%);
 }
 .calendar nav {
     display: flex;
@@ -111,6 +136,8 @@ h5 {
     align-items: center;
     justify-content: center;
 }
+
+
 #prev,
 #next {
     width: 20px;
@@ -144,11 +171,17 @@ h5 {
 }
 .days {
     font-weight: 600;
+    font-size: 2.5rem;
 }
 
 /* Date cell styling with hidden button */
 .date-cell {
     cursor: pointer;
+    border: 1px solid #ccc;
+    text-align: left;
+    position: relative;
+    padding-right: 3rem;
+    padding-bottom: 1rem;
 }
 
 .date-button {
@@ -172,12 +205,17 @@ h5 {
 .date-button:active {
     opacity: 0.15;
     background: rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
 }
 
 .date-number {
-    position: relative;
+    text-align: left;
+    position: absolute;
     z-index: 2;
     pointer-events: none;
+
+    padding-right: 3rem;
+    padding-bottom: 3rem;
 }
 
 .dates li.today .date-number {
@@ -186,40 +224,25 @@ h5 {
 
 .dates li.today::before {
     content: "";
-    width: 2rem;
-    height: 2rem;
     position: absolute;
-    top: 50%;
-    left: 50%;
     transform: translate(-50%, -50%);
     background: #000;
     border-radius: 50%;
     z-index: 0;
-}
-
-.dates li.calendar-event .date-number {
-    color: #000000;
-}
-
-.dates li.calendar-event::before {
-    content: "";
-    width: 2rem;
-    height: 2rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: transparent;
-    border: 2px solid #000;
-    border-radius: 50%;
-    z-index: 0;
+    padding-right: 2.65rem;
+    padding-bottom: 2.65rem;
 }
 
 .dates li.inactive {
     color: #ccc;
+    text-align: left;
+    border: 1px solid #ccc;
+    padding-right: 3rem;
+    padding-bottom: 3rem;
 }
 
-/* Modal Window Styling */
+/* Login / Streak Window Styling */
+/* Entire Window */
 .modal {
     display: none;
     position: fixed;
@@ -229,9 +252,7 @@ h5 {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    /* background-color: rgb(0,0,0); */
     background-color: rgba(0,0,0,0.4);
-    /* padding-top: 60px; */
     align-items: center;
     justify-content: center;
 }
@@ -246,6 +267,7 @@ h5 {
     max-width: 500px;
     border-radius: 10px;
 }
+/* Login Close Button */
 .close {
     color: #fff;
     float: right;
@@ -259,7 +281,7 @@ h5 {
     cursor: pointer;
 }
 
-/* Modal Header */
+/* Login Header */
 .modal-header {
     padding: 2px 16px;
     background-color: #865DFF;
@@ -267,10 +289,10 @@ h5 {
     text-align: center;
 }
 
-/* Modal Body */
+/* Login Body */
 .modal-body { padding: 2px 16px;}
 
-/* Modal Footer */
+/* Login Footer */
 .modal-footer {
     padding: 2px 16px;
     text-align: center;
@@ -278,9 +300,8 @@ h5 {
     color: white;
 }
 
-/* Modal Content */
+/* Login Content */
 .modal-content {
-    
     position: relative;
     background-color: #fefefe;
     margin: auto;
@@ -367,11 +388,12 @@ h5 {
     margin-right: 2%
 }
 
+/* Calendar Navigation Bar Styling */
 #topBar {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10%;
+    gap: 5%;
 }
 
 /* https://uiverse.io/cssbuttons-io/wonderful-baboon-62 */
@@ -472,46 +494,18 @@ h5 {
 #xpBar {
     width: 100%;
     height: 10%;
-    
+
     text-align: center;
     line-height: 21px;
     color: white;
     background-color: #E384FF;
-    
+
     border-color: #A8FBD3;
     border-style: solid;
     border-width: 1px;
 
     transition: width 1s ease;
 }
-/* Event View Button Styling */
-.event-view-btn {
-    background-color: #865DFF;
-    color: white;
-    border: 1px solid #865DFF;
-    padding: 5px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-left: 10px;
-    transition: background-color 0.2s;
-}
-
-.event-view-btn:hover {
-    background-color: #865DFF;
-}
-
-.event-view-btn:active {
-    background-color: #865DFF;
-}
-
-.event-list-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px;
-}
-
 
 /* Navigation Button Styling */
 /* Reference: https://uiverse.io/Smit-Prajapati/lazy-cow-47 */
@@ -521,10 +515,10 @@ h5 {
     --main-color: #865DFF;
     --main-bg-color: #E384FF;
     --pattern-color: #FFA3FD;
-    
+
     /* change this rotation value */
     filter: hue-rotate(0deg);
-    
+
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 0.5rem;
@@ -536,13 +530,13 @@ h5 {
     linear-gradient(var(--pattern-color) 1px, transparent 1px),
     linear-gradient(to right, var(--pattern-color) 1px, transparent 1px);
     background-size:
-    cover,
-    15px 15px,
-    15px 15px;
+        cover,
+        15px 15px,
+        15px 15px;
     background-position:
-    center center,
-    center center,
-    center center;
+        center center,
+        center center,
+        center center;
     border-image: radial-gradient(
       circle,
       var(--main-color) 0%,
@@ -551,7 +545,9 @@ h5 {
     1;
     border-width: 1px 0 1px 0;
     border-radius: 30px;
-    color: #000000;
+    /* color: var(--main-color);*/
+    color: #000;
+    button-color: #000;
     padding: 2rem 3rem;
     margin-top: 1rem;
     font-weight: 300;
@@ -661,4 +657,63 @@ h5 {
 span arrow {
     font-size: 200%;
     font-weight: bold
+}
+
+a:visited {
+    color: #fff;
+}
+a:link {
+    color: #fff;
+}
+a:active {
+    color: #fff;
+}
+
+.tutorial {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 40%;
+    height: 50%;
+    overflow: scroll;
+    background-color: rgba(0,0,0,0.4);
+    align-items: center;
+    justify-content: center;
+    margin-left: 30%;
+    margin-top: 10%;
+}
+.tutorial-header {
+    font-size: 18px;
+    font-weight: bold;
+    font-color: #fff;
+    background-color: #865DFF;
+    display: flex;
+    height: 10%;
+    width: 100%;
+    border: 2px solid #000;
+    padding-bottom: 2%;
+    margin-bottom: 2%;
+}
+.tutorial-body{
+    width: 100%;
+    /* margin-left: 2%; */
+    padding-left: 2%;
+    display: flex;
+    flex-direction: column;
+    /* margin-right: 2%; */
+}
+.tutorial-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    /* left: 0.5%; */
+    border: 2px solid #000;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
 }

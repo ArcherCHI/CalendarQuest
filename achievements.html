@@ -11,16 +11,27 @@
 <body>
     <!-- When an Achievement is claimed, XP is rewarded and the claim button is once again disabled with a longer incentive -->
     <div id="bottomBar">
-            <li class = "nav-button"><a href="index.html">Calendar</a></li>
-            <div class = "xpGroup">
-                <h4>Level: <span id="level"></span></h4>
+        <button id = "calendar-link" class = "nav-button">Calendar</button>
+        <script>
+            const calendarLink = document.getElementById("calendar-link");
+            calendarLink.addEventListener("click", function () {
+                window.location = "index.html";
+            });
+        </script>
+        <div class = "xpGroup">
+            <h4>Level: <span id="level"></span></h4>
 
-                <div id="XP" >
-                    <div id="xpBar">10%</div>
-                </div>
+            <div id="XP" >
+                <div id="xpBar">10%</div>
             </div>
-            <li class = "nav-button"><a href="quests.html">Quests</a></li>
         </div>
+        <button id = "quest-link" class = "nav-button">Quests</button>
+        <script>
+            const questLink = document.getElementById("quest-link");
+            questLink.addEventListener("click", function () {
+                window.location = "quests.html";
+            });
+        </script>
     </div>
     <!-- Number of Quests Completed -->
     <div class="achievement-list" style="margin: 2%;">
@@ -94,6 +105,3 @@
 
 </body>
 </html>
-
-
-

@@ -8,70 +8,38 @@
     width: 100%;
     height: 100%;
     overflow: scroll;
-    /* background-color: rgb(0,0,0); */
     background-color: rgba(0,0,0,0.4);
-    /* padding-top: 60px; */
     align-items: center;
     justify-content: center;
 }
-.event-header {
+.event header {
     font-size: 18px;
     font-weight: bold;
     font-color: #fff;
     background-color: #865DFF;
-    /* text-align: center; */
     display: flex;
-    /* margin-top: 10%; */
-    /* margin-left: 13%;
-    margin-right: 10%; */
     height: 8%;
     width: 100%;
     border: 2px solid #000;
-}
-.event-header-new {
-    font-size: 18px;
-    font-weight: bold;
-    font-color: #fff;
-    color: white;
-    background-color: #865DFF;
-    text-align: center;
-    display: flex;
-    margin-top: 2%;
-    /* margin-left: 13%; */
-    height: 10%;
-    width: 100%;
-    border: 2px solid #000;
-
 }
 .event-body{
     width: 100%;
     display: flex;
     flex-direction: row;
     margin-right: 2%;
-
-    /* padding: 2px 16px; */
 }
-.event-content {
+.event content {
     position: relative;
     background-color: #fefefe;
     margin: auto;
-    /* margin-bottom: 10%;
-    margin-top: 10%; */
     padding: 0;
+    left: 0.5%;
     border: 2px solid #000;
     width: 90%;
     height: 60%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     animation-name: animatetop;
     animation-duration: 0.4s;
-}
-.event-footer {
-    padding: 2px 16px;
-    text-align: center;
-    background-color: #865DFF;
-    color: white;
-    margin-top: 10.5%;
-    border: 2px solid #000;
 }
 .event-details {
     width: 40%;
@@ -160,10 +128,44 @@ eventDate {
     margin-top: 2%;
     list-style-type: none;   
 }
-.event-cell { cursor: pointer; }
+.event-cell { 
+    cursor: pointer; 
+}
+/* Signifier for events on the calendar grid */
+.event-dot {
+    position: absolute;
+    bottom: 5%;      /* Position at bottom-right of date cell */
+    right: 5%;
+    background-color: #865DFF;  /* Green badge */
+    color: white;
+    padding: 6px 10px;
+    border-radius: 10px;
+    font-size: 16px;
+}
 .event-section {
     width: 40%;
 }
+/* Event View Button Styling */
+.event-view-btn {
+    background-color: #865DFF;
+    color: white;
+    border: 1px solid #865DFF;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+    transition: background-color 0.2s;
+}
+
+.event-view-btn:hover {
+    background-color: #865DFF;
+}
+
+.event-view-btn:active {
+    background-color: #865DFF;
+}
+
 .newEvent-section {
     width: 58%;
     /* height: 100% */
@@ -202,9 +204,6 @@ table {
     border: 1px solid #000;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-tr{
-    
-}
 th {
     background-color: #FFA3FD;
     width: 30%;
@@ -233,6 +232,7 @@ textarea {
     font-size: 16px;
     text-font-name: Times New Roman;
     resize: none;
+    padding-left: 1%;
 }
 
 /* addEvent Button Styling */

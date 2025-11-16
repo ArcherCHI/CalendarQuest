@@ -25,6 +25,7 @@ let month = date.getMonth();
 let year = date.getFullYear();
 
 function renderCalendar() {
+    console.log("renderCalendar called");
     // first day of the month
     const start = new Date(year, month, 1).getDay();
     // last date of the month
@@ -41,31 +42,20 @@ function renderCalendar() {
     }
 
     for (let i = 1; i <= endDate; i++) {
-        let className = 'date-cell';
-        if (i === date.getDate() &&
+        let className =
+            i === date.getDate() &&
             month === new Date().getMonth() &&
-            year === new Date().getFullYear()) {
-            className += ' today';
-        }
+            year === new Date().getFullYear()
+                ? ' class="today date-cell"'
+                : ' class="date-cell"';
 
         // Zero-pad month and day for consistent date formatting
         const paddedMonth = String(month + 1).padStart(2, "0");
         const paddedDay = String(i).padStart(2, "0");
         const dateStr = `${year}-${paddedMonth}-${paddedDay}`;
 
-        // Create the dateKey to search local storage with for days with events
-        const dateObj = new Date(year, month, i);
-        const options = { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' };
-        const dateKey = dateObj.toDateString();
-
-        // Add a black border if there is an event on this day
-        if (eventOnThisDay(dateKey)) {
-            console.log("RENDERING EVENT");
-            className += ' calendar-event';
-        }
-
         // Create button element hidden behind the date number
-        datesHtml += `<li class="${className}">
+        datesHtml += `<li${className}>
             <button class="date-button" data-date="${dateStr}" aria-label="${months[month]} ${i}, ${year}"></button>
             <span class="date-number">${i}</span>
         </li>`;
@@ -77,7 +67,9 @@ function renderCalendar() {
 
     dates.innerHTML = datesHtml;
     header.textContent = `${months[month]} ${year}`;
+    displayEventDots();
 }
+
 
 // Event delegation for date button clicks
 dates.addEventListener("click", function (e) {
@@ -86,16 +78,16 @@ dates.addEventListener("click", function (e) {
         const dateStr = button.getAttribute("data-date");
 
         // Create Date object properly to avoid timezone issues
-        const [clickedYear, clickedMonth, clickedDay] = dateStr
-            .split("-")
-            .map(Number);
-        
+        const [clickedYear, clickedMonth, clickedDay] = dateStr.split("-").map(Number);
+
         const clickedDate = new Date(clickedYear, clickedMonth - 1, clickedDay);
         const dateString = clickedDate.toDateString();
         console.log("Selected day:", clickedDate.toDateString());
         document.getElementById("eventDate").textContent = dateString;
         renderEventList(dateString);
         eventWindow.style.display = "flex";
+
+        updateAllQuestProgress("inspect event", 1);
     }
 });
 
@@ -121,7 +113,8 @@ navs.forEach((nav) => {
     });
 });
 
-renderCalendar();
+// renderCalendar();
+// displayWeeklyStreak();
 
 const newEventWindow = document.getElementById("newEventWindow");
 
@@ -134,26 +127,26 @@ const closeBtn = document.getElementById("closeModal");
 modalBtn.style.background = "transparent";
 modalBtn.style.border = "none";
 
-// Open modal when button is clicked
+// Open pop-up windows when button is clicked
 modalBtn.addEventListener("click", function () {
     displayWeeklyStreak(); 
     modal.style.display = "flex";
 });
 
-// Close modal when X is clicked
+// Close pop-up windows when X is clicked
 closeBtn.addEventListener("click", function () {
     modal.style.display = "none";
     console.log("Modal Closed");
 });
 
-// Close modal when clicking outside of it
+// Close pop-up windows when clicking outside of it
 window.addEventListener("click", function (event) {
     if (event.target === modal) {
         modal.style.display = "none";
     } else if (event.target === eventWindow ){
         eventWindow.style.display = "none"; 
         newEventWindow.style.visibility = "hidden";
-    }
+    } 
 });
 
 // Display weekly streak in modal window
@@ -168,210 +161,16 @@ function displayWeeklyStreak() {
     }
     document.getElementById("xpBar").style.width = (i + 1) * 10 + "%";
     document.getElementById("xpBar").textContent = (i + 1) * 10 + "%";
-    document.getElementsByClassName("dayBox")[i].style.backgroundColor =
-        "#4caf50";
+    document.getElementsByClassName("dayBox")[i].style.backgroundColor = "#4caf50";
+    
 }
-
-
-// Event Window functionality
-let currentEditingEventName = null;
-
-const openEvents = document.getElementById("openEvents");
-const eventWindow = document.getElementById("eventWindow");
-const closeEventWindow = document.getElementById("closeEventWindow");
-const addEventButton = document.getElementById("addEvent");
-
-openEvents.style.background = "transparent";
-openEvents.style.border = "none";
-
-openEvents.addEventListener("click", function () {
-    eventWindow.style.display = "block";
-    dateElement = document.getElementById("eventDate").textContent;
-    renderEventList(dateElement);
-    console.log("Event Window Opened");
-});
-closeEventWindow.addEventListener("click", function () {
-    eventWindow.style.display = "none";
-    console.log("Event Window Closed");
-    clearEventInput();
-    newEventWindow.style.visibility = "hidden";
-});
-
-
-addEventButton.addEventListener("click", function (e) {
-    console.log("Add Event Button Clicked");
-    currentEditingEventName = null;
-    newEventWindow.style.visibility = "visible";
-
-    document.getElementById("eventTitle").value = "";
-    document.getElementById("eventTime").value = "";
-    document.getElementById("eventLocation").value = "";
-    document.getElementById("eventDescription").value = "";
-});
-
-// Event List functionality
-const eventList = document.querySelector(".event-list");
-const eventButton = document.querySelector(".event-button");
-
-if (eventButton) {
-    eventButton.addEventListener("click", function (e) {
-        console.log("Event Button Clicked");
-        document.getElementsByClassName("event-details").visibility = "visible";
-    });
-}
-
-function addEventToList(eventName) {
-    const newEvent = document.createElement("li");
-    newEvent.classList.add("event-list-item");
-    
-    const textSpan = document.createElement("span");
-    textSpan.textContent = eventName;
-    textSpan.style.flexGrow = "1";
-    newEvent.appendChild(textSpan);
-
-    const viewBtn = document.createElement("button");
-    viewBtn.textContent = "View";
-    viewBtn.classList.add("event-view-btn");
-    viewBtn.addEventListener('click', function() {
-        updateAllQuestProgress("inspect event", 1);
-
-        const currentDate = document.getElementById("eventDate").textContent;
-        const events = getEventsForDate(currentDate);
-        const eventData = events.find(e => e.name === eventName);
-
-        if (eventData) {
-            currentEditingEventName = eventName;
-            
-            document.getElementById("eventTitle").value = eventData.name || "";
-            document.getElementById("eventTime").value = eventData.time || "";
-            document.getElementById("eventLocation").value = eventData.place || "";
-            document.getElementById("eventDescription").value = eventData.description || "";
-            newEventWindow.style.visibility = "visible";
-            console.log('Viewing event:', eventName);
-        }
-    });
-
-    newEvent.appendChild(viewBtn);
-    eventList.prepend(newEvent);
-}    
-
-function clearEventInput() {
-    document.getElementById("eventTitle").value = "";
-    document.getElementById("eventTime").value = "";
-    document.getElementById("eventLocation").value = "";
-    document.getElementById("eventDescription").value = "";
-}
-
-function renderEventList(date) {
-    const items = eventList.querySelectorAll('.event-list-item');
-    items.forEach(item => item.remove());
-    
-    const events = getEventsForDate(date);
-    events.forEach(event => addEventToList(event.name));
-}
-
-function openNewEventWindow(){
-    document.getElementById("newEvent-section").visibility = "visible";
-}
-const saveButton = document.getElementById("saveButton");
-saveButton.addEventListener("click", function (e) {
-    console.log("Save Button Clicked");
-    dateElement = document.getElementById("eventDate").textContent;
-    eventName = document.getElementById("eventTitle").value;
-    eventTime = document.getElementById("eventTime").value;
-    eventLocation = document.getElementById("eventLocation").value;
-    eventDescription = document.getElementById("eventDescription").value;
-    
-    if (!eventName.trim()) {
-        alert("Please enter an event title");
-        return;
-    }
-    
-    const success = addEvent(dateElement, createEvent(eventName, dateElement, eventTime, eventLocation, eventDescription));
-    
-    if (success) {
-        renderCalendar();
-        updateAllQuestProgress("add event", 1);
-
-        if (eventTime !== "" && eventLocation !== "") {
-            updateAllQuestProgress("add time+location", 1);
-        }
-
-        renderEventList(dateElement);
-        
-        document.getElementById("eventTitle").value = "";
-        document.getElementById("eventTime").value = "";
-        document.getElementById("eventLocation").value = "";
-        document.getElementById("eventDescription").value = "";
-        
-        currentEditingEventName = null;
-        newEventWindow.style.visibility = "hidden";
-        
-        console.log("Event saved successfully: " + eventName);
-    }
-});
-
-const editButton = document.getElementById("editButton");
-editButton.addEventListener("click", function (e) {
-    console.log("Edit Button Clicked");
-    
-    if (!currentEditingEventName) {
-        alert("Please select an event to edit by clicking the View button");
-        return;
-    }
-    
-    const dateElement = document.getElementById("eventDate").textContent;
-    const newEventName = document.getElementById("eventTitle").value;
-    const newEventTime = document.getElementById("eventTime").value;
-    const newEventLocation = document.getElementById("eventLocation").value;
-    const newEventDescription = document.getElementById("eventDescription").value;
-    
-    if (!newEventName.trim()) {
-        alert("Please enter an event title");
-        return;
-    }
-    
-    const updatedEvent = createEvent(newEventName, dateElement, newEventTime, newEventLocation, newEventDescription);
-    const success = editEvent(date, currentEditingEventName, updatedEvent);
-    
-    if (success) {
-        renderEventList(dateElement);
-
-        if (eventTime !== "" && eventLocation !== "") {
-            updateAllQuestProgress("add time+location", 1);
-        }
-        
-        document.getElementById("eventTitle").value = "";
-        document.getElementById("eventTime").value = "";
-        document.getElementById("eventLocation").value = "";
-        document.getElementById("eventDescription").value = "";
-        
-        currentEditingEventName = null;
-        newEventWindow.style.visibility = "hidden";
-        
-        console.log("Event edited successfully");
-    } else {
-        alert("Failed to edit event. An event with that name may already exist.");
-    }
-});
-
-const removeButton = document.getElementById("removeButton");
-removeButton.addEventListener("click", function (e) {
-    console.log("Remove Button Clicked");
-    dateElement = document.getElementById("eventDate").textContent;
-    eventName = document.getElementById("eventTitle").value;
-    removeEvent(dateElement, eventName);
-    renderEventList(dateElement);
-    newEventWindow.style.visibility = "hidden";
-    // removeEvent();
-});
 
 displayWeeklyStreak();
 
-const rewardButton = document.getElementById('reward-button');
-const settingsButton = document.getElementById('settings-button');
-const shopButton = document.getElementById('shop-button');
-const notificationButton = document.getElementById('notification-button');
+const rewardButton = document.getElementById('rewardsButton');
+const settingsButton = document.getElementById('settingsButton');
+const shopButton = document.getElementById('shopButton');
+const notificationButton = document.getElementById('notificationsButton');
 
 const themeLink = document.getElementById('theme-stylesheet');
 let isRedTheme = false;
@@ -398,4 +197,47 @@ settingsButton.addEventListener("click", function (e) {
             location.reload(); // Refreshes the page
         }
     }
+});
+
+// Reveals an input box for selecting a month/year
+// Once input received, renders the calendar for that month/year
+// Click button once to reveal input box, click again to hide it and save changes
+const selectMonthButton = document.getElementById("selectMonthButton");
+selectMonthButton.addEventListener("click", function () {
+    if ( monthPicker.style.display === "block" ) {
+        selectMonthButton.style.backgroundColor = "#865DFF";
+        selectMonthButton.style.color = "#fff";
+        monthPicker.style.display = "none";
+        if ( monthPicker.value !== "" ){
+            month = monthPicker.value.split("-")[1] - 1;
+            year = monthPicker.value.split("-")[0];
+            renderCalendar();
+        }
+    } else {
+        selectMonthButton.style.backgroundColor = "#fff";
+        selectMonthButton.style.color = "#865DFF";
+        monthPicker.style.display = "block";
+    }
+});
+
+const tutorialWindow = document.getElementById("tutorialSlides");
+tutorialWindow.style.display = "none";
+const tutorialButton = document.getElementById("tutorialButton");
+tutorialButton.addEventListener("click", function () {
+    console.log("Tutorial Button Clicked");
+    // tutorialWindow.style.visibility = "visible";
+    tutorialWindow.style.display = "block";
+});
+
+// Render calendar and display event dots when page loads
+window.onload = function() {
+    // tutorialWindow.style.display = "none";
+    monthPicker.style.display = "none";
+    renderCalendar();
+    displayEventDots();
+}
+
+const questBtn = document.getElementById("quest-link");
+questBtn.addEventListener("click", function () {
+    window.location = "quests.html";
 });
