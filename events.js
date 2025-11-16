@@ -1,4 +1,5 @@
 // Retrieves the array of events for a given day
+// Takes a string not a date object
 function getEventsForDate(date) {
   // Get existing array or create a new empty one from local storage
   return JSON.parse(localStorage.getItem(date) || "[]");
@@ -68,6 +69,19 @@ function editEvent(date, oldName, updatedEvent) {
   console.log("Edited event " + oldName + " -> " + updatedEvent.name + " on " + date);
 
   return true; // Successfully edited event
+}
+
+
+
+// Returns true if an event is present on that day, false if not
+function eventOnThisDay(day) {
+  const events = getEventsForDate(day);
+
+  if (events.length === 0) {
+    return false;
+  }
+
+  return true;
 }
 
 // Creates a new event object

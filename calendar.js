@@ -41,20 +41,31 @@ function renderCalendar() {
     }
 
     for (let i = 1; i <= endDate; i++) {
-        let className =
-            i === date.getDate() &&
+        let className = 'date-cell';
+        if (i === date.getDate() &&
             month === new Date().getMonth() &&
-            year === new Date().getFullYear()
-                ? ' class="today date-cell"'
-                : ' class="date-cell"';
+            year === new Date().getFullYear()) {
+            className += ' today';
+        }
 
         // Zero-pad month and day for consistent date formatting
         const paddedMonth = String(month + 1).padStart(2, "0");
         const paddedDay = String(i).padStart(2, "0");
         const dateStr = `${year}-${paddedMonth}-${paddedDay}`;
 
+        // Create the dateKey to search local storage with for days with events
+        const dateObj = new Date(year, month, i);
+        const options = { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' };
+        const dateKey = dateObj.toDateString();
+
+        // Add a black border if there is an event on this day
+        if (eventOnThisDay(dateKey)) {
+            console.log("RENDERING EVENT");
+            className += ' calendar-event';
+        }
+
         // Create button element hidden behind the date number
-        datesHtml += `<li${className}>
+        datesHtml += `<li class="${className}">
             <button class="date-button" data-date="${dateStr}" aria-label="${months[month]} ${i}, ${year}"></button>
             <span class="date-number">${i}</span>
         </li>`;
@@ -85,8 +96,6 @@ dates.addEventListener("click", function (e) {
         document.getElementById("eventDate").textContent = dateString;
         renderEventList(dateString);
         eventWindow.style.display = "flex";
-        
-        updateAllQuestProgress("inspect event", 1);
     }
 });
 
@@ -113,8 +122,6 @@ navs.forEach((nav) => {
 });
 
 renderCalendar();
-
-// displayWeeklyStreak();
 
 const newEventWindow = document.getElementById("newEventWindow");
 
@@ -179,8 +186,8 @@ openEvents.style.border = "none";
 
 openEvents.addEventListener("click", function () {
     eventWindow.style.display = "block";
-    date = document.getElementById("eventDate").textContent;
-    renderEventList(date);
+    dateElement = document.getElementById("eventDate").textContent;
+    renderEventList(dateElement);
     console.log("Event Window Opened");
 });
 closeEventWindow.addEventListener("click", function () {
@@ -226,6 +233,8 @@ function addEventToList(eventName) {
     viewBtn.textContent = "View";
     viewBtn.classList.add("event-view-btn");
     viewBtn.addEventListener('click', function() {
+        updateAllQuestProgress("inspect event", 1);
+
         const currentDate = document.getElementById("eventDate").textContent;
         const events = getEventsForDate(currentDate);
         const eventData = events.find(e => e.name === eventName);
@@ -267,7 +276,7 @@ function openNewEventWindow(){
 const saveButton = document.getElementById("saveButton");
 saveButton.addEventListener("click", function (e) {
     console.log("Save Button Clicked");
-    date = document.getElementById("eventDate").textContent;
+    dateElement = document.getElementById("eventDate").textContent;
     eventName = document.getElementById("eventTitle").value;
     eventTime = document.getElementById("eventTime").value;
     eventLocation = document.getElementById("eventLocation").value;
@@ -278,16 +287,17 @@ saveButton.addEventListener("click", function (e) {
         return;
     }
     
-    const success = addEvent(date, createEvent(eventName, date, eventTime, eventLocation, eventDescription));
+    const success = addEvent(dateElement, createEvent(eventName, dateElement, eventTime, eventLocation, eventDescription));
     
     if (success) {
+        renderCalendar();
         updateAllQuestProgress("add event", 1);
 
         if (eventTime !== "" && eventLocation !== "") {
             updateAllQuestProgress("add time+location", 1);
         }
 
-        renderEventList(date);
+        renderEventList(dateElement);
         
         document.getElementById("eventTitle").value = "";
         document.getElementById("eventTime").value = "";
@@ -310,7 +320,7 @@ editButton.addEventListener("click", function (e) {
         return;
     }
     
-    const date = document.getElementById("eventDate").textContent;
+    const dateElement = document.getElementById("eventDate").textContent;
     const newEventName = document.getElementById("eventTitle").value;
     const newEventTime = document.getElementById("eventTime").value;
     const newEventLocation = document.getElementById("eventLocation").value;
@@ -321,11 +331,11 @@ editButton.addEventListener("click", function (e) {
         return;
     }
     
-    const updatedEvent = createEvent(newEventName, date, newEventTime, newEventLocation, newEventDescription);
+    const updatedEvent = createEvent(newEventName, dateElement, newEventTime, newEventLocation, newEventDescription);
     const success = editEvent(date, currentEditingEventName, updatedEvent);
     
     if (success) {
-        renderEventList(date);
+        renderEventList(dateElement);
 
         if (eventTime !== "" && eventLocation !== "") {
             updateAllQuestProgress("add time+location", 1);
@@ -348,12 +358,44 @@ editButton.addEventListener("click", function (e) {
 const removeButton = document.getElementById("removeButton");
 removeButton.addEventListener("click", function (e) {
     console.log("Remove Button Clicked");
-    date = document.getElementById("eventDate").textContent;
+    dateElement = document.getElementById("eventDate").textContent;
     eventName = document.getElementById("eventTitle").value;
-    removeEvent(date, eventName);
-    renderEventList(date);
+    removeEvent(dateElement, eventName);
+    renderEventList(dateElement);
     newEventWindow.style.visibility = "hidden";
     // removeEvent();
 });
 
 displayWeeklyStreak();
+
+const rewardButton = document.getElementById('reward-button');
+const settingsButton = document.getElementById('settings-button');
+const shopButton = document.getElementById('shop-button');
+const notificationButton = document.getElementById('notification-button');
+
+const themeLink = document.getElementById('theme-stylesheet');
+let isRedTheme = false;
+
+// Change theme to red when clicking rewards and above or at level 3
+rewardButton.addEventListener("click", function (e) {
+    if (level >= 3) {
+        if (!isRedTheme) {
+            console.log("Changing theme to red");
+            themeLink.href = 'red.css'; // switch to red theme
+        } else {
+            console.log("Changing theme to purple");
+            themeLink.href = 'style.css'; // switch back to default
+        }
+        isRedTheme = !isRedTheme;
+    }
+});
+
+// Reset the calendar when clicking on cogwheel
+settingsButton.addEventListener("click", function (e) {
+    if (confirm("Do you want to reset the calendar? All progress will be lost.")) {
+        if (confirm("Are you sure you want to reset all progress?")) {
+            localStorage.clear(); // Clears local storage
+            location.reload(); // Refreshes the page
+        }
+    }
+});

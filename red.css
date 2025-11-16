@@ -1,3 +1,4 @@
+/* Red theme colors and styles were updated to a red theme with assistance from ChatGPT */
 html {
     min-height: 100%;
 }
@@ -11,7 +12,7 @@ body {
     flex-direction: column;
 
     font-family: Poppins, sans-serif;
-    background: linear-gradient(to bottom, #191825, #865DFF);
+    background: linear-gradient(to bottom, #400000, #FF3B3B); /* updated red theme */
     background-attachment: fixed;    /* optional — prevents visible gaps */
 }
 * {
@@ -35,11 +36,13 @@ body {
     z-index: 999;
     background: transparent; /* or a soft gradient */
 }
+h1, h2, h4 {
+    color: #FFD2D2; /* updated red theme */
+}
 h1 {
     font-weight: 600;
     text-align: center;
     text-drop-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    color: #fff;
     margin-block: 2rem;
 }
 h2 {
@@ -49,7 +52,6 @@ h2 {
     margin-right: 30%;
     margin-left: 30%;
     text-drop-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    color: #fff;
     margin-block: 0.5rem;
 }
 h3 {
@@ -62,7 +64,6 @@ h4 {
     font-size: 20px;
     text-align: left;
     text-drop-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    color: #fff;
     text-decoration: none;
     list-style-type: none;
     justify-content: space-between;
@@ -192,7 +193,7 @@ h5 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #000;
+    background: #FF3B3B; /* updated red theme */
     border-radius: 50%;
     z-index: 0;
 }
@@ -229,15 +230,12 @@ h5 {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    /* background-color: rgb(0,0,0); */
     background-color: rgba(0,0,0,0.4);
-    /* padding-top: 60px; */
     align-items: center;
     justify-content: center;
 }
 .modal-content {
     background-color: #fefefe;
-    /* margin: 5% auto; */
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
@@ -259,45 +257,16 @@ h5 {
     cursor: pointer;
 }
 
-/* Modal Header */
-.modal-header {
-    padding: 2px 16px;
-    background-color: #865DFF;
+/* Modal Header + Footer */
+.modal-header,
+.modal-footer {
+    background-color: #FF3B3B; /* updated red theme */
     color: white;
-    text-align: center;
 }
 
 /* Modal Body */
 .modal-body { padding: 2px 16px;}
 
-/* Modal Footer */
-.modal-footer {
-    padding: 2px 16px;
-    text-align: center;
-    background-color: #865DFF;
-    color: white;
-}
-
-/* Modal Content */
-.modal-content {
-    
-    position: relative;
-    background-color: #fefefe;
-    margin: auto;
-    margin-bottom: 130%;
-    padding: 0;
-    border: 1px solid #888;
-    width: 80%;
-
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    animation-name: animatetop;
-    animation-duration: 0.4s
-}
-/* Add Animation */
-@keyframes animatetop {
-  from {top: -300px; opacity: 0}
-  to {top: 0; opacity: 1}
-}
 /* Weekly Streak Styling */
 .thisWeek {
     list-style-type: none;
@@ -308,12 +277,9 @@ h5 {
     margin: 0 auto;
     width: 100%;
     height: 50%;
-    background-color: #fff;
+    background-color: #FFB3B3; /* updated red theme */
     padding: 1rem;
     margin-top: 5px;
-    /* margin-left: 1px;
-    margin-right: 1px; */
-    margin-bottom: 5px;
 }
 .dayBox {
     display: flex;
@@ -321,15 +287,12 @@ h5 {
     align-items: center;
     width: 20%;
     height: 90%;
-    background-color: #fff;
+    background-color: #FFD2D2; /* updated red theme */
     border: 1px solid #000;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     padding: 2%;
-    margin-top: 5px;
-    margin-left: 2px;
-    margin-right: 2px;
-    margin-bottom: 5px;
+    margin: 5px 2px 5px 2px;
 }
 
 /* Navigation Bar Styling */
@@ -338,12 +301,9 @@ h5 {
     flex-direction: row;
     padding: 5%;
     margin: 2%;
-    /* background-color: #fff; */
-    /* border: 1px solid #000; */
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     text-align: center;
-    text-color: black;
     font-size: 20px;
     font-weight: bold;
     color: #000;
@@ -356,15 +316,13 @@ h5 {
     font-size: 20px;
     font-weight: bold;
     color: #000;
-    background-color: #865DFF;
+    background-color: #FF3B3B; /* updated red theme */
     border: 1px solid #fff;
     text-decoration: none;
     list-style-type: none;
     justify-content: space-between;
     align-items: center;
-    margin-top: 2%;
-    margin-left: 2%;
-    margin-right: 2%
+    margin: 2% 2% 2% 2%;
 }
 
 #topBar {
@@ -374,157 +332,90 @@ h5 {
     gap: 10%;
 }
 
-/* https://uiverse.io/cssbuttons-io/wonderful-baboon-62 */
+/* Reward & Settings Buttons */
 .top-button {
-  align-items: center;
-  background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
-  border: 0;
-  border-radius: 8px;
-  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-  box-sizing: border-box;
-  color: #ffffff;
-  display: flex;
-  font-size: 18px;
-  justify-content: center;
-  line-height: 1em;
-  max-width: 100%;
-  min-width: 140px;
-  padding: 7px;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.top-button:active, .top-button:hover {
-  outline: 0;
-}
-
-.top-button span {
-  background-color: rgb(5, 6, 45);
-  padding: 16px 24px;
-  border-radius: 6px;
-  width: 100%;
-  height: 100%;
-  transition: 300ms;
-}
-
-.top-buttonhover span {
-  background: none;
-}
-
-.top-button:active {
-  transform: scale(0.9);
-}
-
-/* Experience (XP) Bar Styling */
-#bottomBar {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    padding: 2%;
-    margin: 2%;
-    background-color: transparent;
-    list-style-type: none;
-    /* border: 1px solid #4cae4c; */
-}
-.xpGroup{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    margin: 0 auto;
-    width: 100%;
-    height: 50%;
-    /* background-color: #fff; */
-    padding: 1rem;
-    margin-top: 5px;
-    /* margin-left: 5%; */
-    margin-right: 4%;
-    margin-bottom: 5px;
-}
-#level {
-    font-size: 20px;
-    font-weight: bold;
-    color: #fff;
+    background-image: linear-gradient(144deg, #ff6b6b, #ff3b3b 50%, #b30000);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    color: #ffffff;
+    display: flex;
+    font-size: 18px;
+    justify-content: center;
+    line-height: 1em;
+    max-width: 100%;
+    min-width: 140px;
+    padding: 7px;
     text-decoration: none;
-    list-style-type: none;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 2%;
-    margin-right: 1%;
+    user-select: none;
+    cursor: pointer;
+    transition: all 0.3s;
 }
-#XP {
+.top-button span {
+    background-color: #400000; /* updated red theme */
+    padding: 16px 24px;
+    border-radius: 6px;
     width: 100%;
     height: 100%;
-    background-color: #fff;
-    margin-top: 1%;
-    /* margin-left: 13%; */
-    /* margin-right: 20%; */
-    margin-bottom: 1%;
-    border-color: black;
-    border-style: solid;
-    border-width: 2px;
+    transition: 300ms;
+}
+.top-button:hover span {
+    background: rgba(255, 255, 255, 0.1); /* updated hover */
+}
+.top-button:active {
+    transform: scale(0.9);
+}
+
+/* XP Bar Styling */
+#XP {
+    background-color: #FFD2D2; /* updated red theme */
 }
 #xpBar {
     width: 100%;
     height: 10%;
-    
     text-align: center;
     line-height: 21px;
     color: white;
-    background-color: #E384FF;
-    
-    border-color: #A8FBD3;
+    background-color: #FF3B3B; /* updated red theme */
+    border-color: #FFB3B3; /* updated red theme */
     border-style: solid;
     border-width: 1px;
-
     transition: width 1s ease;
 }
-/* Event View Button Styling */
-.event-view-btn {
-    background-color: #865DFF;
-    color: white;
-    border: 1px solid #865DFF;
-    padding: 5px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-left: 10px;
-    transition: background-color 0.2s;
+
+/* Quest Buttons */
+#daily-quests-button-open,
+#daily-quests-button-close {
+    background-color: #FF3B3B; /* updated red theme */
+}
+#weekly-quests-button-open,
+#weekly-quests-button-close {
+    background-color: #FF6B6B; /* updated red theme */
+}
+#monthly-quests-button-open,
+#monthly-quests-button-close {
+    background-color: #B30000; /* updated red theme */
 }
 
-.event-view-btn:hover {
-    background-color: #865DFF;
+/* Quest Nodes */
+.quest-node {
+    background-color: #FFB3B3; /* updated red theme */
 }
 
-.event-view-btn:active {
-    background-color: #865DFF;
+/* Links */
+a:visited,
+a:link,
+a:active {
+    color: #FFD2D2; /* updated red theme */
 }
 
-.event-list-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px;
-}
-
-
-/* Navigation Button Styling */
-/* Reference: https://uiverse.io/Smit-Prajapati/lazy-cow-47 */
+/* Nav Buttons */
 .nav-button {
-  /* in scss with just one variable i can change opacity with rgba(variable, opacity) but in css it's not possible so i have used three seperate variables */
-  /* with hue-rotate color can be changed */
-    --main-color: #865DFF;
-    --main-bg-color: #E384FF;
-    --pattern-color: #FFA3FD;
-    
-    /* change this rotation value */
+    --main-color: #FF3B3B;
+    --main-bg-color: #FF6B6B;
+    --pattern-color: #FFD2D2;
     filter: hue-rotate(0deg);
-    
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 0.5rem;
@@ -535,20 +426,13 @@ h5 {
     ),
     linear-gradient(var(--pattern-color) 1px, transparent 1px),
     linear-gradient(to right, var(--pattern-color) 1px, transparent 1px);
-    background-size:
-    cover,
-    15px 15px,
-    15px 15px;
-    background-position:
-    center center,
-    center center,
-    center center;
+    background-size: cover, 15px 15px, 15px 15px;
+    background-position: center center, center center, center center;
     border-image: radial-gradient(
       circle,
       var(--main-color) 0%,
       rgba(0, 0, 0, 0) 100%
-    )
-    1;
+    ) 1;
     border-width: 1px 0 1px 0;
     border-radius: 30px;
     color: #000000;
@@ -558,107 +442,70 @@ h5 {
     font-size: 1.25rem;
     transition: background-size 0.2s ease-in-out;
 }
-
 .nav-button:hover {
-  background-size:
-    cover,
-    10px 10px,
-    10px 10px;
+  background-size: cover, 10px 10px, 10px 10px;
 }
 .nav-button:active {
-  filter: hue-rotate(250deg);
-}
-#leftLink {
-    float: left;
-}
-#rightLink {
-    float: right;
+  filter: hue-rotate(30deg);
 }
 
-/* Quests Page Styling*/
-#quests-container {
-    display: flex;
-    flex-direction: column;
+/* Bottom Bar / XP Section */
+#bottomBar {
     width: 100%;
-    max-width: 1200px;  /* prevents giant stretching on big screens */
-    margin: 0 auto;     /* center horizontally */
-    padding: 20px;
-    height:auto;
-    background-color: transparent;
-}
-#quest-list {
     display: flex;
-    flex-direction: column;
-    margin-left: 200px;
-    padding: 0;
-    margin: 0;
-    width: auto;
-    height: auto;     /* IMPORTANT */
-    background-color: transparent;
-    list-style: none;
-}
-.quest-button {
-    width: 250px;
-    height: 125px;
-    margin: 10px 0px;
-    border: 1px solid #000;
-    border-radius: 5px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #000;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-}
-.quest-node {
-    width: 250px;
-    height: 125px;
-    display: flex;
-    border: 1px solid #000;
-    background-color: pink;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    color: #000;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    flex-direction: column;   /* stack description + progress vertically */
-    justify-content: space-between;  /* push progress to the bottom */
-}
-.quest-details {
-    display: none;
     flex-direction: row;
+    padding: 2%;
+    margin: 2%;
     background-color: transparent;
     list-style-type: none;
-    padding: 0;
-    margin: 0;
 }
-.quest-group {
+
+.xpGroup {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    gap: 20px; /* space between the button and quest details */
+    margin: 0 auto;
+    width: 100%;
+    height: 50%;
+    padding: 1rem;
+    margin-top: 5px;
+    margin-right: 4%;
+    margin-bottom: 5px;
 }
-#daily-quests-button-open {
-    background-color: crimson;
+
+#level {
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFD2D2; /* updated red theme */
+    text-decoration: none;
+    list-style-type: none;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+    margin-right: 1%;
 }
-#daily-quests-button-close {
-    background-color: crimson;
-    display: none;
+
+#XP {
+    width: 100%;
+    height: 100%;
+    background-color: #FFD2D2; /* updated red theme background */
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border-color: #FF3B3B; /* updated red theme border */
+    border-style: solid;
+    border-width: 2px;
 }
-#weekly-quests-button-open {
-    background-color: gold;
-}
-#weekly-quests-button-close {
-    background-color: gold;
-    display: none;
-}
-#monthly-quests-button-open {
-    background-color: slateblue;
-}
-#monthly-quests-button-close {
-    background-color: slateblue;
-    display: none;
-}
-span arrow {
-    font-size: 200%;
-    font-weight: bold
+
+#xpBar {
+    width: 100%;
+    height: 10%;
+    text-align: center;
+    line-height: 21px;
+    color: white;
+    background-color: #FF3B3B; /* updated red theme bar */
+    border-color: #FFB3B3; /* updated red theme border */
+    border-style: solid;
+    border-width: 1px;
+    transition: width 1s ease;
 }

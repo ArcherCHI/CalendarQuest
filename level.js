@@ -10,6 +10,9 @@ const levelElement = document.getElementById("level"); // the level number eleme
 let xp = 0;
 const xpBar = document.getElementById("xpBar"); // the XP bar element itself
 
+let coins = 0;
+const coinsBalance = document.getElementById("coinsBalance");
+
 let dailyStreak = 0;
 // const streakNumber = document.getElementById("");
 
@@ -31,6 +34,14 @@ if (typeof(Storage) !== "undefined") {
     console.log("Current XP found")
   }
 
+  // Set coins to 0 if there is none in local storage
+  if (localStorage.getItem("coins") === null) {
+    localStorage.setItem("coins", "0");
+    console.log("No coins found, intialized coins to 0")
+  } else {
+    console.log("Current coins found")
+  }
+
   // Retrieve and set level
   level = parseInt(localStorage.getItem("level")) || 0;
   amountToLevelUp = (level + 1) * amountToAddToEachLevelUp; // Set next amount of XP to level up
@@ -41,6 +52,11 @@ if (typeof(Storage) !== "undefined") {
   xp = parseInt(localStorage.getItem("xp")) || 0;
   updateXPBar();
   console.log("Set XP to " + xp + " out of " + amountToLevelUp +" needed")
+
+  // Retrieve and set coin balance
+  coins = parseInt(localStorage.getItem("coins")) || 0;
+  updateCoinBalance();
+  console.log("Set coin balance to " + coins);
 } else {
   levelElement.innerHTML = "Web storage not supported";
 }
@@ -79,6 +95,32 @@ function addXP(xpAmount) {
     console.log("+" + xpAmount + " XP");
 }
 
+// Add coins to the user's balance
+function addCoins(amount) {
+  coins += amount;
+  localStorage.setItem("coins", coins);
+  console.log("+" + amount + " Coin(s)");
+}
+
+// Remove coins from the user's balance
+function removeCoins(amount) {
+  if (coins - amount < 0) {
+    console.log("Insufficient balance");
+    return false;
+  } else {
+    coins -= amount;
+    localStorage.setItem("coins", coins);
+    console.log("-" + amount + " Coin(s)");
+    return true;
+  }
+}
+
+function updateCoinBalance() {
+  if (!coinsBalance) return; // Check if element exists on the page
+
+  coinsBalance.textContent = "Coins: " + coins;
+}
+
 // Updates the XP bar's visuals
 function updateXPBar() {
   const percent = (xp / amountToLevelUp) * 100; // Get the percent to update the XP bar
@@ -101,11 +143,13 @@ function setLevel(newLevel) {
   // Update global variables
   level = newLevel;
   xp = 0;
+  coins = 0;
   amountToLevelUp = (level + 1) * amountToAddToEachLevelUp;
 
   // Save to localStorage
   localStorage.setItem("level", level);
   localStorage.setItem("xp", xp);
+  localStorage.setItem("coins", coins);
 
   // Update UI
   levelElement.textContent = level;
