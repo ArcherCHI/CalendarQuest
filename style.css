@@ -20,27 +20,28 @@ body {
     box-sizing: border-box;
 }
 #global-ui {
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    position: absolute;
+    margin-top: 2%;
     width: 100%;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    padding: 20px;
+    padding-left: 5%;
+    padding-right: 5%;
     box-sizing: border-box;
 
     z-index: 999;
     background: transparent; /* or a soft gradient */
 }
 h1 {
+    height: 60%;
+    margin-top: 12%;
     font-weight: 600;
     text-align: center;
     text-drop-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     color: #fff;
-    margin-block: 2rem;
+    /* margin-block: 2rem; */
 }
 h2 {
     font-weight: 600;
@@ -58,18 +59,19 @@ h3 {
     text-align: left;
 }
 h4 {
+    width: 10%;
     font-weight: 600;
     font-size: 20px;
     text-align: left;
     text-drop-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    color: #fff;
+    color: #000;
     text-decoration: none;
+    text-shadow: 2px 2px 4px #fff;
     list-style-type: none;
     justify-content: space-between;
     align-items: center;
-    margin-top: 2%;
     margin-left: 5%;
-    margin-right: 1%;
+    /* margin-right: 1%; */
 }
 
 /* Calendar Styling */
@@ -79,7 +81,8 @@ h4 {
     /* display: flex; */
     width: 90%;
     height: 100%;
-    margin-bottom: 20%;    
+    /* margin-top: 2%; */
+    margin-bottom: 10%;    
     padding: 1rem;
     background: #fff;
     border-radius: 10px;
@@ -183,7 +186,6 @@ h4 {
     padding-right: 3rem;
     padding-bottom: 1rem;
 }
-
 .date-button {
     position: absolute;
     top: 0;
@@ -196,18 +198,15 @@ h4 {
     z-index: 1;
     opacity: 0;
 }
-
 .date-button:hover {
     opacity: 0.1;
     background: rgba(0, 0, 0, 0.05);
 }
-
 .date-button:active {
     opacity: 0.15;
     background: rgba(0, 0, 0, 0.1);
     border: 1px solid #ccc;
 }
-
 .date-number {
     text-align: left;
     position: absolute;
@@ -217,11 +216,9 @@ h4 {
     padding-right: 3rem;
     padding-bottom: 3rem;
 }
-
 .dates li.today .date-number {
     color: #fff;
 }
-
 .dates li.today::before {
     content: "";
     position: absolute;
@@ -232,7 +229,6 @@ h4 {
     padding-right: 2.65rem;
     padding-bottom: 2.65rem;
 }
-
 .dates li.inactive {
     color: #ccc;
     text-align: left;
@@ -390,6 +386,7 @@ h4 {
 
 /* Calendar Navigation Bar Styling */
 #topBar {
+    margin-top: 2%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -420,11 +417,9 @@ h4 {
   cursor: pointer;
   transition: all 0.3s;
 }
-
 .top-button:active, .top-button:hover {
   outline: 0;
 }
-
 .top-button span {
   background-color: rgb(5, 6, 45);
   padding: 16px 24px;
@@ -433,11 +428,9 @@ h4 {
   height: 100%;
   transition: 300ms;
 }
-
 .top-buttonhover span {
   background: none;
 }
-
 .top-button:active {
   transform: scale(0.9);
 }
@@ -447,11 +440,10 @@ h4 {
     width: 100%;
     display: flex;
     flex-direction: row;
-    padding: 2%;
-    margin: 2%;
+    /* padding: 2%;
+    margin: 2%; */
     background-color: transparent;
     list-style-type: none;
-    /* border: 1px solid #4cae4c; */
 }
 .xpGroup{
     display: flex;
@@ -461,32 +453,27 @@ h4 {
     margin: 0 auto;
     width: 100%;
     height: 50%;
-    /* background-color: #fff; */
     padding: 1rem;
-    margin-top: 5px;
-    /* margin-left: 5%; */
-    margin-right: 4%;
-    margin-bottom: 5px;
+    margin-top: 2%;
+    /* margin-right: 2%; */
+    margin-bottom: 2%;
 }
 #level {
+    margin-left: 0.5%;
+    position: absolute;
     font-size: 20px;
     font-weight: bold;
-    color: #fff;
+    color: #000;
     text-decoration: none;
     list-style-type: none;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 2%;
-    margin-right: 1%;
 }
 #XP {
     width: 100%;
     height: 100%;
     background-color: #fff;
     margin-top: 1%;
-    /* margin-left: 13%; */
-    /* margin-right: 20%; */
     margin-bottom: 1%;
+    margin-right: 5%;
     border-color: black;
     border-style: solid;
     border-width: 2px;
@@ -497,10 +484,10 @@ h4 {
 
     text-align: center;
     line-height: 21px;
-    color: white;
+    color: black;
     background-color: #E384FF;
 
-    border-color: #A8FBD3;
+    border-color: #fff;
     border-style: solid;
     border-width: 1px;
 
@@ -548,13 +535,13 @@ h4 {
     /* color: var(--main-color);*/
     color: #000;
     button-color: #000;
+    text-shadow: 2px 2px 4px #fff;
     padding: 2rem 3rem;
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
     font-weight: 300;
     font-size: 1.25rem;
     transition: background-size 0.2s ease-in-out;
 }
-
 .nav-button:hover {
   background-size:
     cover,
@@ -564,12 +551,8 @@ h4 {
 .nav-button:active {
   filter: hue-rotate(250deg);
 }
-#leftLink {
-    float: left;
-}
-#rightLink {
-    float: right;
-}
+#leftLink { float: left; }
+#rightLink { float: right; }
 
 /* Quests Page Styling*/
 #quests-container {

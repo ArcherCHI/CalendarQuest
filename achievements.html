@@ -6,102 +6,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Achievements</title>
     <link rel="stylesheet" href="style.css" /> 
+    <link rel="stylesheet" href="achievements.css" />
     <script src = "level.js" defer></script>
 </head>
 <body>
     <!-- When an Achievement is claimed, XP is rewarded and the claim button is once again disabled with a longer incentive -->
-    <div id="bottomBar">
-        <button id = "calendar-link" class = "nav-button">Calendar</button>
-        <script>
-            const calendarLink = document.getElementById("calendar-link");
-            calendarLink.addEventListener("click", function () {
-                window.location = "index.html";
-            });
-        </script>
-        <div class = "xpGroup">
-            <h4>Level: <span id="level"></span></h4>
-
-            <div id="XP" >
-                <div id="xpBar">10%</div>
+    
+    <!-- Navigation Bar -->
+    <footer id = "global-ui">
+        <div id="bottomBar">
+            <button id = "calendar-link" class = "nav-button">Calendar</button>
+            <script>
+                const calendarLink = document.getElementById("calendar-link");
+                calendarLink.addEventListener("click", function () {
+                    window.location = "index.html";
+                });
+            </script>
+            <div class = "xpGroup">
+                <h4>Level: <span id="level"></span></h4>
+    
+                <div id="XP" >
+                    <div id="xpBar">10%</div>
+                </div>
             </div>
+            <button id = "quest-link" class = "nav-button">Quests</button>
+            <script>
+                const questLink = document.getElementById("quest-link");
+                questLink.addEventListener("click", function () {
+                    window.location = "quests.html";
+                });
+            </script>
         </div>
-        <button id = "quest-link" class = "nav-button">Quests</button>
-        <script>
-            const questLink = document.getElementById("quest-link");
-            questLink.addEventListener("click", function () {
-                window.location = "quests.html";
-            });
-        </script>
-    </div>
-    <!-- Number of Quests Completed -->
-    <div class="achievement-list" style="margin: 2%;">
+    </footer>
+    <!-- List of Achievements -->
+    <div class="achievement-list">
         <h1>All Achievements</h1>
-        <div class="achievement" style="background-color:#f5f5f5; padding:10px; margin-bottom:10px; border-radius:5px;">
+        
+        <!-- Number of Quests Completed -->
+        <div class="achievement">
             <span>Quest Conqueror</span>
             <span style="float:right;">4/10</span>
-            <div style="background-color:#ddd; height:15px; border-radius:5px; margin-top:5px; position:relative;">
-                <div style="width:40%; height:100%; background-color:#E384FF; border-radius:5px;"></div>
+            <div class = "emptyProgressBar">
+                <div id = "Quest Conqueror Progress" class = ".currentProgress"></div>
             </div>
-            <button style="margin-top:5px; padding:5px 10px; background-color:grey; color:white; border:none; border-radius:5px;" disabled>Claim</button>
+            <button id = "Quest Conqueror Button" disabled>Claim</button>
         </div>
 
         <!-- Number of Events Created -->
-        <div class="achievement" style="background-color:#f5f5f5; padding:10px; margin-bottom:10px; border-radius:5px;">
+        <div class="achievement">
             <span>Busy Bee</span>
             <span style="float:right;">6/30</span>
-            <div style="background-color:#ddd; height:15px; border-radius:5px; margin-top:5px; position:relative;">
-                <div style="width:20%; height:100%; background-color:#E384FF; border-radius:5px;"></div>
+            <div class = "emptyProgressBar">
+                <div id = "Busy Bee Progress" class = ".currentProgress"></div>
             </div>
-            <button style="margin-top:5px; padding:5px 10px; background-color:grey; color:white; border:none; border-radius:5px;" disabled>Claim</button>
+            <button id = "Busy Bee Button" disabled>Claim</button>
         </div>
 
         <!-- Number of Fonts Collected -->
-        <div class="achievement" style="background-color:#f5f5f5; padding:10px; margin-bottom:10px; border-radius:5px;">
+        <div class="achievement">
             <span>Stylist</span>
             <span style="float:right;">1/4</span>
-            <div style="background-color:#ddd; height:15px; border-radius:5px; margin-top:5px; position:relative;">
-                <div style="width:25%; height:100%; background-color:#E384FF; border-radius:5px;"></div>
+            <div class = "emptyProgressBar">
+                <div id = "Stylist Progress" class = ".currentProgress"></div>
             </div>
-            <button style="margin-top:5px; padding:5px 10px; background-color:grey; color:white; border:none; border-radius:5px;" disabled>Claim</button>
+            <button id = "Stylist Button" disabled>Claim</button>
         </div>
 
         <!-- Total Amount of Experience gained so Far -->
-        <div class="achievement" style="background-color:#f5f5f5; padding:10px; margin-bottom:10px; border-radius:5px;">
-            <span>For The EXperience</span>
+        <div class="achievement">
+            <span>For The Experience</span>
             <span style="float:right;">234/1000</span>
-            <div style="background-color:#ddd; height:15px; border-radius:5px; margin-top:5px; position:relative;">
-                <div style="width:23%; height:100%; background-color:#E384FF; border-radius:5px;"></div>
+            <div class = "emptyProgressBar">
+                <div id = "For The Experience Progress" class = ".currentProgress"></div>
             </div>
-            <button style="margin-top:5px; padding:5px 10px; background-color:grey; color:white; border:none; border-radius:5px;" disabled>Claim</button>
+            <button id = "For The Experience Button" disabled>Claim</button>
         </div>
 
         <!-- Number of Calendar Themes Collected -->
-        <div class="achievement" style="background-color:#f5f5f5; padding:10px; margin-bottom:10px; border-radius:5px;">
+        <div class="achievement">
             <span>Calendar Collector</span>
             <span style="float:right;">1/3</span>
-            <div style="background-color:#ddd; height:15px; border-radius:5px; margin-top:5px; position:relative;">
-                <div style="width:33%; height:100%; background-color:#E384FF; border-radius:5px;"></div>
+            <div class = "emptyProgressBar">
+                <div id = "Calendar Collector Progress" class = ".currentProgress"></div>
             </div>
-            <button style="margin-top:5px; padding:5px 10px; background-color:grey; color:white; border:none; border-radius:5px;" disabled>Claim</button>
+            <button id = "Calendar Collector Button" disabled>Claim</button>
         </div>
 
         <!-- Longest Streak Achieved -->
-        <div class="achievement" style="background-color:#f5f5f5; padding:10px; margin-bottom:10px; border-radius:5px;">
+        <div class="achievement">
             <span>Longest Streak!</span>
             <span style="float:right;">12 days</span>
-            <div style="background-color:#ddd; height:15px; border-radius:5px; margin-top:5px; position:relative;">
-                <div style="width:100%; height:100%; background-color:#E384FF; border-radius:5px;"></div>
+            <div class = "emptyProgressBar">
+                <div id = "Longest Streak! Progress"></div>
             </div>
-            <button style="margin-top:5px; padding:5px 10px; background-color:#865DFF; color:white; border:none; border-radius:5px;">Claim</button>
+            <button id = "Longest Streak! Button" enabled>Claim</button>
         </div>
 
     </div>
-    <!-- <div>
-        <h4>Level: <span id="level"></span></h4>
-    </div>
-    <div class="XP" id="XP" style="margin-left:13%; margin-right:10%;">
-        <div id="xpBar">25%</div>
-    </div> -->
 
 </body>
 </html>

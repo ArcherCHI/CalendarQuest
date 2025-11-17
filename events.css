@@ -18,9 +18,10 @@
     font-color: #fff;
     background-color: #865DFF;
     display: flex;
-    height: 8%;
+    height: 14%;
     width: 100%;
     border: 2px solid #000;
+    overflow: auto;
 }
 .event-body{
     width: 100%;
@@ -35,8 +36,11 @@
     padding: 0;
     left: 0.5%;
     border: 2px solid #000;
-    width: 90%;
-    height: 60%;
+    overflow: auto;
+    width: 80%;
+    height: 55%;
+    margin-top: 10%;
+    margin-bottom: 20%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     animation-name: animatetop;
     animation-duration: 0.4s;
@@ -66,12 +70,11 @@ eventTitle {
     margin-right: 10%;
     margin-bottom: 5%;
 }
-eventDate {
+#eventDate {
     text-align: center;
     /* margin-right: 80%; */
+    margin-top: 1.5%;
 }
-
-
 .event-close {
     color: #fff;
     float: right;
@@ -109,7 +112,7 @@ eventDate {
     align-items: center;
     font-size: 18px;
     width: 80%;
-    height: 100%;
+    height: 80%;
     background-color: #fff;
     border: 1px solid #000;
     /* border-radius: 5%; */

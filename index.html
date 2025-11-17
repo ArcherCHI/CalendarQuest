@@ -22,7 +22,34 @@
     <script src = "tutorial.js" defer></script>
 </head>
     <body>
-        <h1 style="padding-bottom: 1%;" >Calendar Quest</h1>
+        <footer id="global-ui">
+            <div id="bottomBar">
+                <button id = "achievement-link" class = "nav-button">Achievements</button>
+                <script>
+                    const achievementLink = document.getElementById("achievement-link");
+                    achievementLink.addEventListener("click", function () {
+                        window.location = "achievements.html";
+                    });
+                </script>
+                <!-- Level and XP Bar -->
+                <div class = "xpGroup">
+                    <h4>Level <span id="level"></span>:</h4>
+
+                    <div id="XP" >
+                        <div id="xpBar">10%</div>
+                    </div>
+                </div>
+
+                <button id = "quest-link" class = "nav-button">Quests</a></button>
+                <script>
+                    const questLink = document.getElementById("quest-link");
+                    questLink.addEventListener("click", function () {
+                        window.location = "quests.html";
+                    });
+                </script>
+            </div>
+        </footer>
+        <h1>Calendar Quest</h1>
         <header id="topBar" style="padding-bottom: 2%;">
             <button id="shopButton" class="top-button">🛍️</button>
             <button id = "rewardsButton" class = "top-button"> 🎁 </button>
@@ -67,33 +94,7 @@
             </div>
         </main>
 
-        <footer id="global-ui">
-            <div id="bottomBar">
-                <button id = "achievement-link" class = "nav-button">Achievements</button>
-                <script>
-                    const achievementLink = document.getElementById("achievement-link");
-                    achievementLink.addEventListener("click", function () {
-                        window.location = "achievements.html";
-                    });
-                </script>
-                <!-- Level and XP Bar -->
-                <div class = "xpGroup">
-                    <h4>Level: <span id="level"></span></h4>
-                
-                    <div id="XP" >
-                        <div id="xpBar">10%</div>
-                    </div>
-                </div>
-                
-                <button id = "quest-link" class = "nav-button">Quests</button>
-                <script>
-                    const questLink = document.getElementById("quest-link");
-                    questLink.addEventListener("click", function () {
-                        window.location = "quests.html";
-                    });
-                </script>
-            </div>
-        </footer>
+        
 
         <!-- Calendar Tutorial Window -->
         <!-- <div id = "tutorialWindow" class = "tutorial">
