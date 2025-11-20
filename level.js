@@ -45,7 +45,7 @@ if (typeof(Storage) !== "undefined") {
   // Retrieve and set level
   level = parseInt(localStorage.getItem("level")) || 0;
   amountToLevelUp = (level + 1) * amountToAddToEachLevelUp; // Set next amount of XP to level up
-  levelElement.innerHTML = level;
+  levelElement.innerHTML = "Level: " + level;
   console.log("Set level to " + level)
 
   // Retrieve and set XP
@@ -70,15 +70,15 @@ function addXP(xpAmount) {
         // Level up
         level++;
         localStorage.setItem("level", level); // Update the level in the local storage
-        document.getElementById("level").innerHTML = level;
+        document.getElementById("level").innerHTML = "Level: " + level;
 
         amountToLevelUp = (level + 1) * amountToAddToEachLevelUp;  // Update the amount needed for next level up
-        
+
         let overflowXP = xp - amountToLevelUp; // Check for overflow
-        
+
         xp = 0; // Reset XP
         localStorage.setItem("xp", 0); // Update the XP in the local storage
-        
+
         // Update XP bar (should reset to 0%)
         updateXPBar();
 
@@ -157,3 +157,28 @@ function setLevel(newLevel) {
 
   console.log("Level manually set to " + level + " and was XP reset to 0");
 }
+
+// Displays the level up window when the user levels up
+function displayLevelUpWindow() {
+  document.getElementById("levelUpWindow").style.visibility = "visible";
+  console.log("Level Up Window Opened");
+  document.getElementById("reachedLevel").textContent = "Reached Level " + level;
+}
+
+// Confirm Button for Level Up Window
+// Closes Level Up Window when clicked
+const confirmLevelUpButton = document.getElementById("level-up-button");
+confirmLevelUpButton.addEventListener("click", function () {
+    document.getElementById("levelUpWindow").style.visibility = "hidden";
+    console.log("Level Up Window Closed");
+});
+
+// Quest Completed Pop-Up
+// Appears when a quest is completed
+
+// Claim Button for Quest Completed Window
+const claimQuestRewardButton = document.getElementById("quest-completed-button");
+claimQuestRewardButton.addEventListener("click", function () {
+  document.getElementById("questCompletedWindow").style.visibility = "hidden";
+  console.log("Quest Completed Window Closed");
+});

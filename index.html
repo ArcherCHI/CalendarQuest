@@ -33,10 +33,10 @@
                 </script>
                 <!-- Level and XP Bar -->
                 <div class = "xpGroup">
-                    <h4>Level <span id="level"></span>:</h4>
+                    <h4><span id="level"></span></h4>
 
                     <div id="XP" >
-                        <div id="xpBar">10%</div>
+                        <div id="xpBar"></div>
                     </div>
                 </div>
 
@@ -226,13 +226,14 @@
                     <script>
                         var today = new Date();
                         document.getElementById("dayNum").textContent = "Streak: " + 
-                            today.getDay() + " / 7"; 
+                            (today.getDay() + 1) + " / 7"; 
                     </script>
                 </div>
                 
             </div>
         </div>
 
+        <!-- Tutorial Slideshow -->
         <div id = "tutorialSlides" class = "tutorial-slideshow-container"  >
             <div class = "slides">
                 <div class = "numbertext"> 1 / 5 </div>
@@ -269,8 +270,29 @@
                 <span class = "dot" onclick = "currentSlide(5)"></span>
             </div>
         </div>
-                
+
+        <!-- Level Up Window -->
+        <div id = "levelUpWindow" class = "level-up-window">
+            <div class = "level-up-content">
+                <header>Level Up Achieved!</header>
+                <div id = "reached">
+                    <h2 id = "reachedLevel"></h2>
+                </div>
+                <div id = "rewardsReceived">Rewards Received:</div>
+                <div id = "level-up-body">
+                    <li>Space Themed Background</li>
+                    <li>New Font: Comic Sans</li>
+                </div>
+                <button id = "level-up-button">Confirm</button>
+            </div>
+        </div>
         
-        
+        <!-- Small window to display when a quest is completed -->
+        <div id = "questCompletedWindow" class = "quest-completed-window">
+                <div class = "quest-completed-content">
+                    <h2>Quest Completed!</h2>
+                    <button id = "quest-completed-button">Claim</button>
+                </div>   
+        </div>
     </body>
 </html>

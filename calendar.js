@@ -67,7 +67,7 @@ function renderCalendar() {
 
     dates.innerHTML = datesHtml;
     header.textContent = `${months[month]} ${year}`;
-    displayEventDots();
+    displayEvents();
 }
 
 
@@ -113,10 +113,8 @@ navs.forEach((nav) => {
     });
 });
 
-// renderCalendar();
-// displayWeeklyStreak();
 
-const newEventWindow = document.getElementById("newEventWindow");
+
 
 // Modal windows are the pop up windows that appear when you initially log in
 // Modal Window functionality
@@ -234,10 +232,11 @@ window.onload = function() {
     // tutorialWindow.style.display = "none";
     monthPicker.style.display = "none";
     renderCalendar();
-    displayEventDots();
+    displayEvents();
 }
 
 const questBtn = document.getElementById("quest-link");
 questBtn.addEventListener("click", function () {
     window.location = "quests.html";
 });
+
