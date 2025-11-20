@@ -708,7 +708,7 @@ a:active {
 
 /* Level Up Window */
 .level-up-window {
-/*  visibility: hidden; */
+    visibility: hidden;
     display: block;
     position: fixed;
     z-index: 1;
