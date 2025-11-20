@@ -81,6 +81,7 @@ function addXP(xpAmount) {
 
         // Update XP bar (should reset to 0%)
         updateXPBar();
+        displayLevelUpWindow();
 
         // If there’s leftover XP, apply it after level-up
         if (overflowXP > 0) {

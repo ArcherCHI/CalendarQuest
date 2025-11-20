@@ -873,19 +873,15 @@ a:active {
 /* Quest Completed Window */
 .quest-completed-window {
     visibility: hidden;
-    display: block;
+    display: flex;
     position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 30%;
-    height: 10%;
-    /* overflow: scroll; */
-    background-color: transparent;
-    align-items: center;
-    justify-content: center;
-    margin-left: 35%;
-    margin-top: 50%;
+    z-index: 9999;              /* High priority - appears on top */
+    left: 50%;
+    top: 80%;
+    transform: translate(-50%, -50%);  /* Perfect centering */
+    width: 400px;
+    height: auto;               /* Adjusts to content */
+    min-height: 100px;
 }
 .quest-completed-content {
     position: relative;
