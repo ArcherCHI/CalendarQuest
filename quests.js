@@ -12,8 +12,8 @@ function updateQuestProgress(quests, type, amount) {
                 updateAllQuestProgress("complete quest", 1);
                 
                 // Reward the player
-                addXP(q.reward); 
-                addCoins(q.reward);
+                addXP(q.reward[0]); 
+                addCoins(q.reward[1]);
             }
         }
     });
@@ -57,7 +57,7 @@ function loadQuests() {
     for (let i = 0; i < dailyElements.length; i++) {
         dailyElements[i].innerHTML = `
             <div class="quest-description">${dailies[i].description}</div>
-            <div class="quest-reward">+${dailies[i].reward} XP and Coins</div>
+            <div class="quest-reward">+${dailies[i].reward[0]} XP and ${dailies[i].reward[1]} 💰</div>
             <div class="quest-progress">${dailies[i].progress} / ${dailies[i].goal}</div>`;
     }
 
@@ -68,7 +68,7 @@ function loadQuests() {
     for (let i = 0; i < weeklyElements.length; i++) {
         weeklyElements[i].innerHTML = `
             <div class="quest-description">${weeklies[i].description}</div>
-            <div class="quest-reward">+${weeklies[i].reward} XP and Coins</div>
+            <div class="quest-reward">+${weeklies[i].reward[0]} XP and ${weeklies[i].reward[1]} 💰</div>
             <div class="quest-progress">${weeklies[i].progress} / ${weeklies[i].goal}</div>`;
     }
 
@@ -79,7 +79,7 @@ function loadQuests() {
     for (let i = 0; i < monthlyElements.length; i++) {
         monthlyElements[i].innerHTML = `
             <div class="quest-description">${monthlies[i].description}</div>
-            <div class="quest-reward">+${monthlies[i].reward} XP and Coins</div>
+            <div class="quest-reward">+${monthlies[i].reward[0]} XP and ${monthlies[i].reward[1]} 💰</div>
             <div class="quest-progress">${monthlies[i].progress} / ${monthlies[i].goal}</div>`;
     }
 }
@@ -98,7 +98,7 @@ const dailyQuests = [
         id: 1,
         description: "Inspect 1 event on the calendar.",
         taskType: "inspect event", // the type of task needed to be completed
-        reward: 25, // in XP
+        reward: [25, 5], // in XP and Coins
         progress: 0,
         goal: 1,
         completed: false
@@ -107,7 +107,7 @@ const dailyQuests = [
         id: 2,
         description: "Add 1 event to the calendar.",
         taskType: "add event", // the type of task needed to be completed
-        reward: 25, // in XP
+        reward: [25, 5], // in XP and Coins
         progress: 0,
         goal: 1,
         completed: false
@@ -116,7 +116,7 @@ const dailyQuests = [
         id: 3,
         description: "Add a location and time to an event on the calendar.",
         taskType: "add time+location", // the type of task needed to be completed
-        reward: 25, // in XP
+        reward: [25, 5], // in XP and Coins
         progress: 0,
         goal: 1,
         completed: false
@@ -163,7 +163,7 @@ const weeklyQuests = [
         id: 1,
         description: "Inspect 5 events on the calendar.",
         taskType: "inspect event", // the type of task needed to be completed
-        reward: 50, // in XP
+        reward: [50, 10], // in XP and Coins
         progress: 0,
         goal: 5,
         completed: false
@@ -172,7 +172,7 @@ const weeklyQuests = [
         id: 2,
         description: "Add 5 events to the calendar.",
         taskType: "add event", // the type of task needed to be completed
-        reward: 50, // in XP
+        reward: [50, 10], // in XP and Coins
         progress: 0,
         goal: 5,
         completed: false
@@ -181,7 +181,7 @@ const weeklyQuests = [
         id: 3,
         description: "Add a location and time to 3 events on the calendar.",
         taskType: "add time+location", // the type of task needed to be completed
-        reward: 50, // in XP
+        reward: [50, 10], // in XP and Coins
         progress: 0,
         goal: 3,
         completed: false
@@ -228,7 +228,7 @@ const monthlyQuests = [
         id: 1,
         description: "Inspect 25 events on the calendar.",
         taskType: "inspect event", // the type of task needed to be completed
-        reward: 100, // in XP
+        reward: [100, 15], // in XP and Coins
         progress: 0,
         goal: 25,
         completed: false
@@ -237,7 +237,7 @@ const monthlyQuests = [
         id: 2,
         description: "Add 10 events to the calendar.",
         taskType: "add event", // the type of task needed to be completed
-        reward: 100, // in XP
+        reward: [100, 15], // in XP and Coins
         progress: 0,
         goal: 10,
         completed: false
@@ -246,7 +246,7 @@ const monthlyQuests = [
         id: 3,
         description: "Add a location and time to 12 events on the calendar.",
         taskType: "add time+location", // the type of task needed to be completed
-        reward: 100, // in XP
+        reward: [100, 15], // in XP and Coins
         progress: 0,
         goal: 12,
         completed: false
@@ -336,7 +336,7 @@ const achievement_list = [
         id: 1,
         description: "Quest Conqueror",
         taskType: "complete quest", // the type of task needed to be completed
-        reward: 250, // in XP
+        reward: [0, 250], // in Coins only
         progress: 0,
         goal: 10,
         completed: false
@@ -345,7 +345,7 @@ const achievement_list = [
         id: 2,
         description: "Busy Bee",
         taskType: "add event", // the type of task needed to be completed
-        reward: 250, // in XP
+        reward: [0, 250], // in Coins only
         progress: 0,
         goal: 30,
         completed: false
@@ -354,7 +354,7 @@ const achievement_list = [
         id: 3,
         description: "For The EXperience",
         taskType: "earn XP", // the type of task needed to be completed
-        reward: 250, // in XP
+        reward: [0, 250], // in Coins only
         progress: 0,
         goal: 1000,
         completed: false
@@ -406,10 +406,10 @@ function loadAchievements() {
 
         achievementElements[i].innerHTML = `
             <div class="achievement-description">${achievement[i].description}</div>
-            <div class="achievement-reward">+${achievement[i].reward} XP and Coins</div>
+            <div class="achievement-reward">+${achievement[i].reward[1]} 💰</div>
             <div class="achievement-progress">${achievement[i].progress} / ${achievement[i].goal}</div>
-            <div class = "progress-bar">
-                <div class = "achievement-bar" style="width: ${percent}%;"></div>
+            <div class = "achievement-bar">
+                <div class = "progress-bar" style="width: ${percent}%;"></div>
             </div>
             <button class="achievement-button" ${achievement[i].completed ? "" : "disabled"}>${buttonText}</button>`;
     }

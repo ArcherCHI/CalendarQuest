@@ -23,13 +23,14 @@
                     window.location = "index.html";
                 });
             </script>
-            <div class = "xpGroup">
-                <h4><span id="level"></span></h4>
-    
-                <div id="XP" >
-                    <div id="xpBar">10%</div>
+                <!-- Level and XP Bar -->
+                <div class = "xpGroup">
+                    <h4 id="level"></h4>
+
+                    <div id="XP" >
+                        <div id="xpBar"></div>
+                    </div>
                 </div>
-            </div>
             <button id = "quest-link" class = "nav-button">Quests</button>
             <script>
                 const questLink = document.getElementById("quest-link");
@@ -48,9 +49,8 @@
                 <div class="achievement-description">Test</div>
                 <div class="achievement-reward"></div>
                 <div class="achievement-progress" style="float:right;"></div>
-                <div class = "progress-bar">
-                    <div class = "achievement-bar" style="width: 0%;"></div>
-                </div>
+                <div class = "achievement-bar">
+                    <div class = "progress-bar" style="width: 0%;"></div>
                 <button class = "achievement-button" disabled>Claim</button>
             </li>
             <li class="achievement-node">
@@ -58,7 +58,7 @@
                 <div class="achievement-reward"></div>
                 <div class="achievement-progress" style="float:right;"></div>
                 <div class = "progress-bar">
-                    <div class = "achievement-bar" style="width: 0%;"></div>
+                    <div class = "progress-bar" style="width: 0%;"></div>
                 </div>
                 <button class = "achievement-button" disabled>Claim</button>
             </li>
@@ -66,8 +66,8 @@
                 <div class="achievement-description"></div>
                 <div class="achievement-reward"></div>
                 <div class="achievement-progress" style="float:right;"></div>
-                <div class = "progress-bar">
-                    <div class = "achievement-bar" style="width: 0%;"></div>
+                <div class = "achievement-bar">
+                    <div class = "progress-bar" style="width: 0%;"></div>
                 </div>
                 <button class = "achievement-button" disabled>Claim</button>
             </li>

@@ -3,7 +3,7 @@
   flex-direction: column;
   width: 100%;
   margin-top: 2%;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
   margin-left: 5%;
   margin-right: 5%;
   list-style-type: none;
@@ -11,17 +11,18 @@
   margin-left: 0;
   padding: 1rem;
 }
-.achievement-node {
-  background-color: #f5f5f5;
-  padding: 10px;
-  width: 90%;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  margin: 0 auto 10px auto; 
-}
 .achievement-list h1 {
   margin-top: 8%;
   margin-bottom: 2%;
+}
+.achievement-node {
+  background-color: #f5f5f5;
+  padding: 10px;
+  width: 75%;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  margin: 0 auto 10px auto; 
+  text-align: center;
 }
 .achievement-node span {
   font-weight: bold;
@@ -32,7 +33,6 @@
   color: white;
   border: none;
   border-radius: 5px;
-  content: "Claim";
 }
 .achievement-node button:disabled {
   background-color: grey;
@@ -40,16 +40,34 @@
 .achievement-node button:enabled {
   background-color: #865DFF;
 }
-.progress-bar {
+.achievement-bar {
   background-color: #ddd;
   height: 15px;
   border-radius: 5px;
   margin-top: 5px;
   position: relative;
+  width: 95%;
+  text-align: center;
+  margin: 5px auto;
 }
-.progress-bar div {
-
+.achievement-bar div {
   height: 100%;
   background-color: #E384FF;
   border-radius: 5px;
+}
+.achievement-description {
+  color: rgb(0, 0, 0);
+  font-size: 24px;
+  font-weight: bold;
+}
+.achievement-reward {
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+}
+.achievement-progress {
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+}
+.achievement-button {
+  align-: center;
 }

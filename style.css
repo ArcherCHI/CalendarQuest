@@ -517,12 +517,10 @@ h5 {
     text-transform: uppercase;
     letter-spacing: 0.5rem;
     background: radial-gradient(
-      circle,
+      ellipse,
       var(--secondary-color) 0%,
       rgba(0, 0, 0, 0) 95%
-    ),
-    linear-gradient(var(--patterned-color) 1px, transparent 1px),
-    linear-gradient(to right, var(--patterned-color) 1px, transparent 1px);
+    );
     background-size:
         cover,
         15px 15px,
@@ -539,14 +537,12 @@ h5 {
     1;
     border-width: 1px 0 1px 0;
     border-radius: 30px;
-    color: #000;
-    button-color: #000;
-
+    color: #000000;
     width: 400px;
     margin-top: 1.5%;
     margin-bottom: 1.5%;
     font-weight: 300;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     transition: background-size 0.2s ease-in-out;
 }
 .nav-button:hover {

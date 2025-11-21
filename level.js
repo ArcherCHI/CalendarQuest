@@ -119,7 +119,7 @@ function removeCoins(amount) {
 function updateCoinBalance() {
   if (!coinsBalance) return; // Check if element exists on the page
 
-  coinsBalance.textContent = "Coins: " + coins;
+  coinsBalance.textContent = "Coins 💰: " + coins;
 }
 
 // Updates the XP bar's visuals
