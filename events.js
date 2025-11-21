@@ -174,7 +174,7 @@ function removeEventDots(){
 }
 
 // For each date-cell, display a dot for each event on that date
-function displayEventDots(){
+function displayEvents(){
     // console.log(events);
     console.log("Displaying Event Dots");
     removeEventDots();
@@ -252,7 +252,7 @@ saveButton.addEventListener("click", function (e) {
         newEventWindow.style.visibility = "hidden";
 
         console.log("Event saved successfully: " + eventName);
-        displayEventDots();
+        displayEvents();
     }
 });
 
@@ -266,6 +266,6 @@ removeButton.addEventListener("click", function (e) {
     // document.querySelectorAll("event-dot").remove();
     // cell.parentNode.removeChild(cell);
     renderEventList(date);
-    displayEventDots();
+    displayEvents();
     newEventWindow.style.visibility = "hidden";
 });
