@@ -95,27 +95,65 @@
         </main>
 
         
+        <!-- Tutorial Button -->
+        <button id="tutorialButton"
+            onclick="
+            document.body.style.pointerEvents='none';
+            document.getElementById('tutorialSlides').style.pointerEvents='auto';
+            document.getElementById('tutorialSlides').style.display='block';
+            document.getElementById('tutorialOverlay').style.display='block';
+            showSlides(1);
+            "> ?
+        </button>
 
-        <!-- Calendar Tutorial Window -->
-        <!-- <div id = "tutorialWindow" class = "tutorial">
-            <div class = "tutorial-content">
-                <div class = "tutorial-header">
-                    <h2>Tutorial</h2>
-                    <span id = "closeTutorialWindow" class = "tutorial-close">&times; </span>
-                </div>
-                <div class = "tutorial-body">
-                    <p>Welcome to Calendar Quest!</p>
-                    <p>This is a tutorial on how to use the calendar.</p>
-                    <p>Click on a date to add an event to that date.</p>
-                    <p>Click on an event to view its details.</p>
-                    <p>Click on the "Select Month" button to select a month.</p>
-                    <p>Click on the "Notifications" button to view notifications.</p>
-                    <p>Click on the "Settings" button to view settings.</p>
-                    <p>Click on the "?" button to view this tutorial.</p>
-                </div>
+
+        <!-- Tutorial Slideshow -->
+        <div id="tutorialSlides" class="tutorial-slideshow-container">
+
+            <span class="tutorial-close-btn" onclick="closeTutorial()">&times;</span>
+
+            <div class="slides fade">
+                <div class="numbertext">1 / 5</div>
+                <img src="tutorial_img1.png">
+                <div class="text">Click On Any Date To View, Add, Or Modify Events!</div>
             </div>
-            
-        </div> -->
+
+            <div class="slides fade">
+                <div class="numbertext">2 / 5</div>
+                <img src="tutorial_img2.png">
+                <div class="text">Click On The "+" Button To Add An Event</div>
+            </div>
+
+            <div class="slides fade">
+                <div class="numbertext">3 / 5</div>
+                <img src="tutorial_img3.png">
+                <div class="text">Click On The "Select Month" Button To Change The Month</div>
+            </div>
+
+            <div class="slides fade">
+                <div class="numbertext">4 / 5</div>
+                <img src="tutorial_img4.png">
+                <div class="text">Use The Calendar Icon To Pick A Month</div>
+            </div>
+
+            <div class="slides fade">
+                <div class="numbertext">5 / 5</div>
+                <img src="tutorial_img5.png">
+                <div class="text">Fill Event Info And Save, Edit, Or Remove</div>
+            </div>
+
+            <a class="slides-prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="slides-next" onclick="plusSlides(1)">&#10095;</a>
+
+            <div style="text-align:center; margin-top:12px;">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span>
+            </div>
+
+        </div>
 
         <!-- New Event Window -->
         <button id = "openEvents"></button>    <!-- Button to open event window -->
