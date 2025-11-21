@@ -12,7 +12,8 @@ function addEvent(date, event) {
   // Check if an event with the same name already exists
   const duplicate = events.some(e => e.name === event.name);
   if (duplicate) {
-    console.log("Event " + event.name + " already exists on " + date);
+    console.log("Event " + event.name + " already exists on " + date + ". Editing it instead.");
+    editEvent(date, event.name, event);
     return false; // Failed to add
   }
 
@@ -137,6 +138,8 @@ function addEventToList(eventName) {
     viewBtn.textContent = "View";
     viewBtn.classList.add("event-view-btn");
     viewBtn.addEventListener('click', function() {
+        updateAllQuestProgress("inspect event", 1);
+
         const currentDate = document.getElementById("eventDate").textContent;
         const eventsOfDate = getEventsForDate(currentDate);
         const eventData = eventsOfDate.find(e => e.name === eventName);
@@ -250,51 +253,6 @@ saveButton.addEventListener("click", function (e) {
 
         console.log("Event saved successfully: " + eventName);
         displayEventDots();
-    }
-});
-
-// Saves event to list when "edit" button is clicked
-const editButton = document.getElementById("editButton");
-editButton.addEventListener("click", function (e) {
-    console.log("Edit Button Clicked");
-
-    if (!currentEditingEventName) {
-        alert("Please select an event to edit by clicking the View button");
-        return;
-    }
-
-    const date = document.getElementById("eventDate").textContent;
-    const newEventName = document.getElementById("eventTitle").value;
-    const newEventTime = document.getElementById("eventTime").value;
-    const newEventLocation = document.getElementById("eventLocation").value;
-    const newEventDescription = document.getElementById("eventDescription").value;
-
-    if (!newEventName.trim()) {
-        alert("Please enter an event title");
-        return;
-    }
-
-    const updatedEvent = createEvent(newEventName, date, newEventTime, newEventLocation, newEventDescription);
-    const success = editEvent(date, currentEditingEventName, updatedEvent);
-
-    if (success) {
-        renderEventList(date);
-
-        if (eventTime !== "" && eventLocation !== "") {
-            updateAllQuestProgress("add time+location", 1);
-        }
-
-        document.getElementById("eventTitle").value = "";
-        document.getElementById("eventTime").value = "";
-        document.getElementById("eventLocation").value = "";
-        document.getElementById("eventDescription").value = "";
-
-        currentEditingEventName = null;
-        newEventWindow.style.visibility = "hidden";
-
-        console.log("Event edited successfully");
-    } else {
-        alert("Failed to edit event. An event with that name may already exist.");
     }
 });
 

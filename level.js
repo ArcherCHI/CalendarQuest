@@ -65,6 +65,8 @@ if (typeof(Storage) !== "undefined") {
 function addXP(xpAmount) {
     xp += xpAmount; // Add xp 
 
+    updateAllQuestProgress("earn XP", xpAmount);
+
     // Check for level up
     if (xp >= amountToLevelUp) {
         // Level up
@@ -79,8 +81,12 @@ function addXP(xpAmount) {
         xp = 0; // Reset XP
         localStorage.setItem("xp", 0); // Update the XP in the local storage
 
+        // Add 100 coins
+        addCoins(100);
+
         // Update XP bar (should reset to 0%)
         updateXPBar();
+        displayLevelUpWindow();
 
         // If there’s leftover XP, apply it after level-up
         if (overflowXP > 0) {
@@ -118,7 +124,7 @@ function removeCoins(amount) {
 function updateCoinBalance() {
   if (!coinsBalance) return; // Check if element exists on the page
 
-  coinsBalance.textContent = "Coins: " + coins;
+  coinsBalance.textContent = "Coins 💰: " + coins;
 }
 
 // Updates the XP bar's visuals

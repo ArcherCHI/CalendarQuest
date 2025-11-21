@@ -7,10 +7,13 @@ function updateQuestProgress(quests, type, amount) {
                 q.progress = q.goal; // Prevent visual overflow
                 q.completed = true;
                 console.log("Quest Completed: " + q.description);
+
+                // Progress quests completed
+                updateAllQuestProgress("complete quest", 1);
                 
                 // Reward the player
-                addXP(q.reward); 
-                addCoins(q.reward);
+                addXP(q.reward[0]); 
+                addCoins(q.reward[1]);
             }
         }
     });
@@ -37,6 +40,12 @@ function updateAllQuestProgress(type, amount) {
         updateQuestProgress(monthly, type, amount);
         localStorage.setItem("monthly_quests", JSON.stringify(monthly)); // Update local storage
     }
+
+    const achievements = getAchievements();
+    if (achievements) {
+        updateQuestProgress(achievements, type, amount);
+        localStorage.setItem("achievements", JSON.stringify(achievements)); // Update local storage
+    }
 }
 
 // Load the daily quests into their html counterparts
@@ -48,7 +57,7 @@ function loadQuests() {
     for (let i = 0; i < dailyElements.length; i++) {
         dailyElements[i].innerHTML = `
             <div class="quest-description">${dailies[i].description}</div>
-            <div class="quest-reward">+${dailies[i].reward} XP and Coins</div>
+            <div class="quest-reward">+${dailies[i].reward[0]} XP and ${dailies[i].reward[1]} 💰</div>
             <div class="quest-progress">${dailies[i].progress} / ${dailies[i].goal}</div>`;
     }
 
@@ -59,7 +68,7 @@ function loadQuests() {
     for (let i = 0; i < weeklyElements.length; i++) {
         weeklyElements[i].innerHTML = `
             <div class="quest-description">${weeklies[i].description}</div>
-            <div class="quest-reward">+${weeklies[i].reward} XP and Coins</div>
+            <div class="quest-reward">+${weeklies[i].reward[0]} XP and ${weeklies[i].reward[1]} 💰</div>
             <div class="quest-progress">${weeklies[i].progress} / ${weeklies[i].goal}</div>`;
     }
 
@@ -70,7 +79,7 @@ function loadQuests() {
     for (let i = 0; i < monthlyElements.length; i++) {
         monthlyElements[i].innerHTML = `
             <div class="quest-description">${monthlies[i].description}</div>
-            <div class="quest-reward">+${monthlies[i].reward} XP and Coins</div>
+            <div class="quest-reward">+${monthlies[i].reward[0]} XP and ${monthlies[i].reward[1]} 💰</div>
             <div class="quest-progress">${monthlies[i].progress} / ${monthlies[i].goal}</div>`;
     }
 }
@@ -89,7 +98,7 @@ const dailyQuests = [
         id: 1,
         description: "Inspect 1 event on the calendar.",
         taskType: "inspect event", // the type of task needed to be completed
-        reward: 25, // in XP
+        reward: [25, 5], // in XP and Coins
         progress: 0,
         goal: 1,
         completed: false
@@ -98,7 +107,7 @@ const dailyQuests = [
         id: 2,
         description: "Add 1 event to the calendar.",
         taskType: "add event", // the type of task needed to be completed
-        reward: 25, // in XP
+        reward: [25, 5], // in XP and Coins
         progress: 0,
         goal: 1,
         completed: false
@@ -107,7 +116,7 @@ const dailyQuests = [
         id: 3,
         description: "Add a location and time to an event on the calendar.",
         taskType: "add time+location", // the type of task needed to be completed
-        reward: 25, // in XP
+        reward: [25, 5], // in XP and Coins
         progress: 0,
         goal: 1,
         completed: false
@@ -151,28 +160,28 @@ function getDailyQuests() {
 // An array of weekly quests, each week three will be choosen at random
 const weeklyQuests = [
     {
-        id: 4,
+        id: 1,
         description: "Inspect 5 events on the calendar.",
         taskType: "inspect event", // the type of task needed to be completed
-        reward: 50, // in XP
+        reward: [50, 10], // in XP and Coins
         progress: 0,
         goal: 5,
         completed: false
     },
     {
-        id: 5,
+        id: 2,
         description: "Add 5 events to the calendar.",
         taskType: "add event", // the type of task needed to be completed
-        reward: 50, // in XP
+        reward: [50, 10], // in XP and Coins
         progress: 0,
         goal: 5,
         completed: false
     },
     {
-        id: 6,
+        id: 3,
         description: "Add a location and time to 3 events on the calendar.",
         taskType: "add time+location", // the type of task needed to be completed
-        reward: 50, // in XP
+        reward: [50, 10], // in XP and Coins
         progress: 0,
         goal: 3,
         completed: false
@@ -216,28 +225,28 @@ function getWeeklyQuests() {
 // An array of monthly quests, each month three will be choosen at random
 const monthlyQuests = [
     {
-        id: 7,
+        id: 1,
         description: "Inspect 25 events on the calendar.",
         taskType: "inspect event", // the type of task needed to be completed
-        reward: 100, // in XP
+        reward: [100, 15], // in XP and Coins
         progress: 0,
         goal: 25,
         completed: false
     },
     {
-        id: 8,
+        id: 2,
         description: "Add 10 events to the calendar.",
         taskType: "add event", // the type of task needed to be completed
-        reward: 100, // in XP
+        reward: [100, 15], // in XP and Coins
         progress: 0,
         goal: 10,
         completed: false
     },
     {
-        id: 9,
+        id: 3,
         description: "Add a location and time to 12 events on the calendar.",
         taskType: "add time+location", // the type of task needed to be completed
-        reward: 100, // in XP
+        reward: [100, 15], // in XP and Coins
         progress: 0,
         goal: 12,
         completed: false
@@ -317,4 +326,91 @@ function getWeekNumber(date) {
   const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
   const daysSinceYearStart = Math.floor((date - firstDayOfYear) / (1000 * 60 * 60 * 24));
   return Math.ceil((daysSinceYearStart + firstDayOfYear.getDay() + 1) / 7);
+}
+
+/* 
+    Achievements 
+*/
+const achievement_list = [
+    {
+        id: 1,
+        description: "Quest Conqueror",
+        taskType: "complete quest", // the type of task needed to be completed
+        reward: [0, 250], // in Coins only
+        progress: 0,
+        goal: 10,
+        completed: false
+    },
+    {
+        id: 2,
+        description: "Busy Bee",
+        taskType: "add event", // the type of task needed to be completed
+        reward: [0, 250], // in Coins only
+        progress: 0,
+        goal: 30,
+        completed: false
+    },
+    {
+        id: 3,
+        description: "For The EXperience",
+        taskType: "earn XP", // the type of task needed to be completed
+        reward: [0, 250], // in Coins only
+        progress: 0,
+        goal: 1000,
+        completed: false
+    },
+];
+
+// Reset achievements
+function resetAchievments() {
+    // Make deep copies of the achievements
+    let achievements = [
+        structuredClone(achievement_list[0]),
+        structuredClone(achievement_list[1]),
+        structuredClone(achievement_list[2])
+    ];
+
+    // Save the quest objects to local storage
+    localStorage.setItem("achievements", JSON.stringify(achievements));
+}
+
+// Retrieves the achievements from local storage
+function getAchievements() {
+    let achievements = JSON.parse(localStorage.getItem("achievements"));
+
+    // Check if achievements were retrieved properly, reset if not
+    if (!achievements) {
+        console.log("No achievements, resetting...");
+        resetAchievments();
+        achievements = JSON.parse(localStorage.getItem("achievements"));
+    }
+    
+    return achievements;
+}
+
+document.addEventListener("DOMContentLoaded", loadAchievements);
+
+// Loads achievements into its html counterparts
+function loadAchievements() {
+    // Get achievement elements and store as a list
+    const achievementElements = document.querySelectorAll('#achievement-list li');
+
+    const achievement = getAchievements();
+    for (let i = 0; i < achievementElements.length; i++) {
+        const percent = (achievement[i].progress / achievement[i].goal) * 100;
+
+        let buttonText = "In progress...";
+        if (achievement[i].completed) {
+            buttonText = "Claim!";
+        }
+
+        achievementElements[i].innerHTML = `
+            <div class="achievement-description">${achievement[i].description}</div>
+            <div class="achievement-reward">+${achievement[i].reward[1]} 💰</div>
+            <div class="achievement-progress">${achievement[i].progress} / ${achievement[i].goal}</div>
+            <div class = "achievement-bar">
+                <div class = "progress-bar" style="width: ${percent}%;"></div>
+            </div>
+            <button class="achievement-button" ${achievement[i].completed ? "" : "disabled"}>${buttonText}</button>`;
+    }
 }
