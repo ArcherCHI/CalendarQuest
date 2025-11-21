@@ -165,23 +165,15 @@ displayWeeklyStreak();
 const rewardButton = document.getElementById('rewardsButton');
 const settingsButton = document.getElementById('settingsButton');
 const shopButton = document.getElementById('shopButton');
+
 const notificationButton = document.getElementById('notificationsButton');
 
 const themeLink = document.getElementById('theme-stylesheet');
 let isRedTheme = false;
 
 // Change theme to red when clicking rewards and above or at level 3
-rewardButton.addEventListener("click", function (e) {
-    if (level >= 3) {
-        if (!isRedTheme) {
-            console.log("Changing theme to red");
-            themeLink.href = 'red.css'; // switch to red theme
-        } else {
-            console.log("Changing theme to purple");
-            themeLink.href = 'style.css'; // switch back to default
-        }
-        isRedTheme = !isRedTheme;
-    }
+shopButton.addEventListener("click", function (e) {
+    window.location = "shop.html";
 });
 
 // Reset the calendar when clicking on cogwheel

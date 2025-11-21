@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="shop.css" />
+    <script src = "level.js" defer></script>
+    <script src = "quests.js" defer></script>
+</head>
+    <body>
+        <header>
+            <h1>Shop</h1>
+            <h5 id = "coinsBalance">Coins:</h5>
+        </header>
+        
+        <main>
+            <ul id="shop-list">
+                <li class="shop-node">
+                    <div class="item-title">Button Hover Shadow</div>
+                    <div class="item-description">When hovering over a button, I shadow will rise up.</div>
+                    <div class="item-example"><button class="test-button">Press me!</button></div>
+                    <div class="item-cost"></div>
+                    <button class = "buy-button" disabled>Buy for 250 💰!</button>
+                </li>
+            </ul>
+        </main>
+        
+        <footer id="global-ui">
+            <div id="bottomBar">
+                <button id = "calendar-link" class = "nav-button">Calendar</button>
+                <script>
+                    const calendarLink = document.getElementById("calendar-link");
+                    calendarLink.addEventListener("click", () => {
+                        window.location = "index.html";
+                    });
+                </script>
+                
+                <!-- Level and XP Bar -->
+                <div class = "xpGroup">
+                    <h4 id="level"></h4>
+
+                    <div id="XP" >
+                        <div id="xpBar"></div>
+                    </div>
+                </div>
+                
+                <button id = "quest-link" class = "nav-button">Quests</button>
+                <script>
+                    const questLink = document.getElementById("quest-link");
+                    questLink.addEventListener("click", function () {
+                        window.location = "quests.html";
+                    });
+                </script>
+            </div>
+        </footer>
+    </body>
+</html>

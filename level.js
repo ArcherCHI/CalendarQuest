@@ -79,6 +79,9 @@ function addXP(xpAmount) {
         xp = 0; // Reset XP
         localStorage.setItem("xp", 0); // Update the XP in the local storage
 
+        // Add 100 coins
+        addCoins(100);
+
         // Update XP bar (should reset to 0%)
         updateXPBar();
         displayLevelUpWindow();
