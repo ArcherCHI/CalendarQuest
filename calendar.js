@@ -67,6 +67,7 @@ function renderCalendar() {
 
     dates.innerHTML = datesHtml;
     header.textContent = `${months[month]} ${year}`;
+    displayEvents();
 }
 
 
@@ -221,6 +222,7 @@ window.onload = function() {
     // tutorialWindow.style.display = "none";
     monthPicker.style.display = "none";
     renderCalendar();
+    displayEvents();
 }
 
 const questBtn = document.getElementById("quest-link");
