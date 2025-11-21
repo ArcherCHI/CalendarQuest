@@ -7,6 +7,9 @@ function updateQuestProgress(quests, type, amount) {
                 q.progress = q.goal; // Prevent visual overflow
                 q.completed = true;
                 console.log("Quest Completed: " + q.description);
+
+                // Progress quests completed
+                updateAllQuestProgress("complete quest", 1);
                 
                 // Reward the player
                 addXP(q.reward); 
@@ -36,6 +39,12 @@ function updateAllQuestProgress(type, amount) {
     if (monthly) {
         updateQuestProgress(monthly, type, amount);
         localStorage.setItem("monthly_quests", JSON.stringify(monthly)); // Update local storage
+    }
+
+    const achievements = getAchievements();
+    if (achievements) {
+        updateQuestProgress(achievements, type, amount);
+        localStorage.setItem("achievements", JSON.stringify(achievements)); // Update local storage
     }
 }
 
@@ -151,7 +160,7 @@ function getDailyQuests() {
 // An array of weekly quests, each week three will be choosen at random
 const weeklyQuests = [
     {
-        id: 4,
+        id: 1,
         description: "Inspect 5 events on the calendar.",
         taskType: "inspect event", // the type of task needed to be completed
         reward: 50, // in XP
@@ -160,7 +169,7 @@ const weeklyQuests = [
         completed: false
     },
     {
-        id: 5,
+        id: 2,
         description: "Add 5 events to the calendar.",
         taskType: "add event", // the type of task needed to be completed
         reward: 50, // in XP
@@ -169,7 +178,7 @@ const weeklyQuests = [
         completed: false
     },
     {
-        id: 6,
+        id: 3,
         description: "Add a location and time to 3 events on the calendar.",
         taskType: "add time+location", // the type of task needed to be completed
         reward: 50, // in XP
@@ -216,7 +225,7 @@ function getWeeklyQuests() {
 // An array of monthly quests, each month three will be choosen at random
 const monthlyQuests = [
     {
-        id: 7,
+        id: 1,
         description: "Inspect 25 events on the calendar.",
         taskType: "inspect event", // the type of task needed to be completed
         reward: 100, // in XP
@@ -225,7 +234,7 @@ const monthlyQuests = [
         completed: false
     },
     {
-        id: 8,
+        id: 2,
         description: "Add 10 events to the calendar.",
         taskType: "add event", // the type of task needed to be completed
         reward: 100, // in XP
@@ -234,7 +243,7 @@ const monthlyQuests = [
         completed: false
     },
     {
-        id: 9,
+        id: 3,
         description: "Add a location and time to 12 events on the calendar.",
         taskType: "add time+location", // the type of task needed to be completed
         reward: 100, // in XP
@@ -317,4 +326,91 @@ function getWeekNumber(date) {
   const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
   const daysSinceYearStart = Math.floor((date - firstDayOfYear) / (1000 * 60 * 60 * 24));
   return Math.ceil((daysSinceYearStart + firstDayOfYear.getDay() + 1) / 7);
+}
+
+/* 
+    Achievements 
+*/
+const achievement_list = [
+    {
+        id: 1,
+        description: "Quest Conqueror",
+        taskType: "complete quest", // the type of task needed to be completed
+        reward: 250, // in XP
+        progress: 0,
+        goal: 10,
+        completed: false
+    },
+    {
+        id: 2,
+        description: "Busy Bee",
+        taskType: "add event", // the type of task needed to be completed
+        reward: 250, // in XP
+        progress: 0,
+        goal: 30,
+        completed: false
+    },
+    {
+        id: 3,
+        description: "For The EXperience",
+        taskType: "earn XP", // the type of task needed to be completed
+        reward: 250, // in XP
+        progress: 0,
+        goal: 1000,
+        completed: false
+    },
+];
+
+// Reset achievements
+function resetAchievments() {
+    // Make deep copies of the achievements
+    let achievements = [
+        structuredClone(achievement_list[0]),
+        structuredClone(achievement_list[1]),
+        structuredClone(achievement_list[2])
+    ];
+
+    // Save the quest objects to local storage
+    localStorage.setItem("achievements", JSON.stringify(achievements));
+}
+
+// Retrieves the achievements from local storage
+function getAchievements() {
+    let achievements = JSON.parse(localStorage.getItem("achievements"));
+
+    // Check if achievements were retrieved properly, reset if not
+    if (!achievements) {
+        console.log("No achievements, resetting...");
+        resetAchievments();
+        achievements = JSON.parse(localStorage.getItem("achievements"));
+    }
+    
+    return achievements;
+}
+
+document.addEventListener("DOMContentLoaded", loadAchievements);
+
+// Loads achievements into its html counterparts
+function loadAchievements() {
+    // Get achievement elements and store as a list
+    const achievementElements = document.querySelectorAll('#achievement-list li');
+
+    const achievement = getAchievements();
+    for (let i = 0; i < achievementElements.length; i++) {
+        const percent = (achievement[i].progress / achievement[i].goal) * 100;
+
+        let buttonText = "In progress...";
+        if (achievement[i].completed) {
+            buttonText = "Claim!";
+        }
+
+        achievementElements[i].innerHTML = `
+            <div class="achievement-description">${achievement[i].description}</div>
+            <div class="achievement-reward">+${achievement[i].reward} XP and Coins</div>
+            <div class="achievement-progress">${achievement[i].progress} / ${achievement[i].goal}</div>
+            <div class = "progress-bar">
+                <div class = "achievement-bar" style="width: ${percent}%;"></div>
+            </div>
+            <button class="achievement-button" ${achievement[i].completed ? "" : "disabled"}>${buttonText}</button>`;
+    }
 }

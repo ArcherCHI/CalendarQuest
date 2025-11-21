@@ -36,7 +36,6 @@ body {
     padding-right: 5%;
     box-sizing: border-box;
 
-    z-index: 999;
     background: transparent; /* or a soft gradient */
 }
 h1 {
@@ -78,7 +77,13 @@ h4 {
     margin-left: 5%;
     margin-bottom: 2%;
 }
-
+h5 { 
+    padding-top: 1%;
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+    padding-bottom: 1%;
+}
 /* Calendar Styling */
 .calendar {
     margin: 0 auto;
@@ -145,8 +150,6 @@ h4 {
     align-items: center;
     justify-content: center;
 }
-
-
 #prev,
 #next {
     width: 20px;
@@ -461,12 +464,12 @@ h4 {
     height: 50%;
     padding: 1rem;
     margin-top: 2%;
-    /* margin-right: 2%; */
     margin-bottom: 2%;
 }
 #level {
-    margin-left: 0.5%;
-    position: absolute;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-left: 3%;
     font-size: 20px;
     font-weight: bold;
     color: #fff;
@@ -536,14 +539,14 @@ h4 {
     1;
     border-width: 1px 0 1px 0;
     border-radius: 30px;
-    /* color: var(--main-color);*/
     color: #000;
     button-color: #000;
-    text-shadow: 2px 2px 4px #fff;
-    padding: 2rem 3rem;
-    /* margin-top: 1rem; */
+
+    width: 400px;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
     font-weight: 300;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     transition: background-size 0.2s ease-in-out;
 }
 .nav-button:hover {

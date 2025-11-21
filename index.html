@@ -33,7 +33,7 @@
                 </script>
                 <!-- Level and XP Bar -->
                 <div class = "xpGroup">
-                    <h4><span id="level"></span></h4>
+                    <h4 id="level"></h4>
 
                     <div id="XP" >
                         <div id="xpBar"></div>
@@ -120,9 +120,8 @@
         <!-- New Event Window -->
         <button id = "openEvents"></button>    <!-- Button to open event window -->
         <div id = "eventWindow" class = "event">
-            <content>
-                <header>
-                    
+            <div class="event-content">
+                <header class = "event-header">
                     <h2 id = "eventDate"></h2>
                     <span id = "closeEventWindow" class = "event-close">&times; </span>
                     <!-- <textarea id = "eventTitle" rows = "1" cols = "50">Enter a title:</textarea> -->
@@ -140,9 +139,8 @@
                     <section id = "newEventWindow" class = "newEvent-section">
                         <table>
                             <h3 id = "event-info" class = "newEvent-info-header">
-                                Event Information
+                                <p style="padding-top: 1%;">Event Information</p>
                                 <button id = "saveButton" class = "addEvent-button">Save</button>
-                                <button id = "editButton" class = "addEvent-button">Edit</button>
                                 <button id = "removeButton" class = "addEvent-button">Remove</button>
                             </h3>
                             <tr>
@@ -175,7 +173,7 @@
                         </table>
                     </section>
                 </div>
-            </content>
+            </div>
         </div>
 
         <!-- Window for first login of the day -->

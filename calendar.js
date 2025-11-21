@@ -67,7 +67,6 @@ function renderCalendar() {
 
     dates.innerHTML = datesHtml;
     header.textContent = `${months[month]} ${year}`;
-    displayEvents();
 }
 
 
@@ -86,8 +85,6 @@ dates.addEventListener("click", function (e) {
         document.getElementById("eventDate").textContent = dateString;
         renderEventList(dateString);
         eventWindow.style.display = "flex";
-
-        updateAllQuestProgress("inspect event", 1);
     }
 });
 
@@ -232,7 +229,6 @@ window.onload = function() {
     // tutorialWindow.style.display = "none";
     monthPicker.style.display = "none";
     renderCalendar();
-    displayEvents();
 }
 
 const questBtn = document.getElementById("quest-link");
