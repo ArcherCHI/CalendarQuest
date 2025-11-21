@@ -1,0 +1,88 @@
+/* Quests Page Styling*/
+#quests-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    max-width: 1200px;  /* prevents giant stretching on big screens */
+    margin: 20px auto;     /* center horizontally */
+    background-color: transparent;
+}
+#quest-list {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: auto;     /* IMPORTANT */
+    background-color: transparent;
+    list-style: none;
+}
+.quest-group {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0px;
+    align-items: center;
+    gap: 20px; /* space between the button and quest details */
+}
+.quest-button {
+    width: 250px;
+    height: 125px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+}
+.quest-details {
+    display: none;
+    flex-direction: row;
+    background-color: transparent;
+    list-style-type: none;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+.quest-node {
+    display: flex;
+    flex-direction: column;   /* stack description + progress vertically */
+    width: 250px;
+    height: 125px;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: white;
+    justify-content: space-between;   /*push progress to the bottom */
+}
+.quest-description {
+    font-size: 16px;
+    text-align: center;
+}
+.quest-reward {
+    margin: 5px 0px;
+    font-size: 16px;
+    text-align: center;
+}
+.quest-progress {
+    font-size: 16px;
+    text-align: center;
+}
+#daily-quests-button-open {
+    background-color: #dabcff;
+}
+#daily-quests-button-close {
+    background-color: #dabcff;
+    display: none;
+}
+#weekly-quests-button-open {
+    background-color: #cca3ff;
+}
+#weekly-quests-button-close {
+    background-color: #cca3ff;
+    display: none;
+}
+#monthly-quests-button-open {
+    background-color: #bf8bff;
+}
+#monthly-quests-button-close {
+    background-color: #bf8bff;
+    display: none;
+}
