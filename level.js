@@ -65,6 +65,8 @@ if (typeof(Storage) !== "undefined") {
 function addXP(xpAmount) {
     xp += xpAmount; // Add xp 
 
+    updateAllQuestProgress("earn XP", xpAmount);
+
     // Check for level up
     if (xp >= amountToLevelUp) {
         // Level up
