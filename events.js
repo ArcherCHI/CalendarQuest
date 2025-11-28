@@ -8,7 +8,7 @@ function getEventsForDate(date) {
 // Returns true when successful, false when not
 function addEvent(date, event) {
   const events = getEventsForDate(date); // Get existing events array
-  
+
   // Check if an event with the same name already exists
   const duplicate = events.some(e => e.name === event.name);
   if (duplicate) {
@@ -66,6 +66,13 @@ function editEvent(date, oldName, updatedEvent) {
   // Add the updated version which could have a new name
   addEvent(date, updatedEvent);
 
+  // Signifier to show that event details have been saved
+  document.getElementById("saveButton").textContent = "Saved!";
+  setTimeout(function() {
+    document.getElementById("saveButton").textContent = "Save";
+    document.getElementById("saveButton").style.backgroundColor = "white";
+    document.getElementById("saveButton").style.color = "black";
+  }, 5000);
   console.log("Edited event " + oldName + " -> " + updatedEvent.name + " on " + date);
 
   return true; // Successfully edited event
@@ -82,7 +89,7 @@ const openEvents = document.getElementById("openEvents");
 const eventWindow = document.getElementById("eventWindow");
 const closeEventWindow = document.getElementById("closeEventWindow");
 const addEventButton = document.getElementById("addEvent");
-
+const newEventWindow = document.getElementById("newEventWindow");
 // Open event window when a date is clicked
 openEvents.style.background = "transparent";
 openEvents.style.border = "none";
@@ -151,7 +158,7 @@ function addEventToList(eventName) {
             document.getElementById("eventTime").value = eventData.time || "";
             document.getElementById("eventLocation").value = eventData.place || "";
             document.getElementById("eventDescription").value = eventData.description || "";
-            newEventWindow.style.visibility = "visible";
+            document.getElementById("newEventWindow").style.visibility = "visible";
             console.log('Viewing event:', eventName);
         }
     });
@@ -212,11 +219,6 @@ function renderEventList(date) {
     events.forEach(event => addEventToList(event.name));
 }
 
-// "Opens" event window when "addEvent" button is clicked by just making it visible
-function openNewEventWindow(){
-    document.getElementById("newEvent-section").visibility = "visible";
-}
-
 // Adds event to list when "save" button is clicked
 const saveButton = document.getElementById("saveButton");
 saveButton.addEventListener("click", function (e) {
@@ -249,9 +251,9 @@ saveButton.addEventListener("click", function (e) {
         document.getElementById("eventDescription").value = "";
 
         currentEditingEventName = null;
-        newEventWindow.style.visibility = "hidden";
 
         console.log("Event saved successfully: " + eventName);
+        
         displayEvents();
     }
 });
