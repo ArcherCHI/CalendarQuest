@@ -24,6 +24,16 @@
     <body>
         <footer id="global-ui">
             <div id="bottomBar">
+                <!-- Main Navigation Bar -->
+                <button id = "calendar-link" class = "nav-button">Calendar</button>
+                <script>
+                    const calendarLink = document.getElementById("calendar-link");
+                    calendarLink.style.color = "#fff";
+                    calendarLink.addEventListener("click", function () {
+                        window.location = "index.html";
+                    });
+                </script>
+                
                 <button id = "achievement-link" class = "nav-button">Achievements</button>
                 <script>
                     const achievementLink = document.getElementById("achievement-link");
@@ -31,15 +41,7 @@
                         window.location = "achievements.html";
                     });
                 </script>
-                <!-- Level and XP Bar -->
-                <div class = "xpGroup">
-                    <h4 id="level"></h4>
-
-                    <div id="XP" >
-                        <div id="xpBar"></div>
-                    </div>
-                </div>
-
+                
                 <button id = "quest-link" class = "nav-button">Quests</a></button>
                 <script>
                     const questLink = document.getElementById("quest-link");
@@ -47,6 +49,14 @@
                         window.location = "quests.html";
                     });
                 </script>
+            </div>
+            <!-- Level and XP Bar -->
+            <div class = "xpGroup">
+                <h4 id="level"></h4>
+
+                <div id="XP" >
+                    <div id="xpBar"></div>
+                </div>
             </div>
         </footer>
         <h1>Calendar Quest</h1>
@@ -324,6 +334,7 @@
                 <button id = "level-up-button">Confirm</button>
             </div>
         </div>
+        <!-- Event Saved -->
         <!-- Small window to display when a quest is completed -->
         <div id = "questCompletedWindow" class = "quest-completed-window">
             <div class = "quest-completed-content">

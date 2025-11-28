@@ -172,6 +172,15 @@
         
         <footer id="global-ui">
             <div id="bottomBar">
+                <!-- Main Navigation Bar -->
+                <button id = "calendar-link" class = "nav-button">Calendar</button>
+                <script>
+                    const calendarLink = document.getElementById("calendar-link");
+                    calendarLink.addEventListener("click", function () {
+                        window.location = "index.html";
+                    });
+                </script>
+
                 <button id = "achievement-link" class = "nav-button">Achievements</button>
                 <script>
                     const achievementLink = document.getElementById("achievement-link");
@@ -179,23 +188,23 @@
                         window.location = "achievements.html";
                     });
                 </script>
-                
-                <!-- Level and XP Bar -->
-                <div class = "xpGroup">
-                    <h4 id="level"></h4>
 
-                    <div id="XP" >
-                        <div id="xpBar"></div>
-                    </div>
-                </div>
-
-                <button id = "calendar-link" class = "nav-button">Calendar</button>
+                <button id = "quest-link" class = "nav-button">Quests</a></button>
                 <script>
-                    const calendarLink = document.getElementById("calendar-link");
-                    calendarLink.addEventListener("click", () => {
-                        window.location = "index.html";
+                    const questLink = document.getElementById("quest-link");
+                    questLink.style.color = "#fff";
+                    questLink.addEventListener("click", function () {
+                        window.location = "quests.html";
                     });
                 </script>
+            </div>
+            <!-- Level and XP Bar -->
+            <div class = "xpGroup">
+                <h4 id="level"></h4>
+
+                <div id="XP" >
+                    <div id="xpBar"></div>
+                </div>
             </div>
         </footer>
     </body>

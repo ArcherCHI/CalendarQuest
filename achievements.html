@@ -13,8 +13,9 @@
     <body>
         <!-- When an Achievement is claimed, XP is rewarded and the claim button is once again disabled with a longer incentive -->
         <!-- Navigation Bar -->
-        <footer id = "global-ui">
+        <footer id="global-ui">
             <div id="bottomBar">
+                <!-- Main Navigation Bar -->
                 <button id = "calendar-link" class = "nav-button">Calendar</button>
                 <script>
                     const calendarLink = document.getElementById("calendar-link");
@@ -22,21 +23,31 @@
                         window.location = "index.html";
                     });
                 </script>
-                    <!-- Level and XP Bar -->
-                    <div class = "xpGroup">
-                        <h4 id="level"></h4>
 
-                        <div id="XP" >
-                            <div id="xpBar"></div>
-                        </div>
-                    </div>
-                <button id = "quest-link" class = "nav-button">Quests</button>
+                <button id = "achievement-link" class = "nav-button">Achievements</button>
+                <script>
+                    const achievementLink = document.getElementById("achievement-link");
+                    achievementLink.style.color = "#fff";
+                    achievementLink.addEventListener("click", function () {
+                        window.location = "achievements.html";
+                    });
+                </script>
+
+                <button id = "quest-link" class = "nav-button">Quests</a></button>
                 <script>
                     const questLink = document.getElementById("quest-link");
                     questLink.addEventListener("click", function () {
                         window.location = "quests.html";
                     });
                 </script>
+            </div>
+            <!-- Level and XP Bar -->
+            <div class = "xpGroup">
+                <h4 id="level"></h4>
+
+                <div id="XP" >
+                    <div id="xpBar"></div>
+                </div>
             </div>
         </footer>
         <!-- List of Achievements -->
