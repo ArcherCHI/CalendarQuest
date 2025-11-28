@@ -14,6 +14,7 @@
         <header>
             <h1>Your Quests</h1>
             <h5>Click on the buttons below to expand each quest group.</h5>
+            <h6>Note: Each event can only be inspected once per day.</h5>
         </header>
         
         <main>
@@ -93,87 +94,39 @@
                         const dailyQuestsButtonClose = document.getElementById("daily-quests-button-close");
                         const dailyQuests_ = document.getElementById("daily-quests");
 
-                        dailyQuestsButtonOpen.addEventListener("click", function () {
-                            weeklyQuests_.style.display = "none";
-                            weeklyQuestsButtonClose.style.display = "none";
-                            weeklyQuestsButtonOpen.style.display = "inline";
-
-                            monthlyQuests_.style.display = "none";
-                            monthlyQuestsButtonClose.style.display = "none";
-                            monthlyQuestsButtonOpen.style.display = "inline";
-
-                            dailyQuests_.style.display = "flex";
-                            dailyQuestsButtonClose.style.display = "inline";
-                            dailyQuestsButtonOpen.style.display = "none";
-                            console.log("Daily Quests Opened");
-                        });
-                        dailyQuestsButtonClose.addEventListener("click", function () {
-                            dailyQuests_.style.display = "none";
-                            dailyQuestsButtonClose.style.display = "none";
-                            dailyQuestsButtonOpen.style.display = "inline";
-                            console.log("Daily Quests Closed");
-                        })
+                        dailyQuests_.style.display = "flex";
+                        dailyQuestsButtonClose.style.display = "inline";
+                        dailyQuestsButtonOpen.style.display = "none";
+                        console.log("Daily Quests Opened");
 
                         // Weekly quest button
                         const weeklyQuestsButtonOpen = document.getElementById("weekly-quests-button-open");
                         const weeklyQuestsButtonClose = document.getElementById("weekly-quests-button-close");
                         const weeklyQuests_ = document.getElementById("weekly-quests");
 
-                        weeklyQuestsButtonOpen.addEventListener("click", function () {
-                            dailyQuests_.style.display = "none";
-                            dailyQuestsButtonClose.style.display = "none";
-                            dailyQuestsButtonOpen.style.display = "inline";
-
-                            monthlyQuests_.style.display = "none";
-                            monthlyQuestsButtonClose.style.display = "none";
-                            monthlyQuestsButtonOpen.style.display = "inline";
-
-                            weeklyQuests_.style.display = "flex";
-                            weeklyQuestsButtonClose.style.display = "inline";
-                            weeklyQuestsButtonOpen.style.display = "none";
-                            console.log("Weekly Quests Opened");
-                        });
-                        weeklyQuestsButtonClose.addEventListener("click", function () {
-                            weeklyQuests_.style.display = "none";
-                            weeklyQuestsButtonClose.style.display = "none";
-                            weeklyQuestsButtonOpen.style.display = "inline";
-                            console.log("Weekly Quests Closed");
-                        })
+                        weeklyQuests_.style.display = "flex";
+                        weeklyQuestsButtonClose.style.display = "inline";
+                        weeklyQuestsButtonOpen.style.display = "none";
+                        console.log("Weekly Quests Opened");
 
                         // Monthly quest button
                         const monthlyQuestsButtonOpen = document.getElementById("monthly-quests-button-open");
                         const monthlyQuestsButtonClose = document.getElementById("monthly-quests-button-close");
                         const monthlyQuests_ = document.getElementById("monthly-quests");
 
-                        monthlyQuestsButtonOpen.addEventListener("click", function () {
-                            dailyQuests_.style.display = "none";
-                            dailyQuestsButtonClose.style.display = "none";
-                            dailyQuestsButtonOpen.style.display = "inline";
-
-                            weeklyQuests_.style.display = "none";
-                            weeklyQuestsButtonClose.style.display = "none";
-                            weeklyQuestsButtonOpen.style.display = "inline";
-
-                            monthlyQuests_.style.display = "flex";
-                            monthlyQuestsButtonClose.style.display = "inline";
-                            monthlyQuestsButtonOpen.style.display = "none";
-                            console.log("Monthly Quests Opened");
-                        });
-                        monthlyQuestsButtonClose.addEventListener("click", function () {
-                            monthlyQuests_.style.display = "none";
-                            monthlyQuestsButtonClose.style.display = "none";
-                            monthlyQuestsButtonOpen.style.display = "inline";
-                            console.log("Monthly Quests Closed");
-                        })
+                        monthlyQuests_.style.display = "flex";
+                        monthlyQuestsButtonClose.style.display = "inline";
+                        monthlyQuestsButtonOpen.style.display = "none";
+                        console.log("Monthly Quests Opened");
                     </script>
                 </ul>
             </div>
         </main>
         
         <footer id="global-ui">
-            <div id="bottomBar">
+            <div id="navBar">
                 <!-- Main Navigation Bar -->
-                <div class = "bottomButton">
+                <div class = "navButton">
                     <button id = "achievement-link" class = "nav-button">Achievements</button>
                     <script>
                         const achievementLink = document.getElementById("achievement-link");
@@ -183,7 +136,7 @@
                     </script>
                 </div>
 
-                <div class = "bottomButton">
+                <div class = "navButton">
                     <button id = "calendar-link" class = "nav-button">Calendar</button>
                     <script>
                         const calendarLink = document.getElementById("calendar-link");
@@ -193,7 +146,7 @@
                     </script>
                  </div>
 
-                <div class = "bottomButton">
+                <div class = "navButton">
                     <button id = "quest-link" class = "nav-button">Quests</a></button>
                     <script>
                         const questLink = document.getElementById("quest-link");

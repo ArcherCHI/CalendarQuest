@@ -1,3 +1,7 @@
+let logins_this_week = 0;
+let logins_this_month = 0;
+let streak = 0;
+
 // Updates the progress by a given amount on the given array of quests
 function updateQuestProgress(quests, type, amount) {
     quests.forEach(q => {
@@ -105,7 +109,7 @@ const dailyQuests = [
     },
     {
         id: 2,
-        description: "Add 1 event to the calendar.",
+        description: "Add 1 new event to the calendar.",
         taskType: "add event", // the type of task needed to be completed
         reward: [25, 5], // in XP and Coins
         progress: 0,
@@ -114,9 +118,36 @@ const dailyQuests = [
     },
     {
         id: 3,
-        description: "Add a location and time to an event on the calendar.",
-        taskType: "add time+location", // the type of task needed to be completed
+        description: "Add a time to an event on the calendar.",
+        taskType: "add time", // the type of task needed to be completed
         reward: [25, 5], // in XP and Coins
+        progress: 0,
+        goal: 1,
+        completed: false
+    },
+    {
+        id: 4,
+        description: "Add a location to an event on the calendar.",
+        taskType: "add location", // the type of task needed to be completed
+        reward: [25, 5], // in XP and Coins
+        progress: 0,
+        goal: 1,
+        completed: false
+    },
+    {
+        id: 5,
+        description: "Add a description to an event on the calendar.",
+        taskType: "add description", // the type of task needed to be completed
+        reward: [25, 5], // in XP and Coins
+        progress: 0,
+        goal: 1,
+        completed: false
+    },
+    {
+        id: 6,
+        description: "Add 1 complete event to the calendar with a time, location, and description.",
+        taskType: "add complete event", // the type of task needed to be completed
+        reward: [35, 10], // in XP and Coins
         progress: 0,
         goal: 1,
         completed: false
@@ -124,14 +155,13 @@ const dailyQuests = [
 ];
 
 function resetDailyQuests() {
-    // Make deep copies of the quests
-    let quests = [
-        structuredClone(dailyQuests[0]),
-        structuredClone(dailyQuests[1]),
-        structuredClone(dailyQuests[2])
-    ];
+    // Makes a shuffled copy of dailyQuests
+    const shuffled = [...dailyQuests].sort(() => Math.random() - 0.5);
 
-    // Save the quest objects to local storage
+    // Picks the first 3 quests from the shuffled array
+    const quests = shuffled.slice(0, 3).map(q => structuredClone(q));
+
+    // Saves the quest objects to local storage
     localStorage.setItem("daily_quests", JSON.stringify(quests));
 }
 
@@ -163,25 +193,61 @@ const weeklyQuests = [
         id: 1,
         description: "Inspect 5 events on the calendar.",
         taskType: "inspect event", // the type of task needed to be completed
-        reward: [50, 10], // in XP and Coins
+        reward: [50, 25], // in XP and Coins
         progress: 0,
         goal: 5,
         completed: false
     },
     {
         id: 2,
-        description: "Add 5 events to the calendar.",
+        description: "Add 5 new events to the calendar.",
         taskType: "add event", // the type of task needed to be completed
-        reward: [50, 10], // in XP and Coins
+        reward: [50, 25], // in XP and Coins
         progress: 0,
         goal: 5,
         completed: false
     },
     {
         id: 3,
-        description: "Add a location and time to 3 events on the calendar.",
-        taskType: "add time+location", // the type of task needed to be completed
-        reward: [50, 10], // in XP and Coins
+        description: "Add a time to 3 events on the calendar.",
+        taskType: "add time", // the type of task needed to be completed
+        reward: [50, 25], // in XP and Coins
+        progress: 0,
+        goal: 3,
+        completed: false
+    },
+    {
+        id: 4,
+        description: "Add a location to 3 events on the calendar.",
+        taskType: "add location", // the type of task needed to be completed
+        reward: [50, 25], // in XP and Coins
+        progress: 0,
+        goal: 3,
+        completed: false
+    },
+    {
+        id: 5,
+        description: "Add a description to 3 an events on the calendar.",
+        taskType: "add description", // the type of task needed to be completed
+        reward: [50, 25], // in XP and Coins
+        progress: 0,
+        goal: 3,
+        completed: false
+    },
+    {
+        id: 6,
+        description: "Add 3 complete events to the calendar with a time, location, and description.",
+        taskType: "add complete event", // the type of task needed to be completed
+        reward: [65, 35], // in XP and Coins
+        progress: 0,
+        goal: 3,
+        completed: false
+    },
+    {
+        id: 7,
+        description: "Login 3 times this week.",
+        taskType: "total weekly logins", // the type of task needed to be completed
+        reward: [75, 50], // in XP and Coins
         progress: 0,
         goal: 3,
         completed: false
@@ -189,14 +255,13 @@ const weeklyQuests = [
 ];
 
 function resetWeeklyQuests() {
-    // Make deep copies of the quests
-    let quests = [
-        structuredClone(weeklyQuests[0]),
-        structuredClone(weeklyQuests[1]),
-        structuredClone(weeklyQuests[2])
-    ];
+    // Makes a shuffled copy of weeklyQuests
+    const shuffled = [...weeklyQuests].sort(() => Math.random() - 0.5);
 
-    // Save the quest objects to local storage
+    // Picks the first 3 quests from the shuffled array
+    const quests = shuffled.slice(0, 3).map(q => structuredClone(q));
+
+    // Saves the quest objects to local storage
     localStorage.setItem("weekly_quests", JSON.stringify(quests));
 }
 
@@ -228,40 +293,75 @@ const monthlyQuests = [
         id: 1,
         description: "Inspect 25 events on the calendar.",
         taskType: "inspect event", // the type of task needed to be completed
-        reward: [100, 15], // in XP and Coins
+        reward: [100, 50], // in XP and Coins
         progress: 0,
         goal: 25,
         completed: false
     },
     {
         id: 2,
-        description: "Add 10 events to the calendar.",
+        description: "Add 15 events to the calendar.",
         taskType: "add event", // the type of task needed to be completed
-        reward: [100, 15], // in XP and Coins
+        reward: [100, 50], // in XP and Coins
+        progress: 0,
+        goal: 15,
+        completed: false
+    },
+    {
+        id: 3,
+        description: "Add a time to 10 events on the calendar.",
+        taskType: "add time", // the type of task needed to be completed
+        reward: [100, 50], // in XP and Coins
         progress: 0,
         goal: 10,
         completed: false
     },
     {
-        id: 3,
-        description: "Add a location and time to 12 events on the calendar.",
-        taskType: "add time+location", // the type of task needed to be completed
-        reward: [100, 15], // in XP and Coins
+        id: 4,
+        description: "Add a location to 10 events on the calendar.",
+        taskType: "add location", // the type of task needed to be completed
+        reward: [100, 50], // in XP and Coins
         progress: 0,
-        goal: 12,
+        goal: 10,
+        completed: false
+    },
+    {
+        id: 5,
+        description: "Add a description to 10 an events on the calendar.",
+        taskType: "add description", // the type of task needed to be completed
+        reward: [100, 50], // in XP and Coins
+        progress: 0,
+        goal: 10,
+        completed: false
+    },
+    {
+        id: 6,
+        description: "Add 10 complete events to the calendar with a time, location, and description.",
+        taskType: "add complete event", // the type of task needed to be completed
+        reward: [125, 75], // in XP and Coins
+        progress: 0,
+        goal: 10,
+        completed: false
+    },
+    {
+        id: 7,
+        description: "Login 15 times this month.",
+        taskType: "total monthly logins", // the type of task needed to be completed
+        reward: [200, 100], // in XP and Coins
+        progress: 0,
+        goal: 15,
         completed: false
     }
 ];
 
 function resetMonthlyQuests() {
-    // Make deep copies of the quests
-    let quests = [
-        structuredClone(monthlyQuests[0]),
-        structuredClone(monthlyQuests[1]),
-        structuredClone(monthlyQuests[2])
-    ];
+    // Makes a shuffled copy of monthlyQuests
+    const shuffled = [...monthlyQuests].sort(() => Math.random() - 0.5);
 
-    // Save the quest objects to local storage
+    // Picks the first 3 quests from the shuffled array
+    const quests = shuffled.slice(0, 3).map(q => structuredClone(q));
+
+    // Saves the quest objects to local storage
     localStorage.setItem("monthly_quests", JSON.stringify(quests));
 }
 
@@ -279,44 +379,93 @@ function getMonthlyQuests() {
     return quests;
 }
 
-dailyReset();
-
 // If the player hasn't logged in today then display login message
 function dailyReset() {
-  const today = new Date();
-  const lastLogin = new Date(localStorage.getItem("lastLoginDate") || 0);
+    const today = new Date();
+    const lastLogin = new Date(localStorage.getItem("lastLoginDate") || 0);
 
-  // Check whether to reset daily quests and display daily login message
-  if (today.toDateString() !== lastLogin.toDateString()) {
-    // Reset the daily quests
-    resetDailyQuests();
-    
-    // Make daily login message visiable
-    const modal = document.getElementById("myModal");
-    modal.style.display = "flex";
-    console.log("Displaying login message")
-  } else {
-    console.log("Current day has not changed")
-  }
+    logins_this_week = Number(localStorage.getItem("logins_this_week") || 0);
+    logins_this_month = Number(localStorage.getItem("logins_this_month") || 0);
 
-  // Check whether to reset weekly quests
-  if (getWeekNumber(today) !== getWeekNumber(lastLogin)) {
-    resetWeeklyQuests();  
-  } else {
-    console.log("Current week has not changed")
-  }
+    let updatedWeeklyLogins = false;
+    let updatedMonthlyLogins = false;
 
-  // Check whether to reset monthly quests
-  if (today.getMonth() !== lastLogin.getMonth()) {
-    resetMonthlyQuests();
-  } else {
-    console.log("Current month has not changed")
-  }
+    // Check whether to reset daily quests and display daily login message
+    if (today.toDateString() !== lastLogin.toDateString()) {
+        // Reset the daily quests
+        resetDailyQuests();
 
-  loadQuests(); // Load the quests onto the quest page
+        // Increament login amounts
+        logins_this_week++;
+        updatedWeeklyLogins = true;
+        
+        logins_this_month++;
+        updatedMonthlyLogins = true;
 
-  // Update last login
-  localStorage.setItem("lastLoginDate", today.toDateString());
+        // Streak logic
+        streak = Number(localStorage.getItem("streak") || 0);
+        const yesterday = new Date(today);
+        yesterday.setDate(today.getDate() - 1);
+
+        if (lastLogin.toDateString() === yesterday.toDateString()) {
+            // Last login was yesterday → continue streak
+            streak++;
+            console.log("Current streak: " + streak);
+        } else {
+            // Update longest streak
+            if (Number(localStorage.getItem("longest_streak") || 0) < streak) {
+                localStorage.setItem("longest_streak", streak);
+            }
+
+            // Last login was today or earlier → reset streak
+            streak = 1;
+            console.log("Streak reset");
+        }
+
+        localStorage.setItem("streak", streak);
+
+        // Make daily login message visiable
+        const modal = document.getElementById("myModal");
+        modal.style.display = "flex";
+        updateLoginModal();
+        console.log("Displaying login message");
+    } else {
+        console.log("Current day has not changed");
+    }
+
+    // Check whether to reset weekly quests and weekly logins
+    if (getWeekNumber(today) !== getWeekNumber(lastLogin)) {
+        resetWeeklyQuests();
+
+        logins_this_week = 1;
+    } else {
+        console.log("Current week has not changed");
+    }
+
+    // Check whether to reset monthly quests and monthly logins
+    if (today.getMonth() !== lastLogin.getMonth()) {
+        resetMonthlyQuests();
+
+        logins_this_month = 1;
+    } else {
+        console.log("Current month has not changed");
+    }
+
+    if (updatedWeeklyLogins) {
+        updateAllQuestProgress("total weekly logins", 1);
+    }
+
+    if (updatedMonthlyLogins) {
+        updateAllQuestProgress("total monthly logins", 1);
+    }
+
+    // Update last login
+    localStorage.setItem("lastLoginDate", today.toDateString());
+
+    localStorage.setItem("logins_this_week", logins_this_week);
+    localStorage.setItem("logins_this_month", logins_this_month);
+
+    loadQuests(); // Load the quests onto the quest page
 }
 
 // Helper to calculate week number
@@ -358,7 +507,7 @@ const achievement_list = [
         progress: 0,
         goal: 1000,
         completed: false
-    },
+    }
 ];
 
 // Reset achievements
@@ -414,3 +563,5 @@ function loadAchievements() {
             <button class="achievement-button" ${achievement[i].completed ? "" : "disabled"}>${buttonText}</button>`;
     }
 }
+
+dailyReset();

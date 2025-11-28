@@ -23,9 +23,9 @@
 </head>
     <body>
         <footer id="global-ui">
-            <div id="bottomBar">
+            <div id="navBar">
                 <!-- Main Navigation Bar -->
-                <div class = "bottomButton">
+                <div class = "navButton">
                     <button id = "achievement-link" class = "nav-button">Achievements</button>
                     <script>
                         const achievementLink = document.getElementById("achievement-link");
@@ -35,7 +35,7 @@
                     </script>
                 </div>
 
-                <div class = "bottomButton">
+                <div class = "navButton">
                     <button id = "calendar-link" class = "nav-button">Calendar</button>
                     <script>
                         const calendarLink = document.getElementById("calendar-link");
@@ -46,7 +46,7 @@
                     </script>
                  </div>
 
-                <div class = "bottomButton">
+                <div class = "navButton">
                     <button id = "quest-link" class = "nav-button">Quests</a></button>
                     <script>
                         const questLink = document.getElementById("quest-link");
@@ -225,16 +225,9 @@
                 <div class="modal-header">
                     <span id = "closeModal" class="close">&times;</span>
                     <h2 id="today"></h2>
-                    <script>
-                        var today = new Date();
-                        document.getElementById("today").textContent = 
-                            today.toDateString();
-                        
-                    </script>
                 </div>
                 <div class="modal-body">
                     <ul class="thisWeek">
-                        
                         <li class="dayBox">Sun</li>
                         <li class="dayBox">Mon</li>
                         <li class="dayBox">Tue</li>
@@ -242,32 +235,10 @@
                         <li class="dayBox">Thu</li>
                         <li class="dayBox">Fri</li>
                         <li class="dayBox">Sat</li>
-                        <script>
-                            today = new Date().getDay();
-                            console.log(today);
-                            let i = 0;
-                            if ( today == 0 ) {
-                                document.getElementsByClassName("dayBox")[0].style.backgroundColor =
-                                    "#4caf50";
-                            } else {
-                                while (today != i && i < 7) {
-                                    document.getElementsByClassName("dayBox")[i].style.backgroundColor =
-                                        "#4caf50";
-                                    i++;
-                                }
-                            }
-                            document.getElementById("xpBar").style.width = (i + 1) * 10 + "%";
-                            document.getElementById("xpBar").textContent = (i + 1) * 10 + "%";
-                        </script>
                     </ul>
                 </div>
                 <div class="modal-footer">
                     <h3 id="dayNum"></h3>
-                    <script>
-                        var today = new Date();
-                        document.getElementById("dayNum").textContent = "Streak: " + 
-                            (today.getDay() + 1) + " / 7"; 
-                    </script>
                 </div>
                 
             </div>

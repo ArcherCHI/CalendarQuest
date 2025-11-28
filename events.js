@@ -4,6 +4,12 @@ function getEventsForDate(date) {
   return JSON.parse(localStorage.getItem(date) || "[]");
 }
 
+// Retrieves the event of a given name on a given data, null if it does not exist
+function getEventByName(date, name) {
+    const events = getEventsForDate(date); // get array of events for that day
+    return events.find(event => event.name === name) || null;
+}
+
 // Add the passed event into the array of events for that day to local storage
 // Returns true when successful, false when not
 function addEvent(date, event) {
@@ -13,15 +19,19 @@ function addEvent(date, event) {
   const duplicate = events.some(e => e.name === event.name);
   if (duplicate) {
     console.log("Event " + event.name + " already exists on " + date + ". Editing it instead.");
-    editEvent(date, event.name, event);
-    return false; // Failed to add
+    const success = editEvent(date, event.name, event);
+    if (success) {
+        return 2; // Edited event instead
+    } else {
+        return 0; // Failed to add or edit
+    }
   }
 
   events.push(event); // Add new event to array
   localStorage.setItem(date, JSON.stringify(events)); // Save array back to local storage
   console.log("Added " + event.name + " to the calendar");
 
-  return true; // Successfully added event
+  return 1; // Successfully added event
 }
 
 // Remove the event speceficed by name
@@ -79,8 +89,8 @@ function editEvent(date, oldName, updatedEvent) {
 }
 
 // Creates a new event object
-function createEvent(name, date, time, place, description) {
-  return { name, date, time, place, description };
+function createEvent(name, date, time, place, description, lastInspectDate) {
+  return { name, date, time, place, description, lastInspectDate};
 }
 
 // Event Window functionality
@@ -145,13 +155,24 @@ function addEventToList(eventName) {
     viewBtn.textContent = "View";
     viewBtn.classList.add("event-view-btn");
     viewBtn.addEventListener('click', function() {
-        updateAllQuestProgress("inspect event", 1);
-
         const currentDate = document.getElementById("eventDate").textContent;
         const eventsOfDate = getEventsForDate(currentDate);
         const eventData = eventsOfDate.find(e => e.name === eventName);
 
         if (eventData) {
+            // Checks whether the user has inspected the event today
+            const today = new Date();
+            const lastInspect = eventData.lastInspectDate ? new Date(eventData.lastInspectDate) : null;
+
+            if (!lastInspect || lastInspect.toDateString() !== today.toDateString()) {
+                updateAllQuestProgress("inspect event", 1);
+                eventData.lastInspectDate = today;
+
+                editEvent(currentDate, eventData.name, eventData);
+            } else {
+                console.log("This event has already been inspected");
+            }
+
             currentEditingEventName = eventName;
 
             document.getElementById("eventTitle").value = eventData.name || "";
@@ -234,14 +255,38 @@ saveButton.addEventListener("click", function (e) {
         return;
     }
 
-    const success = addEvent(date, createEvent(eventName, date, eventTime, eventLocation, eventDescription));
+    const existingEvent = getEventByName(eventName); // For quest progress tracking
 
-    if (success) {
-        updateAllQuestProgress("add event", 1);
+    const success = addEvent(date, createEvent(eventName, date, eventTime, eventLocation, eventDescription, null));
 
-        if (eventTime !== "" && eventLocation !== "") {
-            updateAllQuestProgress("add time+location", 1);
+    if (success === 1 || success === 2) {
+        // Always increment "add event" for new or edited events
+        if (success === 1) {
+            updateAllQuestProgress("add event", 1);
         }
+
+        // Check attributes only if they are newly added or changed
+        if (eventTime !== "" && (!existingEvent || eventTime !== existingEvent.eventTime)) {
+            updateAllQuestProgress("add time", 1);
+        }
+
+        if (eventLocation !== "" && (!existingEvent || eventLocation !== existingEvent.eventLocation)) {
+            updateAllQuestProgress("add location", 1);
+        }
+
+        if (eventDescription !== "" && (!existingEvent || eventDescription !== existingEvent.eventDescription)) {
+            updateAllQuestProgress("add description", 1);
+        }
+
+        // For "add complete event" quest
+        if (
+            eventTime !== "" && (!existingEvent || eventTime !== existingEvent.eventTime) &&
+            eventLocation !== "" && (!existingEvent || eventLocation !== existingEvent.eventLocation) &&
+            eventDescription !== "" && (!existingEvent || eventDescription !== existingEvent.eventDescription)
+        ) {
+            updateAllQuestProgress("add complete event", 1);
+        }
+
         console.log("Event added successfully: " + eventName);
         renderEventList(date);
 

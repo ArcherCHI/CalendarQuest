@@ -87,6 +87,12 @@ h5 {
     color: #fff;
     padding-bottom: 1%;
 }
+h6 { 
+    padding-top: 0.1%;
+    font-size: 16px;
+    text-align: center;
+    color: #fff;
+}
 /* Calendar Styling */
 .calendar {
     margin: 0 auto;
@@ -360,27 +366,6 @@ h5 {
     margin-right: 2px;
     margin-bottom: 5px;
 }
-
-/* Navigation Bar Styling */
-.navBar {
-    display: flex;
-    flex-direction: row;
-    padding: 5%;
-    margin: 2%;
-    /* background-color: #fff; */
-    /* border: 1px solid #000; */
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    text-color: black;
-    font-size: 20px;
-    font-weight: bold;
-    color: #000;
-    text-decoration: none;
-    list-style-type: none;
-    justify-content: space-between;
-    align-items: center;
-}
 .link {
     font-size: 20px;
     font-weight: bold;
@@ -449,7 +434,7 @@ h5 {
 
 
 /* Experience (XP) Bar Styling */
-#bottomBar {
+#navBar {
     width: 90%;
     display: flex;
     flex-direction: row;
@@ -460,7 +445,7 @@ h5 {
     justify-content: center;
     gap: 2rem; /* optional but looks good */
 }
-.bottomButton {
+.navButton {
     padding: 2%;
 }
 .xpGroup{

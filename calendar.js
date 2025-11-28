@@ -146,22 +146,37 @@ window.addEventListener("click", function (event) {
 });
 
 // Display weekly streak in modal window
-function displayWeeklyStreak() {
-    today = date.getDay();
-    let i = 0;
-    while (today != i && i < 7) {
-        document.getElementsByClassName("dayBox")[i].style.backgroundColor =
-            "#4caf50";
-        i++;
-        console.log(today, days[i]);
+function highlightWeeklyStreak() {
+    const streakNum = Number(localStorage.getItem("streak") || 1);
+    const boxes = document.getElementsByClassName("dayBox");
+
+    // Clear boxes
+    for (let b of boxes) b.style.backgroundColor = "";
+
+    const today = new Date().getDay(); // 0–6
+
+    // Highlight BACKWARDS from today
+    for (let i = 0; i < streakNum; i++) {
+        let index = (today - i + 7) % 7;  
+        boxes[index].style.backgroundColor = "#4caf50";
     }
-    document.getElementById("xpBar").style.width = (i + 1) * 10 + "%";
-    document.getElementById("xpBar").textContent = (i + 1) * 10 + "%";
-    document.getElementsByClassName("dayBox")[i].style.backgroundColor = "#4caf50";
-    
+
+    // Update XP bar
+    const percent = Math.min(streakNum, 7) * (100 / 7);
+    xpBar.style.width = percent + "%";
+    xpBar.textContent = Math.round(percent) + "%";
+
+    dayNum.textContent = `Streak: ${Math.min(streakNum, 7)} / 7`;
 }
 
-displayWeeklyStreak();
+function updateLoginModal() {
+    // Update date text
+    document.getElementById("today").textContent =
+        new Date().toDateString();
+
+    // Use the proper highlight function
+    highlightWeeklyStreak();
+}
 
 const rewardButton = document.getElementById('rewardsButton');
 const settingsButton = document.getElementById('settingsButton');

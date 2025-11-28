@@ -7,6 +7,7 @@
     max-width: 1200px;  /* prevents giant stretching on big screens */
     margin: 20px auto;     /* center horizontally */
     background-color: transparent;
+    padding-bottom: 3%;
 }
 #quest-list {
     display: flex;
@@ -15,6 +16,7 @@
     height: auto;     /* IMPORTANT */
     background-color: transparent;
     list-style: none;
+    align-items: center;
 }
 .quest-group {
     display: flex;
@@ -22,6 +24,7 @@
     margin: 10px 0px;
     align-items: center;
     gap: 20px; /* space between the button and quest details */
+    padding-bottom: 2%;
 }
 .quest-button {
     width: 250px;
