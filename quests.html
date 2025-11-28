@@ -173,30 +173,36 @@
         <footer id="global-ui">
             <div id="bottomBar">
                 <!-- Main Navigation Bar -->
-                <button id = "calendar-link" class = "nav-button">Calendar</button>
-                <script>
-                    const calendarLink = document.getElementById("calendar-link");
-                    calendarLink.addEventListener("click", function () {
-                        window.location = "index.html";
-                    });
-                </script>
+                <div class = "bottomButton">
+                    <button id = "achievement-link" class = "nav-button">Achievements</button>
+                    <script>
+                        const achievementLink = document.getElementById("achievement-link");
+                        achievementLink.addEventListener("click", function () {
+                            window.location = "achievements.html";
+                        });
+                    </script>
+                </div>
 
-                <button id = "achievement-link" class = "nav-button">Achievements</button>
-                <script>
-                    const achievementLink = document.getElementById("achievement-link");
-                    achievementLink.addEventListener("click", function () {
-                        window.location = "achievements.html";
-                    });
-                </script>
+                <div class = "bottomButton">
+                    <button id = "calendar-link" class = "nav-button">Calendar</button>
+                    <script>
+                        const calendarLink = document.getElementById("calendar-link");
+                        calendarLink.addEventListener("click", function () {
+                            window.location = "index.html";
+                        });
+                    </script>
+                 </div>
 
-                <button id = "quest-link" class = "nav-button">Quests</a></button>
-                <script>
-                    const questLink = document.getElementById("quest-link");
-                    questLink.style.color = "#fff";
-                    questLink.addEventListener("click", function () {
-                        window.location = "quests.html";
-                    });
-                </script>
+                <div class = "bottomButton">
+                    <button id = "quest-link" class = "nav-button">Quests</a></button>
+                    <script>
+                        const questLink = document.getElementById("quest-link");
+                        questLink.style.color = "#fff";
+                        questLink.addEventListener("click", function () {
+                            window.location = "quests.html";
+                        });
+                    </script>
+                </div>
             </div>
             <!-- Level and XP Bar -->
             <div class = "xpGroup">
