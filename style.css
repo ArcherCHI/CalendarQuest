@@ -120,7 +120,7 @@ h5 {
     cursor: pointer;
 }
 #monthPicker {
-    margin-right: 65rem;
+    margin-right: 46rem;
     height: 2-.5rem;
     border-radius: 10px;
     border: 1px solid var(--main-color);

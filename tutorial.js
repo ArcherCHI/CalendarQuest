@@ -18,8 +18,15 @@ function currentSlide(n) {
 }
 
 function showSlides(n) {
+  console.log("Slides found:", document.getElementsByClassName("slides").length);
+  
   let i;
   let slides = document.getElementsByClassName("slides");
+
+  for (let i = 0; i < slides.length; i++) {
+      console.log(i, slides[i]);
+  }
+  
   let dots = document.getElementsByClassName("dot");
   if (slides.length === 0) return;
   if (n > slides.length) {slideIndex = 1}

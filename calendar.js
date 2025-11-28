@@ -200,6 +200,7 @@ selectMonthButton.addEventListener("click", function () {
             month = monthPicker.value.split("-")[1] - 1;
             year = monthPicker.value.split("-")[0];
             renderCalendar();
+
         }
     } else {
         selectMonthButton.style.backgroundColor = "#fff";
