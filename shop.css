@@ -1,9 +1,10 @@
-#shop-list {
+/* Owned Items */
+.owned-items {
   display: flex;
   flex-direction: column;
   width: 100%;
   margin-top: 2%;
-  margin-bottom: 5%;
+  /* margin-bottom: 2%; */
   margin-left: 5%;
   margin-right: 5%;
   list-style-type: none;
@@ -11,34 +12,227 @@
   margin-left: 0;
   padding: 1rem;
 }
-.shop-list h1 {
-  margin-top: 8%;
-  margin-bottom: 2%;
-}
-.shop-node {
-  background-color: #f5f5f5;
-  padding: 10px;
+.owned-items header {
   width: 50%;
-  margin-bottom: 10px;
+  margin-left: 25%;
+  margin-bottom: 1%;
+  background-color: #f5f5f5;
+  padding: 0.5%;
   border-radius: 5px;
-  margin: 0 auto 10px auto; 
   text-align: center;
+  border: 1px solid #000;
 }
-.shop-node span {
-  font-weight: bold;
-}
-.shop-node button {
-  margin-top: 5px;
-  padding: 5px 10px;
-  color: white;
-  border: none;
+.owned-items p {
+  text-align: center;
+  font-size: 18px;
+  background-color: white;
+  color: black;
+  width: 40%;
+  /* height: 20%; */
+  margin-left: 30%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2%;
+  border: 1px solid #000;
   border-radius: 5px;
 }
-.shop-node button:disabled {
+.apply-style-button {
+  position: relative;
+  padding: 0.5%;
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #7a65c1;
+  background: transparent;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  border: 5px solid #725AC1;
+  border-radius: 5rem;
+  box-shadow: inset 0 0 0 0 #725AC1;
+}
+.apply-style-button:hover {
+  background-color: #fff;
+  color: #725AC1;
+  box-shadow: inset 0 -100px 0 0 #fff;
+  border: 1px solid #725AC1;
+}
+.switch {
+  position: relative;
+  height: 1.5rem;
+  width: 3rem;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 9999px;
+  background-color: rgba(100, 116, 139, 0.377);
+  transition: all .3s ease;
+}
+
+.switch:checked {
+  background-color: rgba(236, 72, 153, 1);
+}
+
+.switch::before {
+  position: absolute;
+  content: "";
+  left: calc(1.5rem - 1.6rem);
+  top: calc(1.5rem - 1.6rem);
+  display: block;
+  height: 1.6rem;
+  width: 1.6rem;
+  cursor: pointer;
+  border: 1px solid rgba(100, 116, 139, 0.527);
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 3px 10px rgba(100, 116, 139, 0.327);
+  transition: all .3s ease;
+}
+
+.switch:hover::before {
+  box-shadow: 0 0 0px 8px rgba(0, 0, 0, .15)
+}
+
+.switch:checked:hover::before {
+  box-shadow: 0 0 0px 8px rgba(236, 72, 153, .15)
+}
+
+.switch:checked:before {
+  transform: translateX(100%);
+  border-color: rgba(236, 72, 153, 1);
+}
+
+/* Dropdown Menu for Shop Items */
+.dropdown {
+  position: inline;
+  display: block;
+  width: 20%;
+  margin-left: 5%;
+}
+.dropdown button {
+  background-color: #f9f9f9;
+  width: 100%;
+  color: black;
+  padding: 2%;
+  margin-left: 2%;
+  font-size: 16px;
+  margin-bottom: 10%;
+  /* margin-right: 90%; */
+  cursor: pointer;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-color: black;
+}
+/* Style for the dropdown menu */
+.dropdown-content {
+  display: none;
+  z-index: 1;
+  margin-bottom: 5%;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  width: 495%;
+  display: block;
+  left: 10%;
+  /* cursor: pointer; */
+}
+
+/* ---------------------------------------------- */
+#shopHeader {
+  margin-top: 2%;
+}
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 5%;
+  width: 90%;
+  margin-left: 2%;
+  list-style-type: none;
+  /* margin-bottom: 2%;*/
+  padding-bottom: 2%;
+}
+.shop-grid li {
+  background-color: #fff;
+  padding: 1rem;
+  width: 100%;
+  border-radius: 5%;
+  text-align: center;
+  border: 1px solid #000;
+  align-items: center;
+}
+
+.shop-grid li button {
+  margin-top: 10%;
+  /* padding: 5px 10px; */
+  position: relative;
+  /* border: none;
+  border-radius: 5px; */
+  left: 0%;
+  width: 75%;
+  top: 5%;
+  max-height: 100%;
+}
+.shop-grid li button:disabled {
   background-color: grey;
 }
-.shop-node button:enabled {
-  background-color: #865DFF;
+.shop-grid li button:enabled {
+  /* background-color: var(--main-bg-color); */
+  /* border: 1px solid #000; */
+}
+.item {
+  background-color: transparent;
+  padding: 1%;
+  width: 90%;
+  /* margin-bottom: 15%;  */
+  padding-bottom: 10%; 
+  border-radius: 5px;
+  margin: 0 auto 10px auto;
+  text-align: center;
+  height: 30%;
+}
+.color-palette {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5%;
+  width: 100%;
+  /* margin-top: 2%; */
+  margin-bottom: 20%;
+  margin-left: 2%;
+  margin-right: 2%;
+  list-style-type: none;
+  padding-left: 5%; 
+  height: 25%;
+  /* padding-bottom: 15%; */
+  align-items: center;
+}
+.color-palette button {
+  /* background-color: #000; */
+  padding: 25%;
+  margin-bottom: 20%;
+  width: 100%;
+  border: 1px solid #000;
+  border-radius: 25%;
+  /* margin: 0 auto 10px auto; */
+  text-align: center;
+  height: 50%;
+}
+.color-palette button:hover{
+  border: 2px solid #000;
+  border-radius: 25%;
+  padding: 25%;
+  width: 100%;
+  height: 50%;
+  margin: 0 auto 10px auto;
+  text-align: center;
+}
+.color-palette button:active{
+  border: 2px solid #000;
+  border-radius: 25%;
+  padding: 25%;
+  width: 100%;
+  height: 50%;
+  margin: 0 auto 10px auto;
+  text-align: center;
 }
 .item-title {
   color: rgb(0, 0, 0);
@@ -49,16 +243,21 @@
   color: rgb(0, 0, 0);
   font-size: 18px;
   padding-top: 1%;
+  margin-bottom: 5%;
 }
 .item-example {
-    padding-top: 3%;
-    padding-bottom: 3%;
+  margin-top: 15%;
+  margin-bottom: 10%;
+  padding-top: 10%;
+  /* padding-bottom: 3%; */
+  height: 30%;
+  /* top: 90%; */
+  display: block;
 }
 .test-button {
   position: relative;
-  display: inline-block;
-  margin: 15px;
-  padding: 15px 30px;
+  
+  /* padding: 1rem; */
   text-align: center;
   font-size: 24px;
   letter-spacing: 1px;
@@ -67,8 +266,8 @@
   background: transparent;
   cursor: pointer;
   transition: ease-out 0.5s;
-  border: 2px solid #725AC1;
-  border-radius: 10px;
+  border: 5px solid #725AC1;
+  border-radius: 5rem;
   box-shadow: inset 0 0 0 0 #725AC1;
 }
 
@@ -82,155 +281,26 @@
   transform: scale(0.9);
 }
 
-/* From Uiverse.io by Pradeepsaranbishnoi */ 
-.voltage-button {
+.buy-button {
   position: relative;
-}
-
-.voltage-button button {
-  color: white;
-  background: #0D1127;
-  padding: 1rem 3rem 1rem 3rem;
-  border-radius: 5rem;
-  border: 5px solid #5978F3;
-  font-size: 1.2rem;
-  line-height: 1em;
-  letter-spacing: 0.075em;
-  transition: background 0.3s;
-}
-
-.voltage-button button:hover {
+  padding: 1rem;
+  /* margin-top: 5%; */
+  /* margin-bottom: 5%; */
+  text-align: center;
+  /* font-size: 24px; */
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #7a65c1;
+  /* background: transparent; */
   cursor: pointer;
-  background: #0F1C53;
+  transition: ease-out 0.5s;
+  border: 5px solid #725AC1;
+  border-radius: 5rem;
+  box-shadow: inset 0 0 0 0 #725AC1;
 }
-
-.voltage-button button:hover + svg, .voltage-button button:hover + svg + .dots {
-  opacity: 1;
-}
-
-.voltage-button svg {
-  display: block;
-  position: absolute;
-  top: -0.75em;
-  left: -0.25em;
-  width: calc(100% + 0.5em);
-  height: calc(100% + 1.5em);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s;
-  transition-delay: 0.1s;
-}
-
-.voltage-button svg path {
-  stroke-dasharray: 100;
-  filter: url("#glow");
-}
-
-.voltage-button svg path.line-1 {
-  stroke: #f6de8d;
-  stroke-dashoffset: 0;
-  animation: spark-1 3s linear infinite;
-}
-
-.voltage-button svg path.line-2 {
-  stroke: #6bfeff;
-  stroke-dashoffset: 500;
-  animation: spark-2 3s linear infinite;
-}
-
-.voltage-button .dots {
-  opacity: 0;
-  transition: opacity 0.3s;
-  transition-delay: 0.4s;
-}
-
-.voltage-button .dots .dot {
-  width: 1rem;
-  height: 1rem;
-  background: white;
-  border-radius: 100%;
-  position: absolute;
-  opacity: 0;
-}
-
-.voltage-button .dots .dot-1 {
-  top: 0;
-  left: 20%;
-  animation: fly-up 3s linear infinite;
-}
-
-.voltage-button .dots .dot-2 {
-  top: 0;
-  left: 55%;
-  animation: fly-up 3s linear infinite;
-  animation-delay: 0.5s;
-}
-
-.voltage-button .dots .dot-3 {
-  top: 0;
-  left: 80%;
-  animation: fly-up 3s linear infinite;
-  animation-delay: 1s;
-}
-
-.voltage-button .dots .dot-4 {
-  bottom: 0;
-  left: 30%;
-  animation: fly-down 3s linear infinite;
-  animation-delay: 2.5s;
-}
-
-.voltage-button .dots .dot-5 {
-  bottom: 0;
-  left: 65%;
-  animation: fly-down 3s linear infinite;
-  animation-delay: 1.5s;
-}
-
-@keyframes spark-1 {
-  to {
-    stroke-dashoffset: -1000;
-  }
-}
-
-@keyframes spark-2 {
-  to {
-    stroke-dashoffset: -500;
-  }
-}
-
-@keyframes fly-up {
-  0% {
-    opacity: 0;
-    transform: translateY(0) scale(0.2);
-  }
-
-  5% {
-    opacity: 1;
-    transform: translateY(-1.5rem) scale(0.4);
-  }
-
-  10%, 100% {
-    opacity: 0;
-    transform: translateY(-3rem) scale(0.2);
-  }
-}
-
-@keyframes fly-down {
-  0% {
-    opacity: 0;
-    transform: translateY(0) scale(0.2);
-  }
-
-  5% {
-    opacity: 1;
-    transform: translateY(1.5rem) scale(0.4);
-  }
-
-  10%, 100% {
-    opacity: 0;
-    transform: translateY(3rem) scale(0.2);
-  }
+.buy-button:disabled {
+  color: white;
+  box-shadow: inset 0 -100px 0 0 gray;
 }
 
 /* From Uiverse.io by zjssun */ 
@@ -239,16 +309,14 @@
   padding: 10px 22px;
   border-radius: 6px;
   border: none;
-  color: #fff;
+  color: #000;
   cursor: pointer;
   background-color: #7d2ae8;
   transition: all 0.2s ease;
 }
-
 .splash-button:active {
   transform: scale(0.96);
 }
-
 .splash-button:before,
 .splash-button:after {
   position: absolute;
@@ -260,7 +328,6 @@
   z-index: -1000;
   background-repeat: no-repeat;
 }
-
 .splash-button:hover:before {
   top: -70%;
   background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
@@ -326,4 +393,183 @@
       110% 10%;
     background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
   }
+}
+
+ /* By kleenpulse on uiverse.io */
+
+.sliding-button {
+  --border-color: linear-gradient(-45deg, #ffae00, #7e03aa, #00fffb);
+  --border-width: 0.125em;
+  --curve-size: 0.5em;
+  --blur: 30px;
+  --bg: #fff;
+  --color: #afffff;
+  color: var(--color);
+  cursor: pointer;
+  /* use position: relative; so that BG is only for .sliding-button */
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  place-content: center;
+  padding: 0.5em 1.5em;
+  font-size: 17px;
+  border: 0;
+  text-transform: uppercase;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
+  clip-path: polygon(
+    /* Top-left */ 0% var(--curve-size),
+    var(--curve-size) 0,
+    /* top-right */ 100% 0,
+    100% calc(100% - var(--curve-size)),
+    /* bottom-right 1 */ calc(100% - var(--curve-size)) 100%,
+    /* bottom-right 2 */ 0 100%
+  );
+  transition: color 250ms;
+}
+.sliding-button::after,
+.sliding-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  color: #fff;
+}
+.sliding-button::before {
+  background: var(--border-color);
+  color: #fff;
+  background-size: 300% 300%;
+  animation: move-bg7234 5s ease infinite;
+  z-index: -2;
+}
+@keyframes move-bg7234 {
+  0% {
+    background-position: 31% 0%;
+  }
+
+  50% {
+    background-position: 70% 100%;
+  }
+
+  100% {
+    background-position: 31% 0%;
+  }
+}
+.sliding-button::after {
+  background: var(--bg);
+  z-index: -1;
+  clip-path: polygon(
+    /* Top-left */ var(--border-width)
+      calc(var(--curve-size) + var(--border-width) * 0.5),
+    calc(var(--curve-size) + var(--border-width) * 0.5) var(--border-width),
+    /* top-right */ calc(100% - var(--border-width)) var(--border-width),
+    calc(100% - var(--border-width))
+      calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+    /* bottom-right 1 */
+      calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
+      calc(100% - var(--border-width)),
+    /* bottom-right 2 */ var(--border-width) calc(100% - var(--border-width))
+  );
+  transition: clip-path 500ms;
+}
+.sliding-button:where(:hover, :focus)::after {
+  clip-path: polygon(
+    /* Top-left */ calc(100% - var(--border-width))
+      calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+    calc(100% - var(--border-width)) var(--border-width),
+    /* top-right */ calc(100% - var(--border-width)) var(--border-width),
+    calc(100% - var(--border-width))
+      calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+    /* bottom-right 1 */
+      calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
+      calc(100% - var(--border-width)),
+    /* bottom-right 2 */
+      calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
+      calc(100% - var(--border-width))
+  );
+  transition: 200ms;
+}
+.sliding-button:where(:hover, :focus) {
+  color: #fff;
+}
+
+/* Created by Guatammsharma on Uiverse.io */
+.comic-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #ff5252;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.comic-button:hover {
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #000;
+  box-shadow: 5px 5px 0px var(--main-color);
+}
+.comic-button:active {
+  background-color: #fcf414;
+  box-shadow: none;
+  transform: translateY(4px);
+}
+/* Created by WhiteNervosa on Uiverse.io */
+.minimalist {
+  font-size: 18px;
+  color: #e1e1e1;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  background: none;
+  text-transform: uppercase;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: color;
+}
+.minimalist:focus,
+.minimalist:hover {
+  color: #000;
+}
+.minimalist:focus:after,
+.minimalist:hover:after {
+  width: 100%;
+  left: 0%;
+}
+.minimalist:after {
+  content: "";
+  pointer-events: none;
+  bottom: -2px;
+  left: 50%;
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #000;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: width, left;
+}
+
+/* Styling for buttons to switch primary and secondary colors */
+.color-switch {
+  padding: 5%;
+  width: 100%;
+  border: 1px solid #000;
+  border-radius: 50%;
+  background-color: var(--main-color);
+  font-size: 12px;
+  color: white;
+  /* text-align: center; */
+  height: 20%;
+  margin-bottom: 1%;
+}
+.color-switch:hover {
+  background-color: var(--main-bg-color);
+  /* padding: 10%; */
 }
