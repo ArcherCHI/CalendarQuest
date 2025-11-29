@@ -115,7 +115,7 @@
   padding: 2%;
   margin-left: 2%;
   font-size: 16px;
-  margin-bottom: 10%;
+  margin-bottom: 30%;
   /* margin-right: 90%; */
   cursor: pointer;
   border-radius: 0.5rem;
@@ -213,6 +213,7 @@
   border: 1px solid #000;
   border-radius: 25%;
   /* margin: 0 auto 10px auto; */
+  
   text-align: center;
   height: 50%;
 }
@@ -253,6 +254,9 @@
   height: 30%;
   /* top: 90%; */
   display: block;
+}
+.item-example p {
+  font-size: 18px;
 }
 .test-button {
   position: relative;
@@ -403,7 +407,7 @@
   --curve-size: 0.5em;
   --blur: 30px;
   --bg: #fff;
-  --color: #afffff;
+  --color: #000;
   color: var(--color);
   cursor: pointer;
   /* use position: relative; so that BG is only for .sliding-button */
@@ -518,6 +522,7 @@
   box-shadow: none;
   transform: translateY(4px);
 }
+
 /* Created by WhiteNervosa on Uiverse.io */
 .minimalist {
   font-size: 18px;
@@ -563,7 +568,7 @@
   border: 1px solid #000;
   border-radius: 50%;
   background-color: var(--main-color);
-  font-size: 12px;
+  font-size: 16px;
   color: white;
   /* text-align: center; */
   height: 20%;
