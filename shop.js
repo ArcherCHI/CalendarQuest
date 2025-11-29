@@ -10,6 +10,8 @@ class Item {
   }
 }
 
+coins = 9999;
+
 const defaultColors = new Item("Default Colors", "The default colors for the calendar.", null, ["#865DFF", "#E384FF", "#00CAFF", "#FFFFFF"], "Calendar Quest", 0, "colors");
 
 let ownedButtons = [];
@@ -33,7 +35,7 @@ shopItems.forEach(item => {
   if ( type === "buttons" ) {
     const example = parent.querySelector(".item-example button").className;
     newItem = new Item(title, description, example, null, source, cost, type);
-  } else {
+  } else if ( type === "colors" ){
     let colors = [];
     let ptr = parent.querySelector(".color-palette button");
     for ( let i = 0; i < 4; i++ ){
@@ -41,6 +43,12 @@ shopItems.forEach(item => {
       ptr = ptr.nextSibling.nextSibling;
     }
     newItem = new Item(title, description, null, colors, source, cost, type);
+  } else if ( type === "fonts" ) {
+    const example = parent.querySelector(".item-example p").className;
+    newItem = new Item(title, description, example, null, source, cost, type);
+    // console.log("Font Item: " + newItem.title);
+  } else {
+    console.log("Error: Invalid item type");
   }
   
   allItems.push(newItem);
@@ -61,8 +69,9 @@ function updateShopItems() {
   
   let buyButtons = document.querySelectorAll(".buy-button");
   buyButtons.forEach(button => {
-    let item = allItems.find(item => item.title === button.parentElement.querySelector(".item-title").textContent);
-    
+    let item = allItems.find(it => it.title ===   
+      button.parentElement.querySelector(".item-title").textContent);
+      
     // If owned, disable the button, change the text to "Owned", and 
     // change the background color to gray
     if ( isOwned(item) ) {
@@ -344,7 +353,7 @@ function attachColorSwitchListeners() {
   colorSwitchingButtons.forEach( button => {
     button.addEventListener("click", function () {
       console.log("Color: " + chosenColor);
-      // button.style.backgroundColor = chosenColor;
+      // button.style.background-color = chosenColor;
       if ( button.textContent === "Set as Secondary"){
         changeSecondaryColor(chosenColor);
       } else if ( button.textContent === "Set as Primary" ){
@@ -367,8 +376,8 @@ function attachColorPaletteListeners() {
     console.log("Colors: " + colors.length);
     colors.forEach(color => {
       color.addEventListener("click", function (){
-        console.log("Color: " + color.style.backgroundColor);
-        chosenColor = color.style.backgroundColor;
+        console.log("Color: " + color.style.background-color);
+        chosenColor = color.style.background-color;
       });
     });
   });
