@@ -353,7 +353,7 @@ function attachColorSwitchListeners() {
   colorSwitchingButtons.forEach( button => {
     button.addEventListener("click", function () {
       console.log("Color: " + chosenColor);
-      // button.style.background-color = chosenColor;
+      // button.style.backgroundColor = chosenColor;
       if ( button.textContent === "Set as Secondary"){
         changeSecondaryColor(chosenColor);
       } else if ( button.textContent === "Set as Primary" ){
@@ -376,8 +376,8 @@ function attachColorPaletteListeners() {
     console.log("Colors: " + colors.length);
     colors.forEach(color => {
       color.addEventListener("click", function (){
-        console.log("Color: " + color.style.background-color);
-        chosenColor = color.style.background-color;
+        console.log("Color: " + color.style.backgroundColor);
+        chosenColor = color.style.backgroundColor;
       });
     });
   });
