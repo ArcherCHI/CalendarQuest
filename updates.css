@@ -1,0 +1,36 @@
+.updates-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 5px;
+    background-color: #fff;
+}
+.container-title {
+    width: auto;
+    height: auto;
+    margin: 5px;
+    padding: 5px 20px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #E384FF;
+    color: #000;
+    text-align: left;
+}
+.container-list {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    list-style: none;
+}
+.list-element {
+    width: auto;
+    text-align: left;
+    margin: 5px;
+    padding: 5px 25px
+}

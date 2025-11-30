@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updates</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="updates.css" />
+    <script src = "level.js" defer></script>
+    <script src = "quests.js" defer></script>
+
+</head>
+    <body>
+        <header>
+            <h1>Updates</h1>
+        </header>
+        <main>
+            <div class = "updates-container" id = "upcoming-events-container">
+                <h2 class = "container-title">Upcoming Events:</h2>
+                <ul class = "container-list" id = "upcoming-events-list">
+                    <li class = "list-element">11/30/2025: This is just a test</li>
+                </ul>
+            </div>
+            <div class = "updates-container" id = "progress-log-container">
+                <h2 class = "container-title">Recent Progress:</h2>
+                <ul class = "container-list" id = "upcoming-events-list">
+                    <li class = "list-element">11/30/2025: This is just a test</li>
+                </ul>
+            </div>
+        </main>
+        <footer id="global-ui">
+            <div id="navBar">
+                <!-- Main Navigation Bar -->
+                <div class = "navButton">
+                    <button id = "achievement-link" class = "nav-button">Achievements</button>
+                    <script>
+                        const achievementLink = document.getElementById("achievement-link");
+                        achievementLink.addEventListener("click", function () {
+                            window.location = "achievements.html";
+                        });
+                    </script>
+                </div>
+                <div class = "navButton">
+                    <button id = "calendar-link" class = "nav-button">Calendar</button>
+                    <script>
+                        const calendarLink = document.getElementById("calendar-link");
+                        calendarLink.addEventListener("click", function () {
+                            window.location = "index.html";
+                        });
+                    </script>
+                </div>
+                <div class = "navButton">
+                    <button id = "quest-link" class = "nav-button">Quests</a></button>
+                    <script>
+                        const questLink = document.getElementById("quest-link");
+                        questLink.addEventListener("click", function () {
+                            window.location = "quests.html";
+                        });
+                    </script>
+                </div>
+            </div>
+            <!-- Level and XP Bar -->
+            <div class = "xpGroup">
+                <h4 id="level"></h4>
+
+                <div id="XP" >
+                    <div id="xpBar"></div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
