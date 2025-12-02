@@ -57,6 +57,47 @@ if (typeof(Storage) !== "undefined") {
   coins = parseInt(localStorage.getItem("coins")) || 0;
   updateCoinBalance();
   console.log("Set coin balance to " + coins);
+
+  // Load saved color settings
+  const mainColor = localStorage.getItem("mainColor");
+  const mainBgColor = localStorage.getItem("mainBgColor");
+  const patternColor = localStorage.getItem("patternColor");
+  const textColor = localStorage.getItem("textColor");
+  
+  if (mainColor) {
+    document.documentElement.style.setProperty("--main-color", mainColor);
+  }
+  if (mainBgColor) {
+    document.documentElement.style.setProperty("--main-bg-color", mainBgColor);
+  }
+  if (patternColor) {
+    document.documentElement.style.setProperty("--pattern-color", patternColor);
+  }
+  if (textColor) {
+    document.body.style.color = textColor;
+    document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, span, div, li, a").forEach(el => {
+      el.style.color = textColor;
+    });
+  }
+
+  // Load saved font settings
+  const headerFont = localStorage.getItem("headerFont");
+  const buttonFont = localStorage.getItem("buttonFont");
+  const bodyFont = localStorage.getItem("bodyFont");
+
+  if (headerFont) {
+    document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(header => {
+      header.style.fontFamily = headerFont;
+    });
+  }
+  if (buttonFont) {
+    document.querySelectorAll("button").forEach(button => {
+      button.style.fontFamily = buttonFont;
+    });
+  }
+  if (bodyFont) {
+    document.body.style.fontFamily = bodyFont;
+  }
 } else {
   levelElement.innerHTML = "Web storage not supported";
 }
