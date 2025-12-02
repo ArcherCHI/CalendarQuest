@@ -1,36 +1,74 @@
 .updates-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 5px;
-    background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: auto;
+  border-radius: 5px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 5px;
+  background-color: #fff;
 }
-.container-title {
-    width: auto;
-    height: auto;
-    margin: 5px;
-    padding: 5px 20px;
-    border: 1px solid #000;
-    border-radius: 5px;
-    background-color: #E384FF;
-    color: #000;
-    text-align: left;
+.upcoming-events-title {
+  width: auto;
+  height: auto;
+  margin: 5px;
+  padding: 5px 20px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background-color: var(--main-bg-color);
+  color: #000;
+  text-align: left;
 }
-.container-list {
-    display: flex;
-    flex-direction: column;
-    width: auto;
-    height: auto;
-    background-color: transparent;
-    list-style: none;
+.upcoming-events-list {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  list-style: none;
 }
 .list-element {
-    width: auto;
-    text-align: left;
-    margin: 5px;
-    padding: 5px 25px
+  width: auto;
+  text-align: left;
+  margin: 5px;
+  padding: 5px 25px
+}
+.upcoming-event-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  margin: 5px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  /* border-left: 4px solid var(--main-color); */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.upcoming-event-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.upcoming-event-item.empty-message {
+  color: #666;
+  font-style: italic;
+  border-left-color: #ccc;
+  justify-content: center;
+}
+.upcoming-event-date {
+  min-width: 120px;
+  font-weight: bold;
+  color: var(--main-color);
+  font-size: 0.95rem;
+}
+.upcoming-event-name {
+  flex-grow: 1;
+  color: #333;
+  font-weight: 500;
+  padding: 0 15px;
+}
+.upcoming-event-time {
+  min-width: 70px;
+  text-align: right;
+  color: #666;
+  font-size: 0.9rem;
 }

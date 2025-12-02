@@ -215,17 +215,21 @@ function displayLevelUpWindow() {
 // Confirm Button for Level Up Window
 // Closes Level Up Window when clicked
 const confirmLevelUpButton = document.getElementById("level-up-button");
-confirmLevelUpButton.addEventListener("click", function () {
-    document.getElementById("levelUpWindow").style.visibility = "hidden";
-    console.log("Level Up Window Closed");
-});
+if (confirmLevelUpButton) {
+    confirmLevelUpButton.addEventListener("click", function () {
+        document.getElementById("levelUpWindow").style.visibility = "hidden";
+        console.log("Level Up Window Closed");
+    });
+}
 
 // Quest Completed Pop-Up
 // Appears when a quest is completed
 
 // Claim Button for Quest Completed Window
 const claimQuestRewardButton = document.getElementById("quest-completed-button");
-claimQuestRewardButton.addEventListener("click", function () {
-  document.getElementById("questCompletedWindow").style.visibility = "hidden";
-  console.log("Quest Completed Window Closed");
-});
+if (claimQuestRewardButton) {
+    claimQuestRewardButton.addEventListener("click", function () {
+        document.getElementById("questCompletedWindow").style.visibility = "hidden";
+        console.log("Quest Completed Window Closed");
+    });
+}

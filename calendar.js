@@ -179,11 +179,9 @@ function updateLoginModal() {
 }
 
 const rewardButton = document.getElementById('rewardsButton');
-const notificationsButton = document.getElementById('notificationsButton');
 const settingsButton = document.getElementById('settingsButton');
 const shopButton = document.getElementById('shopButton');
 
-const notificationButton = document.getElementById('notificationsButton');
 
 const themeLink = document.getElementById('theme-stylesheet');
 let isRedTheme = false;
@@ -191,10 +189,6 @@ let isRedTheme = false;
 // Change theme to red when clicking rewards and above or at level 3
 shopButton.addEventListener("click", function (e) {
     window.location = "shop.html";
-});
-
-notificationsButton.addEventListener("click", function (e) {
-    window.location = "updates.html";
 });
 
 // Reset the calendar when clicking on cogwheel
@@ -250,4 +244,3 @@ const questBtn = document.getElementById("quest-link");
 questBtn.addEventListener("click", function () {
     window.location = "quests.html";
 });
-

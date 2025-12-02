@@ -298,8 +298,9 @@ saveButton.addEventListener("click", function (e) {
         currentEditingEventName = null;
 
         console.log("Event saved successfully: " + eventName);
-        
+
         displayEvents();
+        renderUpcomingEvents();
     }
 });
 
@@ -315,4 +316,131 @@ removeButton.addEventListener("click", function (e) {
     renderEventList(date);
     displayEvents();
     newEventWindow.style.visibility = "hidden";
+    renderUpcomingEvents();
 });
+
+// Upcoming Events Functions
+function getUpcomingEvents() {
+    const events = [];
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    for (let i = 0; i < 7; i++) {
+        const checkDate = new Date(today);
+        checkDate.setDate(today.getDate() + i);
+        const dateString = checkDate.toDateString();
+        const dayEvents = getEventsForDate(dateString);
+
+        dayEvents.forEach(event => {
+            events.push({
+                ...event,
+                dateString: dateString,
+                displayDate: formatDisplayDate(checkDate)
+            });
+        });
+    }
+    return events;
+}
+function formatDisplayDate(date) {
+    const options = { weekday: 'short', month: 'short', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+}
+function renderUpcomingEvents() {
+    const upcomingList = document.getElementById("upcoming-events-list");
+    if (!upcomingList) return;
+
+    upcomingList.innerHTML = "";
+    const events = getUpcomingEvents();
+
+    if (events.length === 0) {
+        const emptyMessage = document.createElement("li");
+        emptyMessage.classList.add("upcoming-event-item", "empty-message");
+        emptyMessage.textContent = "No events scheduled for the next 7 days";
+        upcomingList.appendChild(emptyMessage);
+        return;
+    }
+
+    events.forEach(event => {
+        const eventItem = document.createElement("li");
+        eventItem.classList.add("upcoming-event-item");
+
+        const dateSpan = document.createElement("span");
+        dateSpan.classList.add("upcoming-event-date");
+        dateSpan.textContent = event.displayDate;
+
+        const nameSpan = document.createElement("span");
+        nameSpan.classList.add("upcoming-event-name");
+        nameSpan.textContent = event.name;
+
+        const timeSpan = document.createElement("span");
+        timeSpan.classList.add("upcoming-event-time");
+        timeSpan.textContent = event.time || "";
+
+        eventItem.appendChild(dateSpan);
+        eventItem.appendChild(nameSpan);
+        eventItem.appendChild(timeSpan);
+        upcomingList.appendChild(eventItem);
+    });
+}
+function renderUpcomingEventsPopup() {
+    const popupList = document.getElementById("upcoming-events-popup-list");
+    if (!popupList) return;
+
+    popupList.innerHTML = "";
+    const events = getUpcomingEvents();
+
+    if (events.length === 0) {
+        const emptyMessage = document.createElement("li");
+        emptyMessage.classList.add("upcoming-event-item", "empty-message");
+        emptyMessage.textContent = "No events scheduled for the next 7 days";
+        popupList.appendChild(emptyMessage);
+        return;
+    }
+
+    events.forEach(event => {
+        const eventItem = document.createElement("li");
+        eventItem.classList.add("upcoming-event-item");
+
+        const dateSpan = document.createElement("span");
+        dateSpan.classList.add("upcoming-event-date");
+        dateSpan.textContent = event.displayDate;
+
+        const nameSpan = document.createElement("span");
+        nameSpan.classList.add("upcoming-event-name");
+        nameSpan.textContent = event.name;
+
+        const timeSpan = document.createElement("span");
+        timeSpan.classList.add("upcoming-event-time");
+        timeSpan.textContent = event.time || "";
+
+        eventItem.appendChild(dateSpan);
+        eventItem.appendChild(nameSpan);
+        eventItem.appendChild(timeSpan);
+        popupList.appendChild(eventItem);
+    });
+}
+// Setup popup functionality
+const updatesButton = document.getElementById("notificationsButton");
+const upcomingModal = document.getElementById("upcomingEventsModal");
+const closeUpcomingModal = document.getElementById("closeUpcomingModal");
+if (updatesButton && upcomingModal) {
+    updatesButton.addEventListener("click", function(e) {
+        e.preventDefault();
+        renderUpcomingEventsPopup();
+        upcomingModal.style.display = "block";
+    });
+
+    if (closeUpcomingModal) {
+        closeUpcomingModal.addEventListener("click", function() {
+            upcomingModal.style.display = "none";
+        });
+    }
+
+    window.addEventListener("click", function(e) {
+        if (e.target === upcomingModal) {
+            upcomingModal.style.display = "none";
+        }
+    });
+}
+// Initialize upcoming events on page load
+renderUpcomingEvents();

@@ -15,12 +15,14 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="events.css" />
     <link rel="stylesheet" href="tutorial.css" />
+    <link rel="stylesheet" href="updates.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
     <script src = "calendar.js" defer></script>
     <script src = "level.js" defer></script>
     <script src = "events.js" defer></script>
     <script src = "quests.js" defer></script>
     <script src = "tutorial.js" defer></script>
+    
 </head>
     <body>
         <footer id="global-ui">
@@ -35,7 +37,6 @@
                         });
                     </script>
                 </div>
-
                 <div class = "navButton">
                     <button id = "calendar-link" class = "nav-button">Calendar</button>
                     <script>
@@ -45,10 +46,9 @@
                             window.location = "index.html";
                         });
                     </script>
-                 </div>
-
+                </div>
                 <div class = "navButton">
-                    <button id = "quest-link" class = "nav-button">Quests</a></button>
+                    <button id = "quest-link" class = "nav-button">Quests</button>
                     <script>
                         const questLink = document.getElementById("quest-link");
                         questLink.addEventListener("click", function () {
@@ -109,6 +109,31 @@
                 </section>
             </div>
         </main>
+        <!--
+        <div class = "updates-container" id = "upcoming-events-container">
+            <h2 class = "upcoming-events-title">Upcoming Events:</h2>
+            <ul class = "upcoming-events-list" id = "upcoming-events-list">
+                <li class = "list-element">11/30/2025: This is just a test</li>
+            </ul>
+        </div>
+        <div class = "updates-container" id = "progress-log-container">
+            <h2 class = "upcoming-events-title">Recent Progress:</h2>
+            <ul class = "upcoming-events-list" id = "upcoming-events-list">
+                <li class = "list-element">11/30/2025: This is just a test</li>
+            </ul>
+        </div>
+         -->
+        <!-- Tutorial Button -->
+        <button id="tutorialButton" style = "visibility: hidden;"
+            onclick="
+            document.body.style.pointerEvents='none';
+            document.getElementById('tutorialSlides').style.pointerEvents='auto';
+            document.getElementById('tutorialSlides').style.display='block';
+            document.getElementById('tutorialOverlay').style.display='block';
+            showSlides(1);
+            "> ?
+        </button>
+
 
         <!-- Tutorial Slideshow -->
         <div id="tutorialSlides" class="tutorial-slideshow-container">
@@ -225,9 +250,16 @@
                 <div class="modal-header">
                     <span id = "closeModal" class="close">&times;</span>
                     <h2 id="today"></h2>
+                    <script>
+                        var today = new Date();
+                        document.getElementById("today").textContent = 
+                            today.toDateString();
+                        
+                    </script>
                 </div>
                 <div class="modal-body">
                     <ul class="thisWeek">
+                        
                         <li class="dayBox">Sun</li>
                         <li class="dayBox">Mon</li>
                         <li class="dayBox">Tue</li>
@@ -235,15 +267,86 @@
                         <li class="dayBox">Thu</li>
                         <li class="dayBox">Fri</li>
                         <li class="dayBox">Sat</li>
+                        <script>
+                            today = new Date().getDay();
+                            console.log(today);
+                            let i = 0;
+                            if ( today == 0 ) {
+                                document.getElementsByClassName("dayBox")[0].style.backgroundColor =
+                                    "#4caf50";
+                            } else {
+                                while (today != i && i < 7) {
+                                    document.getElementsByClassName("dayBox")[i].style.backgroundColor =
+                                        "#4caf50";
+                                    i++;
+                                }
+                            }
+                            document.getElementById("xpBar").style.width = (i + 1) * 10 + "%";
+                            document.getElementById("xpBar").textContent = (i + 1) * 10 + "%";
+                        </script>
                     </ul>
                 </div>
                 <div class="modal-footer">
                     <h3 id="dayNum"></h3>
+                    <script>
+                        var today = new Date();
+                        document.getElementById("dayNum").textContent = "Streak: " + 
+                            (today.getDay() + 1) + " / 7"; 
+                    </script>
                 </div>
                 
             </div>
         </div>
 
+        <!-- Tutorial Slideshow -->
+        <div id = "tutorialSlides" class = "tutorial-slideshow-container"  >
+            <div class = "slides">
+                <div class = "numbertext"> 1 / 5 </div>
+                <img src = "tutorial_img1.png" style = "width:100%">
+                <div class = "text">Caption Text</div>
+            </div>
+            <div class = "slides fade">
+                <div class = "numbertext"> 2 / 5 </div>
+                <img src = "tutorial_img2.png" style = "width:100%">
+                <div class = "text">Caption Text</div>
+            </div>
+            <div class = "slides fade">
+                <div class = "numbertext"> 3 / 5 </div>
+                <img src = "tutorial_img3.png" style = "width:100%">
+                <div class = "text">Caption Text</div>
+            </div>
+            <div class = "slides fade">
+                <div class = "numbertext"> 4 / 5 </div>
+                <img src = "tutorial_img4.png" style = "width:100%">
+                <div class = "text">Caption Text</div>
+            </div>
+            <div class = "slides fade">
+                <div class = "numbertext"> 5 / 5 </div>
+                <img src = "tutorial_img5.png" style = "width:100%">
+                <div class = "text">Caption Text</div>
+            </div>
+            <a class = "slides-prev" onclick = "plusSlides(-1)">&#10094;</a>
+            <a class = "slides-next" onclick = "plusSlides(1)">&#10095;</a>
+            <div style = "text-align:center">
+                <span class = "dot" onclick = "currentSlide(1)"></span>
+                <span class = "dot" onclick = "currentSlide(2)"></span>
+                <span class = "dot" onclick = "currentSlide(3)"></span>
+                <span class = "dot" onclick = "currentSlide(4)"></span>
+                <span class = "dot" onclick = "currentSlide(5)"></span>
+            </div>
+        </div>
+
+        <!-- Upcoming Events Popup -->
+        <div id="upcomingEventsModal" class="upcoming-modal">
+            <div class="upcoming-modal-content">
+                <div class="upcoming-modal-header">
+                    <h3>Upcoming Events (Next 7 Days)</h3>
+                    <span id="closeUpcomingModal" class="upcoming-close">&times;</span>
+                </div>
+                <ul id="upcoming-events-popup-list" class="upcoming-events-list"></ul>
+            </div>
+        </div>
+        
         <!-- Level Up Window -->
         <div id = "levelUpWindow" class = "level-up-window">
             <div class = "level-up-content">
@@ -254,8 +357,6 @@
                 <div id = "rewardsReceived">Rewards Received:</div>
                 <div id = "level-up-body">
                     <li>100 Coins 💰</li>
-                    <li>Shop Unlock: Space Background</li>
-                    <li>Shop Unlock: Comic Sans</li>
                 </div>
                 <button id = "level-up-button">Confirm</button>
             </div>
