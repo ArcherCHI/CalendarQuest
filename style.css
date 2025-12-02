@@ -16,7 +16,7 @@ body {
     flex-direction: column;
 
     font-family: Poppins, sans-serif;
-    background: linear-gradient(to bottom, #191825, var(--main-color));
+    background: linear-gradient(to bottom, var(--main-color), var(--pattern-color));
     background-attachment: fixed;    /* optional — prevents visible gaps */
 }
 * {
@@ -43,7 +43,7 @@ body {
 }
 h1 {
     height: 60%;
-    margin-top: 17%;
+    margin-top: 15%;
     font-weight: 600;
     text-align: center;
     text-drop-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -101,7 +101,7 @@ h6 {
     width: 70%;
     height: 100%;
     /* margin-top: 2%; */
-    margin-bottom: 5%;    
+    margin-bottom: 10%;    
     padding: 1rem;
     background: #fff;
     border-radius: 10px;
@@ -126,7 +126,7 @@ h6 {
     cursor: pointer;
 }
 #monthPicker {
-    margin-right: 46rem;
+    margin-right: 65rem;
     height: 2-.5rem;
     border-radius: 10px;
     border: 1px solid var(--main-color);
@@ -366,6 +366,9 @@ h6 {
     margin-right: 2px;
     margin-bottom: 5px;
 }
+
+/* Navigation Bar Styling */
+
 .link {
     font-size: 20px;
     font-weight: bold;
@@ -432,22 +435,17 @@ h6 {
   transform: scale(0.9);
 }
 
-
 /* Experience (XP) Bar Styling */
 #navBar {
     width: 90%;
     display: flex;
     flex-direction: row;
-    /* padding: 2%;
-    margin: 2%; */
     background-color: transparent;
     list-style-type: none;
     justify-content: center;
     gap: 2rem; /* optional but looks good */
 }
-.navButton {
-    padding: 2%;
-}
+.navButton { padding: 2%; }
 .xpGroup{
     display: flex;
     flex-direction: row;
@@ -457,6 +455,7 @@ h6 {
     width: 100%;
     height: 100%;
     /* padding: 1rem; */
+    margin-top: 2%;
 }
 #level {
     margin-top: 1%;
@@ -510,7 +509,7 @@ h6 {
     letter-spacing: 0.5rem;
     background: radial-gradient(
       ellipse,
-      var(--secondary-color) 0%,
+      var(--patterned-color) 0%,
       rgba(0, 0, 0, 0) 95%
     );
     background-size:
@@ -530,20 +529,22 @@ h6 {
     border-width: 1px 0 1px 0;
     border-radius: 30px;
     color: #000000;
-    width: 360px;
-    height: 80px;
+    width: 400px;
     margin-top: 1.5%;
     margin-bottom: 1.5%;
     font-weight: 300;
     font-size: 1.25rem;
     transition: background-size 0.2s ease-in-out;
+    margin-right: 10%;
     padding: 2%;
 }
 .nav-button:hover {
-  background-size:
-    cover,
-    10px 10px,
-    10px 10px;
+    filter: hue-rotate(90deg);
+    
+    background-size:
+        cover,
+        5px 5px,
+        5px 5px;
 }
 .nav-button:active {
   filter: hue-rotate(250deg);
@@ -833,4 +834,146 @@ a:active {
     /* margin-left: 2%; */
     margin-right: 2%;
     cursor: pointer;
+}
+
+/* Upcoming Events Styles */
+.upcoming-events-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.upcoming-events-title {
+    color: var(--main-color);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--pattern-color);
+}
+
+.upcoming-events-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.upcoming-event-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid var(--main-color);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.upcoming-event-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.upcoming-event-item.empty-message {
+    color: #666;
+    font-style: italic;
+    border-left-color: #ccc;
+    justify-content: center;
+}
+
+.upcoming-event-date {
+    min-width: 100px;
+    font-weight: bold;
+    color: var(--main-color);
+    font-size: 0.9rem;
+}
+
+.upcoming-event-name {
+    flex-grow: 1;
+    color: #333;
+    font-weight: 500;
+    padding: 0 15px;
+}
+
+.upcoming-event-time {
+    min-width: 70px;
+    text-align: right;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Upcoming Events Popup Modal */
+.upcoming-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.upcoming-modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 0;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 70vh;
+    overflow: hidden;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.upcoming-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, var(--main-color), var(--main-bg-color));
+    color: #fff;
+}
+
+.upcoming-modal-header h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.upcoming-close {
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.upcoming-close:hover {
+    transform: scale(1.2);
+}
+
+.upcoming-modal-content .upcoming-events-list {
+    max-height: 50vh;
+    overflow-y: auto;
+    padding: 15px;
+    margin: 0;
+}
+
+.upcoming-modal-content .upcoming-event-item {
+    margin-bottom: 10px;
 }
